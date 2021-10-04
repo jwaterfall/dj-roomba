@@ -6,7 +6,7 @@ const useSpotifyApi = () => {
   const {spotifyAccessToken} = useAuthContext();
 
   const spotifyApi = new SpotifyWebApi({
-    clientId: 'f422d702113a4f448dec04e19d37f9d9',
+    clientId: process.env.REACT_APP_CLIENT_ID,
     accessToken: spotifyAccessToken,
   });
 

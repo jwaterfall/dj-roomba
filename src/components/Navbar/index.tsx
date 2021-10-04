@@ -1,8 +1,8 @@
 import {FC, useState} from 'react';
 import useUserPlaylists from '../../queries/useUserPlaylists';
 
+import {ReactComponent as Logo} from '../../assets/images/logo.svg';
 import {ReactComponent as Home} from '../../assets/icons/home.svg';
-import {ReactComponent as HomeFilled} from '../../assets/icons/home-filled.svg';
 import {ReactComponent as Search} from '../../assets/icons/search.svg';
 import {ReactComponent as Library} from '../../assets/icons/library.svg';
 import {ReactComponent as LikedSongs} from '../../assets/icons/liked-songs.svg';
@@ -23,10 +23,10 @@ const Navbar: FC = () => {
 
   return (
     <NavbarContainer>
+      {/* <Logo /> */}
       <Links>
         <LinkWithBackground to="/" exact>
-          <Home className="onlyNotActive" />
-          <HomeFilled className="onlyActive" />
+          <Home />
           Home
         </LinkWithBackground>
         <LinkWithBackground to="/search">

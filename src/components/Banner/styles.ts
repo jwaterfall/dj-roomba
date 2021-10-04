@@ -1,12 +1,13 @@
-import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
+import {NavLink} from 'react-router-dom';
+import theme from '../../theme';
 
 export const Banner = styled.section`
   padding: 1.5rem 2rem;
   display: flex;
   gap: 1.5rem;
   align-items: flex-end;
-  background-color: #c01078;
+  background-color: ${theme.primary};
   background-image: linear-gradient(transparent 0, rgba(0, 0, 0, 0.5) 100%);
 `;
 
@@ -45,12 +46,15 @@ export const Description = styled.p`
   font-size: 0.875rem;
   font-weight: 400;
   color: hsla(0, 0%, 100%, 0.7);
+  text-transform: capitalize;
 `;
 
 export const DescriptionItem = styled.span`
-  &:before {
-    content: '•';
-    margin: 0 0.25rem;
+  &:not(:first-child) {
+    &:before {
+      content: '•';
+      margin: 0 0.25rem;
+    }
   }
 `;
 
@@ -61,5 +65,11 @@ export const DescriptionLink = styled(NavLink)`
   text-decoration: none;
   &:hover {
     text-decoration: underline;
+  }
+  &:not(:first-child) {
+    &:before {
+      content: '•';
+      margin: 0 0.25rem;
+    }
   }
 `;

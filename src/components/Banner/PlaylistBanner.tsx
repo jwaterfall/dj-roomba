@@ -1,5 +1,6 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import numbro from 'numbro';
+
 import {
   Banner,
   Image,
@@ -11,22 +12,25 @@ import {
   DescriptionLink,
 } from './styles';
 
-import playlistImage from '../../../assets/images/playlist.png';
+import placeholder from '../../assets/images/placeholder.png';
 
 interface Props {
-  playlist: SpotifyApi.SinglePlaylistResponse;
+  playlist: Playlist;
 }
 
 const PlaylistBanner: FC<Props> = ({playlist}) => {
   const imageUrl: string | undefined = playlist.images[0]?.url;
-
   return (
     <Banner>
-      <Image src={imageUrl || playlistImage} />
+      <Image src={imageUrl || placeholder} />
       <Details>
         <Label>playlist</Label>
         <Title>{playlist.name}</Title>
-        <Description>{playlist.description}</Description>
+        {playlist.description && (
+          <Description>
+            {playlist.description.replace(/<[^>]+>/g, '')}
+          </Description>
+        )}
         <Description>
           <DescriptionLink to={`/user/${playlist.owner.id}`}>
             {playlist.owner.display_name}
@@ -36,7 +40,7 @@ const PlaylistBanner: FC<Props> = ({playlist}) => {
               thousandSeparated: true,
             })} likes`}
           </DescriptionItem>
-          <DescriptionItem>{`${playlist.tracks.total} songs`}</DescriptionItem>
+          <DescriptionItem>{`${playlist.tracks.length} songs`}</DescriptionItem>
         </Description>
       </Details>
     </Banner>

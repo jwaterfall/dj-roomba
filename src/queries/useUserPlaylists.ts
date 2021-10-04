@@ -19,4 +19,5 @@ const useUserPlaylists = () => {
     refetchInterval: 15000,
   });
 };
+
 export default useUserPlaylists;

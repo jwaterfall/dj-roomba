@@ -6,7 +6,7 @@ import axios from 'axios';
 const dateLog = (text: string) =>
   console.log(`[${dayjs().format('DD-MM-YYYY HH:ss')}] ${text}`);
 
-export default function useAuth() {
+const useAuth = () => {
   const [spotifyAuthCode, setSpotifyAuthCode] = useState<string>();
   const [spotifyAccessToken, setSpotifyAccessToken] = useState<string>();
   const [spotifyRefreshToken, setSpotifyRefreshToken] = useState<string>();
@@ -16,7 +16,7 @@ export default function useAuth() {
   useEffect(() => {
     if (!spotifyAuthCode) return;
     axios
-      .post('http://localhost:3001/auth/spotify/login', {
+      .post(`${process.env.REACT_APP_SERVER}/auth/spotify/login`, {
         authCode: spotifyAuthCode,
       })
       .then((res) => {
@@ -35,7 +35,7 @@ export default function useAuth() {
     if (!spotifyRefreshToken || !spotifyExpiresIn) return;
     const interval = setInterval(() => {
       axios
-        .post('http://localhost:3001/auth/spotify/refresh', {
+        .post(`${process.env.REACT_APP_SERVER}/auth/spotify/refresh`, {
           refreshToken: spotifyRefreshToken,
         })
         .then((res) => {
@@ -52,4 +52,6 @@ export default function useAuth() {
   }, [spotifyRefreshToken, spotifyExpiresIn]);
 
   return {spotifyAccessToken, setSpotifyAuthCode};
-}
+};
+
+export default useAuth;

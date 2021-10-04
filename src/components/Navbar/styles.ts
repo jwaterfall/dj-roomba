@@ -1,5 +1,6 @@
 import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
+import theme from '../../theme';
 
 export const NavbarContainer = styled.nav`
   grid-area: nav-bar;
@@ -7,7 +8,7 @@ export const NavbarContainer = styled.nav`
   max-height: 100%;
   display: flex;
   flex-direction: column;
-  background: hsl(0, 0%, 0%);
+  background: ${theme.navbar};
   overflow-y: auto;
   overflow-x: hidden;
 `;
@@ -27,30 +28,22 @@ export const Link = styled(NavLink)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #b3b3b3;
+  color: ${theme.textSecondary};
   transition: all 150ms;
   & > svg {
+    fill: ${theme.textSecondary};
     display: block;
     width: 1.5rem;
     height: 1.5rem;
   }
-  & > .onlyActive {
-    display: none;
-  }
   &.active {
-    color: hsl(0, 0%, 100%);
+    color: ${theme.text};
     & > svg {
-      fill: hsl(0, 0%, 100%);
-    }
-    & > .onlyActive {
-      display: block;
-    }
-    & > .onlyNotActive {
-      display: none;
+      fill: ${theme.text};
     }
   }
   &:hover {
-    color: hsl(0, 0%, 100%);
+    color: ${theme.text};
   }
 `;
 
@@ -62,7 +55,7 @@ export const LinkWithBackground = styled(Link)`
 `;
 
 export const Divider = styled.hr`
-  background-color: #282828;
+  background-color: ${theme.accent};
   border: none;
   height: 1px;
   margin: 0 1.5rem;

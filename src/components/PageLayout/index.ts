@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../theme';
 
 export const PageLayout = styled.div`
   width: 100%;
@@ -7,22 +8,22 @@ export const PageLayout = styled.div`
   display: grid;
   grid-template-columns: min-content 1fr;
   grid-template-rows: 1fr min-content;
-  grid-template-areas: 'nav-bar content' 'playing-bar playing-bar';
+  grid-template-areas: 'nav-bar content' 'control-bar control-bar';
 `;
 
 export const Content = styled.div`
   grid-area: content;
-  background: #121212;
+  background: ${theme.background};
   overflow: hidden;
   overflow-y: auto;
   transition: all 150ms;
   scrollbar-width: thin;
-  scrollbar-color: hsla(0, 0%, 100%, 0.3) hsl(0, 0%, 0%);
+  scrollbar-color: hsla(0, 0%, 100%, 0.3) ${theme.navbar};
   &:hover {
-    scrollbar-color: hsla(0, 0%, 100%, 0.5) hsl(0, 0%, 0%);
+    scrollbar-color: hsla(0, 0%, 100%, 0.5) ${theme.navbar};
   }
   &::-webkit-scrollbar {
-    background: hsl(0, 0%, 0%);
+    background: ${theme.navbar};
     width: 0.75rem;
   }
   &::-webkit-scrollbar-thumb {

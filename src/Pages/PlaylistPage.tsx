@@ -1,8 +1,7 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {useParams} from 'react-router-dom';
-import {Playlist} from '../components/Navbar/styles';
-import PlaylistBanner from '../components/PlaylistPage/PlaylistBanner';
-import PlaylistTracks from '../components/PlaylistPage/PlaylistTracks';
+import Banner from '../components/Banner';
+import TrackList from '../components/TrackList';
 import usePlaylist from '../queries/usePlaylist';
 
 const PlaylistPage: FC = () => {
@@ -11,8 +10,8 @@ const PlaylistPage: FC = () => {
 
   return playlist ? (
     <>
-      <PlaylistBanner playlist={playlist} />
-      <PlaylistTracks playlist={playlist} />
+      <Banner type="playlist" playlist={playlist} />
+      <TrackList type="playlist" playlistTracks={playlist.tracks} />
     </>
   ) : (
     <></>

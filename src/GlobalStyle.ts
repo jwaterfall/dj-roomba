@@ -1,5 +1,6 @@
 import {createGlobalStyle} from 'styled-components';
 import {normalize} from 'styled-normalize';
+import theme from './theme';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -57,7 +58,7 @@ const GlobalStyle = createGlobalStyle`
   
   body {
     font-family: 'Roboto', sans-serif;
-    color: hsl(0, 0%, 100%);
+    color: ${theme.text};
   }
   `;
 
