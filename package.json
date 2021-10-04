@@ -1,5 +1,5 @@
 {
-  "name": "dj-roomba-web",
+  "name": "dj-roomba-client",
   "version": "0.1.0",
   "description": "client for dj roomba",
   "private": true,
