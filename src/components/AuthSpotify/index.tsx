@@ -1,15 +1,16 @@
 import {FC, useEffect} from 'react';
 import {useLocation} from 'react-router';
 import queryString from 'query-string';
-import {useAuthContext} from '../../contexts/auth';
+import {useAppDispatch} from '../../redux/store';
+import {setSpotifyAuthCode} from '../../redux/slices/authSlice';
 
 const AuthSpotify: FC = () => {
   const spotifyAuthCode = queryString.parse(useLocation().search).code;
-  const {setSpotifyAuthCode} = useAuthContext();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (spotifyAuthCode && typeof spotifyAuthCode === 'string') {
-      setSpotifyAuthCode(spotifyAuthCode);
+      dispatch(setSpotifyAuthCode(spotifyAuthCode));
     }
   }, []);
 

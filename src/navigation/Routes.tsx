@@ -1,29 +1,23 @@
 import {FC} from 'react';
 import {Switch, Route} from 'react-router-dom';
-import AuthSpotify from '../components/AuthSpotify';
-import Navbar from '../components/Navbar';
-import {useAuthContext} from '../contexts/auth';
-import ProtectedRoute from './ProtectedRoute';
 import {Content, PageLayout} from '../components/PageLayout';
 import ControlBar from '../components/ControlBar';
+import Navbar from '../components/Navbar';
+import ProtectedRoute from './ProtectedRoute';
+import AuthSpotify from '../components/AuthSpotify';
+import AuthDiscord from '../components/AuthDiscord';
 
 import PlaylistPage from '../Pages/PlaylistPage';
 import AlbumPage from '../Pages/AlbumPage';
 import ArtistPage from '../Pages/ArtistPage';
 import LikedSongsPage from '../Pages/LikedSongsPage';
 
-const AUTH_URL_SPOTIFY = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20playlist-read-private%20playlist-read-collaborative`;
-// const AUTH_URL_DISCORD =
-//   'https://discord.com/api/oauth2/authorize?REACT_APP_CLIENT_ID=592467922002247699&REACT_APP_REDIRECT_URI=http://localhost:3000/auth-discord&response_type=code&scope=guilds';
+const AUTH_URL_SPOTIFY = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_SPOTIFY_REDIRECT_URI}&response_type=code&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20playlist-read-private%20playlist-read-collaborative`;
+const AUTH_URL_DISCORD = `https://discord.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_DISCORD_REDIRECT_URI}&response_type=code&scope=identify`;
 
 const Routes: FC = () => {
-  const {spotifyAccessToken} = useAuthContext();
-
   return (
     <Switch>
-      <Route path="/auth-spotify">
-        <AuthSpotify />
-      </Route>
       <Route
         path="/sign-in-spotify"
         component={() => {
@@ -31,9 +25,20 @@ const Routes: FC = () => {
           return null;
         }}
       />
-      <ProtectedRoute
-        isAuthenticated={!!spotifyAccessToken}
-        authenticationPath="/sign-in-spotify">
+      <Route path="/auth-spotify">
+        <AuthSpotify />
+      </Route>
+      <Route
+        path="/sign-in-discord"
+        component={() => {
+          window.location.href = AUTH_URL_DISCORD;
+          return null;
+        }}
+      />
+      <Route path="/auth-discord">
+        <AuthDiscord />
+      </Route>
+      <ProtectedRoute>
         <PageLayout>
           <Navbar />
           <Content>

@@ -1,25 +1,20 @@
 import React from 'react';
-import {Redirect, Route, RouteProps} from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
+import {useAppSelector} from '../redux/store';
+import {selectAuth} from '../redux/slices/authSlice';
 
-export interface ProtectedRouteProps extends RouteProps {
-  isAuthenticated: boolean;
-  authenticationPath: string;
-}
+export const ProtectedRoute: React.FC = (props) => {
+  const {isAuthenticated} = useAppSelector(selectAuth);
 
-export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
-  isAuthenticated,
-  authenticationPath,
-  ...rest
-}) => {
   if (!isAuthenticated) {
     return (
-      <Route {...rest}>
-        <Redirect to={authenticationPath} />
+      <Route {...props}>
+        <Redirect to={'/sign-in-spotify'} />
       </Route>
     );
   }
 
-  return <Route {...rest} />;
+  return <Route {...props} />;
 };
 
 export default ProtectedRoute;

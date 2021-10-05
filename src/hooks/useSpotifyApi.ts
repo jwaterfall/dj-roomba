@@ -1,9 +1,10 @@
 import {useEffect} from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
-import {useAuthContext} from '../contexts/auth';
+import {useAppSelector} from '../redux/store';
+import {selectAuth} from '../redux/slices/authSlice';
 
 const useSpotifyApi = () => {
-  const {spotifyAccessToken} = useAuthContext();
+  const {spotifyAccessToken} = useAppSelector(selectAuth);
 
   const spotifyApi = new SpotifyWebApi({
     clientId: process.env.REACT_APP_CLIENT_ID,
