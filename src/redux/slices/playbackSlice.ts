@@ -6,21 +6,22 @@ interface PlaybackState {
   queuedTracks: ProcessedTrack[];
   isPaused: boolean;
   isOnRepeat: boolean;
-  isOnShuffle: boolean;
 }
 
 const initialState: PlaybackState = {
   queuedTracks: [],
   isPaused: false,
   isOnRepeat: false,
-  isOnShuffle: false,
 };
 
 export const playbackSlice = createSlice({
   name: 'playback',
   initialState,
   reducers: {
-    setCurrentTrack: (state, action: PayloadAction<ProcessedTrack>) => {
+    setCurrentTrack: (
+      state,
+      action: PayloadAction<ProcessedTrack | undefined>,
+    ) => {
       state.currentTrack = action.payload;
     },
     setQueuedTracks: (state, action: PayloadAction<ProcessedTrack[]>) => {
@@ -32,19 +33,11 @@ export const playbackSlice = createSlice({
     setIsOnRepeat: (state, action: PayloadAction<boolean>) => {
       state.isOnRepeat = action.payload;
     },
-    setIsOnShuffle: (state, action: PayloadAction<boolean>) => {
-      state.isOnShuffle = action.payload;
-    },
   },
 });
 
-export const {
-  setCurrentTrack,
-  setQueuedTracks,
-  setIsPaused,
-  setIsOnRepeat,
-  setIsOnShuffle,
-} = playbackSlice.actions;
+export const {setCurrentTrack, setQueuedTracks, setIsPaused, setIsOnRepeat} =
+  playbackSlice.actions;
 
 export const selectPlayback = (state: RootState) => state.playback;
 

@@ -28,8 +28,7 @@ import {useSocket} from '../../contexts/socket';
 
 const ControlBar: FC = () => {
   const {socket} = useSocket();
-  const {currentTrack, isPaused, isOnRepeat, isOnShuffle} =
-    useAppSelector(selectPlayback);
+  const {currentTrack, isPaused, isOnRepeat} = useAppSelector(selectPlayback);
   const {
     connect,
     togglePause,

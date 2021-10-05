@@ -7,7 +7,6 @@ import {selectAuth} from '../redux/slices/authSlice';
 import {
   setCurrentTrack,
   setIsOnRepeat,
-  setIsOnShuffle,
   setIsPaused,
   setQueuedTracks,
 } from '../redux/slices/playbackSlice';
@@ -31,8 +30,6 @@ const usePlaybackControls = () => {
     );
 
     newSocket.on('currentTrack', (track?: ProcessedTrack) => {
-      console.log(track);
-      if (!track) return;
       dispatch(setCurrentTrack(track));
     });
 
@@ -46,10 +43,6 @@ const usePlaybackControls = () => {
 
     newSocket.on('isOnRepeat', (isOnRepeat: boolean) => {
       dispatch(setIsOnRepeat(isOnRepeat));
-    });
-
-    newSocket.on('isOnShuffle', (isOnShuffle: boolean) => {
-      dispatch(setIsOnShuffle(isOnShuffle));
     });
 
     setSocket(newSocket);
