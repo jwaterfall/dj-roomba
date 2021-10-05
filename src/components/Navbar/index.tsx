@@ -1,7 +1,6 @@
 import {FC, useState} from 'react';
 import useUserPlaylists from '../../queries/useUserPlaylists';
 
-import {ReactComponent as Logo} from '../../assets/images/logo.svg';
 import {ReactComponent as Home} from '../../assets/icons/home.svg';
 import {ReactComponent as Search} from '../../assets/icons/search.svg';
 import {ReactComponent as Library} from '../../assets/icons/library.svg';
@@ -23,7 +22,6 @@ const Navbar: FC = () => {
 
   return (
     <NavbarContainer>
-      {/* <Logo /> */}
       <Links>
         <LinkWithBackground to="/" exact>
           <Home />
