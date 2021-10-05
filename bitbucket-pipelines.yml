@@ -6,8 +6,6 @@ pipelines:
            script: 
              - npm install
              - npm run test
-           artifacts: 
-             - application.tar.gz
      - step:
            name: Create artifact
            script: 
