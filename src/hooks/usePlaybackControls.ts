@@ -22,12 +22,9 @@ const usePlaybackControls = () => {
       discordAccessToken,
     });
 
-    const newSocket = socketIOClient(
-      process.env.REACT_APP_SOCKET_SERVER as string,
-      {
-        query: {guildId: result.data},
-      },
-    );
+    const newSocket = socketIOClient(process.env.REACT_APP_SERVER as string, {
+      query: {guildId: result.data},
+    });
 
     newSocket.on('currentTrack', (track?: ProcessedTrack) => {
       dispatch(setCurrentTrack(track));
