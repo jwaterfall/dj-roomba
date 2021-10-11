@@ -135,3 +135,29 @@ export const JoinButton = styled.button`
     transform: scale(1.05);
   }
 `;
+
+export const RightSection = styled.div`
+  grid-area: right;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 1rem;
+`;
+
+export const QueueLink = styled(NavLink)`
+  & > svg {
+    cursor: pointer;
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: ${theme.textSecondary};
+    &:hover {
+      fill: ${theme.text};
+    }
+  }
+  &.active {
+    & > svg {
+      fill: ${theme.primary};
+    }
+  }
+`;

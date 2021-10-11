@@ -26,11 +26,11 @@ const usePlaybackControls = () => {
       query: {guildId: result.data},
     });
 
-    newSocket.on('currentTrack', (track?: ProcessedTrack) => {
+    newSocket.on('currentTrack', (track?: QueuedTrack) => {
       dispatch(setCurrentTrack(track));
     });
 
-    newSocket.on('queuedTracks', (tracks: ProcessedTrack[]) => {
+    newSocket.on('queuedTracks', (tracks: QueuedTrack[]) => {
       dispatch(setQueuedTracks(tracks));
     });
 
@@ -45,14 +45,33 @@ const usePlaybackControls = () => {
     setSocket(newSocket);
   };
 
-  const playTracks = (tracks: SpotifyApi.TrackObjectSimplified[]) => {
+  const play = async (query: string, queue = false) => {
     if (!socket) return;
-    socket.emit('playTracks', tracks);
+    socket.emit('play', query, queue);
   };
 
-  const queueTracks = (tracks: SpotifyApi.TrackObjectSimplified[]) => {
+  const playTrack = async (
+    track: SpotifyApi.TrackObjectSimplified,
+    queue = false,
+  ) => {
     if (!socket) return;
-    socket.emit('queueTracks', tracks);
+    play(`https://open.spotify.com/track/${track.id}`, queue);
+  };
+
+  const playAlbum = async (
+    album: SpotifyApi.AlbumObjectSimplified,
+    queue = false,
+  ) => {
+    if (!socket) return;
+    play(`https://open.spotify.com/album/${album.id}`, queue);
+  };
+
+  const playPlaylist = async (
+    playlist: SpotifyApi.PlaylistObjectSimplified,
+    queue = false,
+  ) => {
+    if (!socket) return;
+    play(`https://open.spotify.com/playlist/${playlist.id}`, queue);
   };
 
   const togglePause = () => {
@@ -97,8 +116,10 @@ const usePlaybackControls = () => {
 
   return {
     connect,
-    playTracks,
-    queueTracks,
+    play,
+    playTrack,
+    playAlbum,
+    playPlaylist,
     togglePause,
     nextTrack,
     previousTrack,

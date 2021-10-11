@@ -7,10 +7,12 @@ import ProtectedRoute from './ProtectedRoute';
 import AuthSpotify from '../components/AuthSpotify';
 import AuthDiscord from '../components/AuthDiscord';
 
+import DashboardPage from '../Pages/DashboardPage';
 import PlaylistPage from '../Pages/PlaylistPage';
 import AlbumPage from '../Pages/AlbumPage';
 import ArtistPage from '../Pages/ArtistPage';
 import LikedSongsPage from '../Pages/LikedSongsPage';
+import QueuePage from '../Pages/QueuePage';
 
 const AUTH_URL_SPOTIFY = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_SPOTIFY_REDIRECT_URI}&response_type=code&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20playlist-read-private%20playlist-read-collaborative`;
 const AUTH_URL_DISCORD = `https://discord.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_DISCORD_REDIRECT_URI}&response_type=code&scope=identify`;
@@ -43,7 +45,12 @@ const Routes: FC = () => {
           <Navbar />
           <Content>
             <Switch>
-              <Route exact path="/"></Route>
+              <Route exact path="/">
+                <DashboardPage />
+              </Route>
+              <Route path="/queue">
+                <QueuePage />
+              </Route>
               <Route path="/playlist/:id">
                 <PlaylistPage />
               </Route>

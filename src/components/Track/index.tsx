@@ -6,6 +6,7 @@ import {
   SimpleTrack,
   PlaylistTrack,
   ArtistTopTrack,
+  QueueTrack,
   Detail,
   DetailLink,
 } from './styles';
@@ -13,25 +14,31 @@ import ControlsSection from './ControlsSection';
 import TitleSection from './TitleSection';
 
 interface PlaylistProps {
-  type: 'playlist';
+  variant: 'playlist';
   index: number;
   playlistTrack: SpotifyApi.PlaylistTrackObject;
 }
 
 interface AlbumProps {
-  type: 'album';
+  variant: 'album';
   index: number;
   track: SpotifyApi.TrackObjectSimplified;
 }
 
 interface ArtistTopTracksProps {
-  type: 'artistTopTracks';
+  variant: 'artistTopTracks';
   index: number;
   track: SpotifyApi.TrackObjectFull;
 }
 
+interface QueueProps {
+  variant: 'queue';
+  index: number;
+  track: QueuedTrack;
+}
+
 interface SavedTracksProps {
-  type: 'savedTrack';
+  variant: 'savedTrack';
   index: number;
   savedTrack: SpotifyApi.SavedTrackObject;
 }
@@ -40,21 +47,22 @@ type Props =
   | PlaylistProps
   | AlbumProps
   | ArtistTopTracksProps
+  | QueueProps
   | SavedTracksProps;
 
 const Track: FC<Props> = (props) => {
-  const {playTracks} = usePlaybackControls();
+  const {playTrack, skipTo} = usePlaybackControls();
 
-  if (props.type === 'playlist') {
+  if (props.variant === 'playlist') {
     const {index} = props;
     const track = props.playlistTrack.track;
     const addedAt = props.playlistTrack.added_at;
     const imageUrl: string | undefined = track.album.images[0].url;
 
     return (
-      <PlaylistTrack onDoubleClick={() => playTracks([track])}>
-        <ControlsSection index={index} track={track} />
-        <TitleSection track={track} imageUrl={imageUrl} />
+      <PlaylistTrack onDoubleClick={() => playTrack(track)}>
+        <ControlsSection variant="standard" index={index} track={track} />
+        <TitleSection variant="standard" track={track} imageUrl={imageUrl} />
         <DetailLink to={`/album/${track.album.id}`}>
           {track.album.name}
         </DetailLink>
@@ -64,26 +72,31 @@ const Track: FC<Props> = (props) => {
     );
   }
 
-  if (props.type === 'album') {
+  if (props.variant === 'album') {
     const {index, track} = props;
 
     return (
-      <SimpleTrack onDoubleClick={() => playTracks([track])}>
-        <ControlsSection index={index} track={track} />
-        <TitleSection track={track} />
+      <SimpleTrack onDoubleClick={() => playTrack(track)}>
+        <ControlsSection variant="standard" index={index} track={track} />
+        <TitleSection variant="standard" track={track} />
         <Detail>{dayjs.duration(track.duration_ms).format('m:ss')}</Detail>
       </SimpleTrack>
     );
   }
 
-  if (props.type === 'artistTopTracks') {
+  if (props.variant === 'artistTopTracks') {
     const {index, track} = props;
     const imageUrl: string | undefined = track.album.images[0].url;
 
     return (
-      <ArtistTopTrack onDoubleClick={() => playTracks([track])}>
-        <ControlsSection index={index} track={track} />
-        <TitleSection track={track} imageUrl={imageUrl} hideArist={true} />
+      <ArtistTopTrack onDoubleClick={() => playTrack(track)}>
+        <ControlsSection variant="standard" index={index} track={track} />
+        <TitleSection
+          variant="standard"
+          track={track}
+          imageUrl={imageUrl}
+          hideArist={true}
+        />
         <DetailLink to={`/album/${track.album.id}`}>
           {track.album.name}
         </DetailLink>
@@ -92,16 +105,27 @@ const Track: FC<Props> = (props) => {
     );
   }
 
-  if (props.type === 'savedTrack') {
+  if (props.variant === 'queue') {
+    const {index, track} = props;
+
+    return (
+      <QueueTrack onDoubleClick={() => skipTo(index)}>
+        <ControlsSection variant="queue" index={index} />
+        <TitleSection variant="queue" track={track} />
+      </QueueTrack>
+    );
+  }
+
+  if (props.variant === 'savedTrack') {
     const {index} = props;
     const track = props.savedTrack.track;
     const addedAt = props.savedTrack.added_at;
     const imageUrl: string | undefined = track.album.images[0].url;
 
     return (
-      <PlaylistTrack onDoubleClick={() => playTracks([track])}>
-        <ControlsSection index={index} track={track} />
-        <TitleSection track={track} imageUrl={imageUrl} />
+      <PlaylistTrack onDoubleClick={() => playTrack(track)}>
+        <ControlsSection variant="standard" index={index} track={track} />
+        <TitleSection variant="standard" track={track} imageUrl={imageUrl} />
         <DetailLink to={`/album/${track.album.id}`}>
           {track.album.name}
         </DetailLink>

@@ -13,7 +13,7 @@ import {
 import placeholder from '../../assets/images/placeholder.png';
 
 interface Props {
-  album: Album;
+  album: SpotifyApi.SingleAlbumResponse;
 }
 
 const AlbumBanner: FC<Props> = ({album}) => {
@@ -35,7 +35,7 @@ const AlbumBanner: FC<Props> = ({album}) => {
             </>
           ))}
 
-          <DescriptionItem>{`${album.tracks.length} songs`}</DescriptionItem>
+          <DescriptionItem>{`${album.tracks.total} songs`}</DescriptionItem>
         </Description>
       </Details>
     </Banner>

@@ -43,17 +43,25 @@ export const SimpleHeaderRow = styled.div<{isStuck: boolean}>`
   border-bottom: 1px solid ${theme.accent};
   margin-bottom: 1rem;
   position: sticky;
+  z-index: 2;
   top: -1px;
-  ${(props) =>
-    props.isStuck &&
-    `background: ${theme.background}; margin: 0 -2rem 1rem -2rem; padding: 0 3rem;`}
   & > :last-child {
     margin-left: auto;
   }
+  ${(props) =>
+    props.isStuck &&
+    `background: ${theme.background}; margin: 0 -2rem 1rem -2rem; padding: 0 3rem;`}
 `;
 
 export const PlaylistHeaderRow = styled(SimpleHeaderRow)`
   grid-template-columns: 3rem 6fr 4fr 3fr minmax(7.5rem, 1fr);
+`;
+
+export const QueueHeaderRow = styled(SimpleHeaderRow)`
+  grid-template-columns: 3rem 1fr;
+  & > :last-child {
+    margin-left: 0;
+  }
 `;
 
 export const Header = styled.h4`

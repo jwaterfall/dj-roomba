@@ -2,8 +2,8 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import type {RootState} from '../store';
 
 interface PlaybackState {
-  currentTrack?: ProcessedTrack;
-  queuedTracks: ProcessedTrack[];
+  currentTrack?: QueuedTrack;
+  queuedTracks: QueuedTrack[];
   isPaused: boolean;
   isOnRepeat: boolean;
 }
@@ -20,11 +20,11 @@ export const playbackSlice = createSlice({
   reducers: {
     setCurrentTrack: (
       state,
-      action: PayloadAction<ProcessedTrack | undefined>,
+      action: PayloadAction<QueuedTrack | undefined>,
     ) => {
       state.currentTrack = action.payload;
     },
-    setQueuedTracks: (state, action: PayloadAction<ProcessedTrack[]>) => {
+    setQueuedTracks: (state, action: PayloadAction<QueuedTrack[]>) => {
       state.queuedTracks = action.payload;
     },
     setIsPaused: (state, action: PayloadAction<boolean>) => {

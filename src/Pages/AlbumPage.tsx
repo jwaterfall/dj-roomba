@@ -3,19 +3,17 @@ import {useParams} from 'react-router-dom';
 import Banner from '../components/Banner';
 import TrackList from '../components/TrackList';
 import useAlbum from '../queries/useAlbum';
+import useAlbumTracks from '../queries/useAlbumTracks';
 
 const AlbumPage: FC = () => {
   const {id} = useParams<{id: string}>();
   const {data: album} = useAlbum(id);
+  const {data: tracks} = useAlbumTracks(id);
 
-  return album ? (
+  return album && tracks ? (
     <>
-      <Banner type="album" album={album} />
-      <TrackList
-        type="album"
-        tracks={album.tracks}
-        copyrights={album.copyrights}
-      />
+      <Banner variant="album" album={album} />
+      <TrackList variant="album" album={album} tracks={tracks} />
     </>
   ) : (
     <></>

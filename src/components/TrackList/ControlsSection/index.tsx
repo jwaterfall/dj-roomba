@@ -6,19 +6,40 @@ import {ReactComponent as QueueAdd} from '../../../assets/icons/queue-add.svg';
 
 import {Container} from './styles';
 
-interface Props {
-  tracks: SpotifyApi.TrackObjectSimplified[];
+interface PlaylistProps {
+  variant: 'playlist';
+  playlist: SpotifyApi.SinglePlaylistResponse;
 }
 
-const ControlsSection: FC<Props> = ({tracks}) => {
-  const {playTracks, queueTracks} = usePlaybackControls();
+interface AlbumProps {
+  variant: 'album';
+  album: SpotifyApi.AlbumObjectSimplified;
+}
 
-  return (
-    <Container>
-      <Play onClick={() => playTracks(tracks)} />
-      <QueueAdd onClick={() => queueTracks(tracks)} />
-    </Container>
-  );
+type Props = PlaylistProps | AlbumProps;
+
+const ControlsSection: FC<Props> = (props) => {
+  const {playPlaylist, playAlbum} = usePlaybackControls();
+
+  if (props.variant === 'playlist') {
+    return (
+      <Container>
+        <Play onClick={() => playPlaylist(props.playlist)} />
+        <QueueAdd onClick={() => playPlaylist(props.playlist, true)} />
+      </Container>
+    );
+  }
+
+  if (props.variant === 'album') {
+    return (
+      <Container>
+        <Play onClick={() => playAlbum(props.album)} />
+        <QueueAdd onClick={() => playAlbum(props.album, true)} />
+      </Container>
+    );
+  }
+
+  return <></>;
 };
 
 export default ControlsSection;

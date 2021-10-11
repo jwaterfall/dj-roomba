@@ -4,6 +4,7 @@ import theme from '../../theme';
 import {IconList, Index} from '../Track/ControlsSection/styles';
 
 export const Detail = styled.h4`
+  height: 1rem;
   margin: 0;
   font-size: 0.875rem;
   font-weight: 400;
@@ -28,19 +29,21 @@ export const DetailLink = styled(NavLink)`
   }
 `;
 
-export const SimpleTrack = styled.div`
+export const SimpleTrack = styled.div<{skeleton?: boolean}>`
   display: grid;
   align-items: center;
   grid-gap: 1rem;
   grid-template-columns: 3rem 4fr minmax(7.5rem, 1fr);
   padding: 0.5rem 1rem;
   transition: background-color 150ms;
+  border-radius: 0.25rem;
   & > :last-child {
     margin-left: auto;
   }
-  &:hover {
+  ${(props) =>
+    !props.skeleton &&
+    `&:hover {
     background-color: ${theme.accent};
-    border-radius: 0.25rem;
     & ${Detail}, ${DetailLink} {
       color: ${theme.text};
     }
@@ -50,7 +53,7 @@ export const SimpleTrack = styled.div`
     & ${IconList} {
       display: flex;
     }
-  }
+  }`}
 `;
 
 export const PlaylistTrack = styled(SimpleTrack)`
@@ -59,4 +62,11 @@ export const PlaylistTrack = styled(SimpleTrack)`
 
 export const ArtistTopTrack = styled(SimpleTrack)`
   grid-template-columns: 3rem 4fr 3fr minmax(7.5rem, 1fr);
+`;
+
+export const QueueTrack = styled(SimpleTrack)`
+  grid-template-columns: 3rem 1fr;
+  & > :last-child {
+    margin-left: 0;
+  }
 `;

@@ -5,14 +5,14 @@ import AlbumCard from '../Card/AlbumCard';
 import {Container, TopBar, Title, CardContainer, Link} from './styles';
 
 interface AlbumProps {
-  type: 'album';
+  variant: 'album';
   linkText: string;
   linkPath: string;
   albums: SpotifyApi.AlbumObjectSimplified[];
 }
 
 interface SingleProps {
-  type: 'single';
+  variant: 'single';
   linkText: string;
   linkPath: string;
   albums: SpotifyApi.AlbumObjectSimplified[];
@@ -39,13 +39,13 @@ const Cards: FC<Props> = (props) => {
     <Container>
       <TopBar>
         <Title>
-          {props.type === 'album' && 'Albums'}
-          {props.type === 'single' && 'Singles'}
+          {props.variant === 'album' && 'Albums'}
+          {props.variant === 'single' && 'Singles'}
         </Title>
         <Link to={props.linkPath}>{props.linkText}</Link>
       </TopBar>
       <CardContainer>
-        {(props.type === 'album' || props.type === 'single') &&
+        {(props.variant === 'album' || props.variant === 'single') &&
           props.albums
             .slice(0, cardCount)
             .map((album) => <AlbumCard album={album} />)}

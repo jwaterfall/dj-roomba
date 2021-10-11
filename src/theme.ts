@@ -7,6 +7,8 @@ const theme = {
   background: 'hsl(220, 15.8%, 7.5%)',
   card: 'hsl(220, 15.8%, 12.5%)',
   cardHover: 'hsl(220, 15.8%, 17.5%)',
+  skeletonBackground: 'hsla(0, 0%, 100%, 0.1)',
+  skeletonShimmer: 'hsla(0, 0%, 100%, 0.025)',
 };
 
 export default theme;

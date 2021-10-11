@@ -7,6 +7,7 @@ import {ReactComponent as Pause} from '../../assets/icons/pause.svg';
 import {ReactComponent as PreviousTrack} from '../../assets/icons/previous-track.svg';
 import {ReactComponent as NextTrack} from '../../assets/icons/next-track.svg';
 import {ReactComponent as Shuffle} from '../../assets/icons/shuffle.svg';
+import {ReactComponent as Queue} from '../../assets/icons/queue.svg';
 
 import {
   Container,
@@ -15,18 +16,20 @@ import {
   Details,
   TitleLink,
   Description,
-  Artist,
   ControlsSection,
   PlayButton,
   Repeat,
   JoinSection,
   JoinButton,
+  RightSection,
+  QueueLink,
 } from './styles';
-import useTrack from '../../queries/useTrack';
 import usePlaybackControls from '../../hooks/usePlaybackControls';
 import {useSocket} from '../../contexts/socket';
+import {useHistory} from 'react-router-dom';
 
 const ControlBar: FC = () => {
+  const history = useHistory();
   const {socket} = useSocket();
   const {currentTrack, isPaused, isOnRepeat} = useAppSelector(selectPlayback);
   const {
@@ -37,10 +40,9 @@ const ControlBar: FC = () => {
     toggleRepeat,
     shuffle,
   } = usePlaybackControls();
-  const {data: spotifyTrack} = useTrack(currentTrack?.spotifyId);
 
-  const imageUrl = spotifyTrack?.album.images[0].url || currentTrack?.thumbnail;
-  const name = spotifyTrack?.name || currentTrack?.title;
+  const imageUrl = currentTrack?.thumbnail;
+  const name = currentTrack?.title;
 
   if (!socket) {
     return (
@@ -58,27 +60,10 @@ const ControlBar: FC = () => {
         <CurrentTrackSection>
           {imageUrl && <Image src={imageUrl} />}
           <Details>
-            {spotifyTrack ? (
-              <TitleLink to={`/album/${spotifyTrack.album.id}`}>
-                {name}
-              </TitleLink>
-            ) : (
-              <TitleLink as="a" href={currentTrack.uri}>
-                {name}
-              </TitleLink>
-            )}
-            {spotifyTrack ? (
-              <Description>
-                {spotifyTrack.artists.map((artist, index) => (
-                  <span key={index}>
-                    {index > 0 && ', '}
-                    <Artist to={`/artist/${artist.id}`}>{artist.name}</Artist>
-                  </span>
-                ))}
-              </Description>
-            ) : (
-              <Description>Playing from youtube</Description>
-            )}
+            <TitleLink as="a" href={currentTrack.uri}>
+              {name}
+            </TitleLink>
+            <Description>Playing from youtube</Description>
           </Details>
         </CurrentTrackSection>
       )}
@@ -92,6 +77,17 @@ const ControlBar: FC = () => {
         <NextTrack onClick={nextTrack} />
         <Repeat onClick={toggleRepeat} isOnRepeat={isOnRepeat} />
       </ControlsSection>
+      <RightSection>
+        <QueueLink
+          onClick={(e) => {
+            if (history.location.pathname === '/queue') {
+              history.goBack();
+            }
+          }}
+          to={'/queue'}>
+          <Queue />
+        </QueueLink>
+      </RightSection>
     </Container>
   );
 };

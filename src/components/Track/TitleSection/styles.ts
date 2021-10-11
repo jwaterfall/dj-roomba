@@ -22,6 +22,7 @@ export const Details = styled.div`
 `;
 
 export const Title = styled.h4`
+  height: 1.25rem;
   margin: 0;
   font-size: 1rem;
   font-weight: 400;
@@ -33,6 +34,7 @@ export const Title = styled.h4`
 `;
 
 export const Artists = styled.div`
+  height: 1rem;
   font-size: 0.875rem;
   font-weight: 400;
   color: ${theme.textSecondary};

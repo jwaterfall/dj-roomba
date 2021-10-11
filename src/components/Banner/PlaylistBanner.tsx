@@ -15,7 +15,7 @@ import {
 import placeholder from '../../assets/images/placeholder.png';
 
 interface Props {
-  playlist: Playlist;
+  playlist: SpotifyApi.SinglePlaylistResponse;
 }
 
 const PlaylistBanner: FC<Props> = ({playlist}) => {
@@ -40,7 +40,7 @@ const PlaylistBanner: FC<Props> = ({playlist}) => {
               thousandSeparated: true,
             })} likes`}
           </DescriptionItem>
-          <DescriptionItem>{`${playlist.tracks.length} songs`}</DescriptionItem>
+          <DescriptionItem>{`${playlist.tracks.total} songs`}</DescriptionItem>
         </Description>
       </Details>
     </Banner>

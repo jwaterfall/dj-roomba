@@ -5,35 +5,34 @@ import ArtistBanner from './ArtistBanner';
 import LikedSongsBanner from './LikedSongsBanner';
 
 interface PlaylistProps {
-  type: 'playlist';
-  playlist: Playlist;
+  variant: 'playlist';
+  playlist: SpotifyApi.SinglePlaylistResponse;
 }
 
 interface AlbumProps {
-  type: 'album';
-  album: Album;
+  variant: 'album';
+  album: SpotifyApi.SingleAlbumResponse;
 }
 
 interface ArtistProps {
-  type: 'artist';
+  variant: 'artist';
   artist: Artist;
 }
 
 interface LikedSongsProps {
-  type: 'likedSongs';
-  likedSongs: SpotifyApi.SavedTrackObject[];
+  variant: 'likedSongs';
 }
 
 type Props = PlaylistProps | AlbumProps | ArtistProps | LikedSongsProps;
 
 const Banner: FC<Props> = (props) => (
   <>
-    {props.type === 'playlist' && <PlaylistBanner playlist={props.playlist} />}
-    {props.type === 'album' && <AlbumBanner album={props.album} />}
-    {props.type === 'artist' && <ArtistBanner artist={props.artist} />}
-    {props.type === 'likedSongs' && (
-      <LikedSongsBanner likedSongs={props.likedSongs} />
+    {props.variant === 'playlist' && (
+      <PlaylistBanner playlist={props.playlist} />
     )}
+    {props.variant === 'album' && <AlbumBanner album={props.album} />}
+    {props.variant === 'artist' && <ArtistBanner artist={props.artist} />}
+    {props.variant === 'likedSongs' && <LikedSongsBanner />}
   </>
 );
 
