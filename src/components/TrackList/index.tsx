@@ -2,26 +2,24 @@ import {FC, useState} from 'react';
 import useSticky from '../../hooks/useSticky';
 import Track from '../Track';
 import ControlsSection from './ControlsSection';
+import PlaylistTrackList from './PlaylistTrackList';
 import LikedSongsTrackList from './LikedSongsTrackList';
+import ArtistTopTrackList from './ArtistTopTrackList';
 
 import {
   Background,
   BackgroundGradient,
   Content,
-  SectionTitle,
   SimpleHeaderRow,
-  PlaylistHeaderRow,
   QueueHeaderRow,
   Header,
   Copyrights,
   Copyright,
-  SeeMore,
 } from './styles';
 
 interface PlaylistProps {
   variant: 'playlist';
-  playlist: SpotifyApi.SinglePlaylistResponse;
-  playlistTracks: SpotifyApi.PlaylistTrackObject[];
+  playlistId: string;
 }
 
 interface AlbumProps {
@@ -32,7 +30,7 @@ interface AlbumProps {
 
 interface ArtistTopTracksProps {
   variant: 'artistTopTracks';
-  tracks: SpotifyApi.TrackObjectFull[];
+  artistId: string;
 }
 
 interface QueueProps {
@@ -52,40 +50,9 @@ type Props =
   | SavedTracksProps;
 
 const TrackList: FC<Props> = (props) => {
-  const [seeMore, setSeeMore] = useState(false);
   const {isStuck, ref} = useSticky();
-
-  const handleSeeMore = () => {
-    setSeeMore((oldValue) => !oldValue);
-  };
-
   if (props.variant === 'playlist') {
-    return (
-      <Background>
-        <BackgroundGradient />
-        <Content>
-          <ControlsSection variant="playlist" playlist={props.playlist} />
-          <PlaylistHeaderRow ref={ref} isStuck={isStuck}>
-            <Header>#</Header>
-            <Header>title</Header>
-            <Header>album</Header>
-            <Header>date added</Header>
-            <Header>length</Header>
-          </PlaylistHeaderRow>
-
-          {props.playlistTracks.map(
-            (playlistTrack: SpotifyApi.PlaylistTrackObject, index) => (
-              <Track
-                variant="playlist"
-                index={index + 1}
-                key={index}
-                playlistTrack={playlistTrack}
-              />
-            ),
-          )}
-        </Content>
-      </Background>
-    );
+    return <PlaylistTrackList playlistId={props.playlistId} />;
   }
 
   if (props.variant === 'album') {
@@ -93,7 +60,7 @@ const TrackList: FC<Props> = (props) => {
       <Background>
         <BackgroundGradient />
         <Content>
-          <ControlsSection variant="album" album={props.album} />
+          <ControlsSection variant="album" albumId={props.album.id} />
           <SimpleHeaderRow ref={ref} isStuck={isStuck}>
             <Header>#</Header>
             <Header>title</Header>
@@ -123,27 +90,7 @@ const TrackList: FC<Props> = (props) => {
   }
 
   if (props.variant === 'artistTopTracks') {
-    return (
-      <Background>
-        <BackgroundGradient />
-        <Content>
-          <SectionTitle>Popular</SectionTitle>
-          {(seeMore ? props.tracks : props.tracks.slice(0, 5)).map(
-            (track, index) => (
-              <Track
-                variant="artistTopTracks"
-                index={index + 1}
-                key={index}
-                track={track}
-              />
-            ),
-          )}
-          <SeeMore onClick={handleSeeMore}>
-            {seeMore ? 'see less' : 'see more'}
-          </SeeMore>
-        </Content>
-      </Background>
-    );
+    return <ArtistTopTrackList artistId={props.artistId} />;
   }
 
   if (props.variant === 'queue') {

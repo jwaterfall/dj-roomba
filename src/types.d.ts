@@ -1,9 +1,3 @@
-interface Artist extends SpotifyApi.SingleArtistResponse {
-  topTracks: SpotifyApi.TrackObjectFull[];
-  topAlbums: SpotifyApi.AlbumObjectSimplified[];
-  topSingles: SpotifyApi.AlbumObjectSimplified[];
-}
-
 interface QueuedTrack {
   track: string;
   title: string;

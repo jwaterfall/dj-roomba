@@ -66,10 +66,4 @@ export const DescriptionLink = styled(NavLink)`
   &:hover {
     text-decoration: underline;
   }
-  &:not(:first-child) {
-    &:before {
-      content: '•';
-      margin: 0 0.25rem;
-    }
-  }
 `;

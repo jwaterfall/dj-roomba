@@ -12,23 +12,19 @@ const ArtistPage: FC = () => {
   return artist ? (
     <>
       <Banner variant="artist" artist={artist} />
-      <TrackList variant="artistTopTracks" tracks={artist.topTracks} />
-      {artist.topAlbums.length > 0 && (
-        <Cards
+      <TrackList variant="artistTopTracks" artistId={artist.id} />
+      {/* <Cards
           variant="album"
           linkText="see discography"
           linkPath={`/artist/${artist.id}/discography/albums`}
           albums={artist.topAlbums}
         />
-      )}
-      {artist.topSingles.length > 0 && (
         <Cards
           variant="single"
           linkText="see discography"
           linkPath={`/artist/${artist.id}/discography/singles`}
           albums={artist.topSingles}
-        />
-      )}
+        /> */}
     </>
   ) : (
     <></>

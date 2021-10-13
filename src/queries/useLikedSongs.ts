@@ -29,7 +29,7 @@ const useLikedSongs = (limit = 25) => {
     ({pageParam}) => getLikedSongs(spotifyApi, limit, pageParam),
     {
       getNextPageParam: (lastPage, pages) => {
-        if (lastPage.nextPage < lastPage.totalPages) return lastPage.nextPage;
+        if (lastPage.nextPage <= lastPage.totalPages) return lastPage.nextPage;
         return undefined;
       },
     },

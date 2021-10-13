@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import dotenv from 'dotenv';
 
-import Routes from './navigation/Routes';
+import Routes from './routes';
 import GlobalStyle from './GlobalStyle';
 import Auth from './components/Auth';
 import {PersistGate} from 'redux-persist/integration/react';

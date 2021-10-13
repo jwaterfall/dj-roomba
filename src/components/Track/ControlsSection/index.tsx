@@ -27,8 +27,8 @@ const ControlsSection: FC<Props> = (props) => {
     return (
       <div>
         <IconList>
-          <Play onClick={() => playTrack(props.track)} />
-          <QueueAdd onClick={() => playTrack(props.track, true)} />
+          <Play onClick={() => playTrack(props.track.id)} />
+          <QueueAdd onClick={() => playTrack(props.track.id, true)} />
         </IconList>
         <Index>{props.index}</Index>
       </div>

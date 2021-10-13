@@ -16,7 +16,7 @@ interface AlbumProps {
 
 interface ArtistProps {
   variant: 'artist';
-  artist: Artist;
+  artist: SpotifyApi.ArtistObjectFull;
 }
 
 interface LikedSongsProps {

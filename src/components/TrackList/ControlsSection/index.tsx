@@ -8,12 +8,12 @@ import {Container} from './styles';
 
 interface PlaylistProps {
   variant: 'playlist';
-  playlist: SpotifyApi.SinglePlaylistResponse;
+  playlistId: string;
 }
 
 interface AlbumProps {
   variant: 'album';
-  album: SpotifyApi.AlbumObjectSimplified;
+  albumId: string;
 }
 
 type Props = PlaylistProps | AlbumProps;
@@ -24,8 +24,8 @@ const ControlsSection: FC<Props> = (props) => {
   if (props.variant === 'playlist') {
     return (
       <Container>
-        <Play onClick={() => playPlaylist(props.playlist)} />
-        <QueueAdd onClick={() => playPlaylist(props.playlist, true)} />
+        <Play onClick={() => playPlaylist(props.playlistId)} />
+        <QueueAdd onClick={() => playPlaylist(props.playlistId, true)} />
       </Container>
     );
   }
@@ -33,8 +33,8 @@ const ControlsSection: FC<Props> = (props) => {
   if (props.variant === 'album') {
     return (
       <Container>
-        <Play onClick={() => playAlbum(props.album)} />
-        <QueueAdd onClick={() => playAlbum(props.album, true)} />
+        <Play onClick={() => playAlbum(props.albumId)} />
+        <QueueAdd onClick={() => playAlbum(props.albumId, true)} />
       </Container>
     );
   }

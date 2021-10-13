@@ -1,9 +1,10 @@
 import {FC, Fragment, useEffect} from 'react';
 import {useInView} from 'react-intersection-observer';
+import ControlsSection from './ControlsSection';
 import Track from '../Track';
 import TrackSkeleton from '../Track/TrackSkeleton';
 import useSticky from '../../hooks/useSticky';
-import useLikedSongs from '../../queries/useLikedSongs';
+import usePlaylistTracks from '../../queries/usePlaylistTracks';
 
 import {
   Background,
@@ -13,8 +14,12 @@ import {
   Header,
 } from './styles';
 
-const LikedSongsTrackList: FC = () => {
-  const {data, hasNextPage, fetchNextPage} = useLikedSongs(25);
+interface Props {
+  playlistId: string;
+}
+
+const PlaylistTrackList: FC<Props> = ({playlistId}) => {
+  const {data, hasNextPage, fetchNextPage} = usePlaylistTracks(playlistId, 25);
   const {isStuck, ref: isStuckRef} = useSticky();
   const {ref: inViewRef, inView} = useInView();
 
@@ -26,6 +31,7 @@ const LikedSongsTrackList: FC = () => {
     <Background>
       <BackgroundGradient />
       <Content>
+        <ControlsSection variant="playlist" playlistId={playlistId} />
         <PlaylistHeaderRow ref={isStuckRef} isStuck={isStuck}>
           <Header>#</Header>
           <Header>title</Header>
@@ -35,12 +41,12 @@ const LikedSongsTrackList: FC = () => {
         </PlaylistHeaderRow>
         {data?.pages.map((page, pageIndex) => (
           <Fragment key={pageIndex}>
-            {page.results.map((savedTrack, index) => (
+            {page.results.map((playlistTrack, index) => (
               <Track
-                variant="savedTrack"
+                variant="playlist"
                 index={pageIndex * 25 + index + 1}
                 key={index}
-                savedTrack={savedTrack}
+                playlistTrack={playlistTrack}
               />
             ))}
           </Fragment>
@@ -48,7 +54,7 @@ const LikedSongsTrackList: FC = () => {
         <div ref={inViewRef}>
           {hasNextPage &&
             [...Array(25)].map((_, i) => (
-              <TrackSkeleton variant="savedTrack" key={i} />
+              <TrackSkeleton variant="playlist" key={i} />
             ))}
         </div>
       </Content>
@@ -56,4 +62,4 @@ const LikedSongsTrackList: FC = () => {
   );
 };
 
-export default LikedSongsTrackList;
+export default PlaylistTrackList;

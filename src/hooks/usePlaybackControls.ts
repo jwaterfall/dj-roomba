@@ -50,28 +50,19 @@ const usePlaybackControls = () => {
     socket.emit('play', query, queue);
   };
 
-  const playTrack = async (
-    track: SpotifyApi.TrackObjectSimplified,
-    queue = false,
-  ) => {
+  const playTrack = async (trackId: string, queue = false) => {
     if (!socket) return;
-    play(`https://open.spotify.com/track/${track.id}`, queue);
+    play(`https://open.spotify.com/track/${trackId}`, queue);
   };
 
-  const playAlbum = async (
-    album: SpotifyApi.AlbumObjectSimplified,
-    queue = false,
-  ) => {
+  const playAlbum = async (albumId: string, queue = false) => {
     if (!socket) return;
-    play(`https://open.spotify.com/album/${album.id}`, queue);
+    play(`https://open.spotify.com/album/${albumId}`, queue);
   };
 
-  const playPlaylist = async (
-    playlist: SpotifyApi.PlaylistObjectSimplified,
-    queue = false,
-  ) => {
+  const playPlaylist = async (playlistId: string, queue = false) => {
     if (!socket) return;
-    play(`https://open.spotify.com/playlist/${playlist.id}`, queue);
+    play(`https://open.spotify.com/playlist/${playlistId}`, queue);
   };
 
   const togglePause = () => {

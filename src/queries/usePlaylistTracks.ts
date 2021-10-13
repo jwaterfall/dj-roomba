@@ -1,29 +1,40 @@
-import {useQuery} from 'react-query';
+import {useInfiniteQuery} from 'react-query';
 import SpotifyWebApi from 'spotify-web-api-node';
 import useSpotifyApi from '../hooks/useSpotifyApi';
 
 const getPlaylistTracks = async (
   spotifyApi: SpotifyWebApi,
   playlistId: string,
+  limit: number,
+  page = 1,
 ) => {
-  let tracks = [];
-  for (let offset = 0; true; offset += 50) {
-    const response = await spotifyApi.getPlaylistTracks(playlistId, {
-      limit: 50,
-      offset,
-    });
-    tracks.push(...response.body.items);
-    if (!response.body.next) break;
-  }
+  const response = await spotifyApi.getPlaylistTracks(playlistId, {
+    limit,
+    offset: (page - 1) * limit,
+  });
 
-  return tracks;
+  const results = response.body.items;
+  const totalPages = Math.ceil(response.body.total / limit);
+
+  return {results, nextPage: page + 1, totalPages};
 };
 
-const usePlaylistTracks = (playlistId: string) => {
+const usePlaylistTracks = (playlistId: string, limit = 25) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.PlaylistTrackObject[]>(
-    ['PLAYLIST_TRACKS', playlistId],
-    () => getPlaylistTracks(spotifyApi, playlistId),
+  return useInfiniteQuery<{
+    results: SpotifyApi.PlaylistTrackObject[];
+    nextPage: number;
+    totalPages: number;
+  }>(
+    ['PLAYLIST_TRACKS', playlistId, limit],
+    ({pageParam}) =>
+      getPlaylistTracks(spotifyApi, playlistId, limit, pageParam),
+    {
+      getNextPageParam: (lastPage, pages) => {
+        if (lastPage.nextPage <= lastPage.totalPages) return lastPage.nextPage;
+        return undefined;
+      },
+    },
   );
 };
 

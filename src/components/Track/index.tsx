@@ -60,7 +60,7 @@ const Track: FC<Props> = (props) => {
     const imageUrl: string | undefined = track.album.images[0].url;
 
     return (
-      <PlaylistTrack onDoubleClick={() => playTrack(track)}>
+      <PlaylistTrack onDoubleClick={() => playTrack(track.id)}>
         <ControlsSection variant="standard" index={index} track={track} />
         <TitleSection variant="standard" track={track} imageUrl={imageUrl} />
         <DetailLink to={`/album/${track.album.id}`}>
@@ -76,7 +76,7 @@ const Track: FC<Props> = (props) => {
     const {index, track} = props;
 
     return (
-      <SimpleTrack onDoubleClick={() => playTrack(track)}>
+      <SimpleTrack onDoubleClick={() => playTrack(track.id)}>
         <ControlsSection variant="standard" index={index} track={track} />
         <TitleSection variant="standard" track={track} />
         <Detail>{dayjs.duration(track.duration_ms).format('m:ss')}</Detail>
@@ -89,7 +89,7 @@ const Track: FC<Props> = (props) => {
     const imageUrl: string | undefined = track.album.images[0].url;
 
     return (
-      <ArtistTopTrack onDoubleClick={() => playTrack(track)}>
+      <ArtistTopTrack onDoubleClick={() => playTrack(track.id)}>
         <ControlsSection variant="standard" index={index} track={track} />
         <TitleSection
           variant="standard"
@@ -123,7 +123,7 @@ const Track: FC<Props> = (props) => {
     const imageUrl: string | undefined = track.album.images[0].url;
 
     return (
-      <PlaylistTrack onDoubleClick={() => playTrack(track)}>
+      <PlaylistTrack onDoubleClick={() => playTrack(track.id)}>
         <ControlsSection variant="standard" index={index} track={track} />
         <TitleSection variant="standard" track={track} imageUrl={imageUrl} />
         <DetailLink to={`/album/${track.album.id}`}>

@@ -10,7 +10,7 @@ import {
 } from './styles';
 
 interface Props {
-  artist: Artist;
+  artist: SpotifyApi.ArtistObjectFull;
 }
 
 const ArtistBanner: FC<Props> = ({artist}) => (
