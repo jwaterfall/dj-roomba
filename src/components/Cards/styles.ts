@@ -24,13 +24,18 @@ export const Title = styled.h2`
 `;
 
 export const CardContainer = styled.div`
+  padding: 1rem;
   display: grid;
-  grid-auto-rows: 0;
   grid-template-rows: 1fr;
   overflow-y: hidden;
   grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-  grid-auto-flow: column;
   gap: 1.5rem;
+`;
+
+export const CardContainerRow = styled(CardContainer)`
+  padding: 0;
+  grid-auto-rows: 0;
+  grid-auto-flow: column;
 `;
 
 export const Link = styled(NavLink)`

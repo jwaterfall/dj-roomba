@@ -9,6 +9,7 @@ const getArtistAlbums = async (
 ) => {
   const response = await spotifyApi.getArtistAlbums(artistId, {
     include_groups: 'album',
+    country: 'GB',
     limit,
   });
   const albums = response.body.items;
@@ -19,7 +20,7 @@ const getArtistAlbums = async (
 const useArtistAlbums = (artistId: string, limit = 10) => {
   const spotifyApi = useSpotifyApi();
   return useQuery<SpotifyApi.AlbumObjectSimplified[]>(
-    ['ARTIST_ALBUMS', artistId],
+    ['ARTIST_ALBUMS', artistId, limit],
     () => getArtistAlbums(spotifyApi, artistId, limit),
   );
 };

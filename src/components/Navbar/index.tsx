@@ -31,13 +31,13 @@ const Navbar: FC = () => {
           <Search />
           Search
         </LinkWithBackground>
-        <LinkWithBackground to="/collection/playlists">
+        <LinkWithBackground to="/library">
           <Library />
           Your Library
         </LinkWithBackground>
       </Links>
       <Links>
-        <Link to="/collection/tracks">
+        <Link to="/liked-songs">
           <LikedSongs />
           Liked Songs
         </Link>

@@ -13,18 +13,8 @@ const ArtistPage: FC = () => {
     <>
       <Banner variant="artist" artist={artist} />
       <TrackList variant="artistTopTracks" artistId={artist.id} />
-      {/* <Cards
-          variant="album"
-          linkText="see discography"
-          linkPath={`/artist/${artist.id}/discography/albums`}
-          albums={artist.topAlbums}
-        />
-        <Cards
-          variant="single"
-          linkText="see discography"
-          linkPath={`/artist/${artist.id}/discography/singles`}
-          albums={artist.topSingles}
-        /> */}
+      <Cards variant="artistAlbums" artistId={id} />
+      <Cards variant="artistSingles" artistId={id} />
     </>
   ) : (
     <></>

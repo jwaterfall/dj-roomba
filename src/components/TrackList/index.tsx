@@ -101,6 +101,7 @@ const TrackList: FC<Props> = (props) => {
           <QueueHeaderRow ref={ref} isStuck={isStuck}>
             <Header>#</Header>
             <Header>title</Header>
+            <Header>added by</Header>
           </QueueHeaderRow>
           {props.tracks.map((track, index) => (
             <Track

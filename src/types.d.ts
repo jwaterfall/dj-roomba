@@ -8,6 +8,6 @@ interface QueuedTrack {
   isStream: boolean;
   uri: string;
   thumbnail: string | null;
-  requester: unknown | null;
+  requester: string | null;
   displayThumbnail(size?: Sizes): string;
 }

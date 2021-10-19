@@ -2,6 +2,35 @@ import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 import theme from '../../theme';
 
+export const PlayButton = styled.div`
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  background-color: ${theme.primary};
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(0.75rem);
+  opacity: 0;
+  transition: all 150ms;
+  &:hover {
+    transform: scale(1.05) !important;
+    & > svg {
+      fill: ${theme.text};
+    }
+  }
+  & > svg {
+    cursor: pointer;
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: ${theme.textSecondary};
+  }
+`;
+
 export const Card = styled(NavLink)`
   background: ${theme.card};
   border-radius: 0.25rem;
@@ -11,10 +40,20 @@ export const Card = styled(NavLink)`
   &:hover {
     background: ${theme.cardHover};
     cursor: pointer;
+    & ${PlayButton} {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 `;
 
+export const ImageContainer = styled.div`
+  position: relative;
+`;
+
 export const Image = styled.img`
+  display: block;
+  aspect-ratio: 1/1;
   box-shadow: 0 0.25rem 3.5rem hsla(0, 0%, 0%, 0.5);
   width: 100%;
 `;
@@ -33,8 +72,12 @@ export const Description = styled.p`
   margin-top: 0.75rem;
   font-size: 0.875rem;
   font-weight: 400;
-  color: hsla(0, 0%, 100%, 0.7);
+  color: ${theme.textSecondary};
   text-transform: capitalize;
+  max-height: 2rem;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 export const DescriptionItem = styled.span`
@@ -43,5 +86,14 @@ export const DescriptionItem = styled.span`
       content: '•';
       margin: 0 0.25rem;
     }
+  }
+`;
+
+export const DescriptionLink = styled(NavLink)`
+  color: ${theme.textSecondary};
+  white-space: nowrap;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
   }
 `;

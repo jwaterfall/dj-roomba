@@ -58,10 +58,7 @@ export const PlaylistHeaderRow = styled(SimpleHeaderRow)`
 `;
 
 export const QueueHeaderRow = styled(SimpleHeaderRow)`
-  grid-template-columns: 3rem 1fr;
-  & > :last-child {
-    margin-left: 0;
-  }
+  grid-template-columns: 3rem 3fr 1fr;
 `;
 
 export const Header = styled.h4`
@@ -96,6 +93,7 @@ export const SeeMore = styled.div`
   font-weight: 600;
   color: ${theme.textSecondary};
   text-transform: uppercase;
+  cursor: pointer;
   &:hover {
     color: ${theme.text};
   }

@@ -22,8 +22,10 @@ const usePlaybackControls = () => {
       discordAccessToken,
     });
 
+    const {guildId, username} = result.data;
+
     const newSocket = socketIOClient(process.env.REACT_APP_SERVER as string, {
-      query: {guildId: result.data},
+      query: {guildId, username},
     });
 
     newSocket.on('currentTrack', (track?: QueuedTrack) => {

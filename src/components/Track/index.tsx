@@ -112,6 +112,7 @@ const Track: FC<Props> = (props) => {
       <QueueTrack onDoubleClick={() => skipTo(index)}>
         <ControlsSection variant="queue" index={index} />
         <TitleSection variant="queue" track={track} />
+        <Detail>{track.requester}</Detail>
       </QueueTrack>
     );
   }

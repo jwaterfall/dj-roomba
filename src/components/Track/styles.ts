@@ -65,8 +65,5 @@ export const ArtistTopTrack = styled(SimpleTrack)`
 `;
 
 export const QueueTrack = styled(SimpleTrack)`
-  grid-template-columns: 3rem 1fr;
-  & > :last-child {
-    margin-left: 0;
-  }
+  grid-template-columns: 3rem 3fr 1fr;
 `;
