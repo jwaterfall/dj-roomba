@@ -1,6 +1,6 @@
-import {FC} from 'react';
+import { FC } from 'react';
 
-import {Container, Link} from './styles';
+import { Container, Link } from './styles';
 
 const LibraryNavbar: FC = () => (
   <Container>

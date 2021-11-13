@@ -1,6 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Socket} from 'socket.io-client';
-import type {RootState} from '../store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Socket } from 'socket.io-client';
+import type { RootState } from '../store';
 
 interface AuthState {
   spotifyAuthCode?: string;
@@ -14,7 +14,7 @@ interface AuthState {
   isAuthenticated?: boolean;
 }
 
-const initialState: AuthState = {isAuthenticated: false};
+const initialState: AuthState = { isAuthenticated: false };
 
 export const authSlice = createSlice({
   name: 'auth',

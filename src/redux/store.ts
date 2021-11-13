@@ -1,5 +1,5 @@
-import {configureStore, combineReducers} from '@reduxjs/toolkit';
-import {useDispatch, useSelector, TypedUseSelectorHook} from 'react-redux';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import {
   persistStore,
   persistReducer,
@@ -21,7 +21,10 @@ const persistConfig = {
   whitelist: ['auth'],
 };
 
-const rootReducer = combineReducers({auth: authSlice, playback: playbackSlice});
+const rootReducer = combineReducers({
+  auth: authSlice,
+  playback: playbackSlice,
+});
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({

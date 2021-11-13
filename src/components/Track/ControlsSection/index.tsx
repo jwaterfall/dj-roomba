@@ -1,11 +1,11 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import usePlaybackControls from '../../../hooks/usePlaybackControls';
 
-import {ReactComponent as Play} from '../../../assets/icons/play.svg';
-import {ReactComponent as QueueAdd} from '../../../assets/icons/queue-add.svg';
-import {ReactComponent as Remove} from '../../../assets/icons/remove.svg';
+import { ReactComponent as Play } from '../../../assets/icons/play.svg';
+import { ReactComponent as QueueAdd } from '../../../assets/icons/queue-add.svg';
+import { ReactComponent as Remove } from '../../../assets/icons/remove.svg';
 
-import {IconList, Index} from './styles';
+import { IconList, Index } from './styles';
 
 interface StandardProps {
   variant: 'standard';
@@ -21,7 +21,7 @@ interface QueueProps {
 type Props = StandardProps | QueueProps;
 
 const ControlsSection: FC<Props> = (props) => {
-  const {playTrack, skipTo, remove} = usePlaybackControls();
+  const { playTrack, skipTo, remove } = usePlaybackControls();
 
   if (props.variant === 'standard') {
     return (

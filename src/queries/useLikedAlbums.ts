@@ -1,11 +1,12 @@
-import {useQuery} from 'react-query';
+import { useQuery } from 'react-query';
 import SpotifyWebApi from 'spotify-web-api-node';
+
 import useSpotifyApi from '../hooks/useSpotifyApi';
 
-const getUserAlbums = async (spotifyApi: SpotifyWebApi) => {
+const getLikedAlbums = async (spotifyApi: SpotifyWebApi) => {
   let albums = [];
   for (let offset = 0; true; offset += 50) {
-    const response = await spotifyApi.getMySavedAlbums({limit: 50, offset});
+    const response = await spotifyApi.getMySavedAlbums({ limit: 50, offset });
     albums.push(...response.body.items);
     if (!response.body.next) break;
   }
@@ -13,11 +14,11 @@ const getUserAlbums = async (spotifyApi: SpotifyWebApi) => {
   return albums;
 };
 
-const useUserAlbums = () => {
+const useLikedAlbums = () => {
   const spotifyApi = useSpotifyApi();
-  return useQuery('USER_ALBUMS', () => getUserAlbums(spotifyApi), {
+  return useQuery('LIKED_ALBUMS', () => getLikedAlbums(spotifyApi), {
     refetchInterval: 15000,
   });
 };
 
-export default useUserAlbums;
+export default useLikedAlbums;

@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const useSticky = () => {
   const [isStuck, setIsStuck] = useState(false);
@@ -11,13 +11,13 @@ const useSticky = () => {
       ([e]) => {
         setIsStuck(e.intersectionRatio < 1);
       },
-      {threshold: [1]},
+      { threshold: [1] },
     );
     observer.observe(cachedRef);
     return () => observer.unobserve(cachedRef);
   }, [ref]);
 
-  return {isStuck, ref};
+  return { isStuck, ref };
 };
 
 export default useSticky;

@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import numbro from 'numbro';
 import {
   Banner,
@@ -13,7 +13,7 @@ interface Props {
   artist: SpotifyApi.ArtistObjectFull;
 }
 
-const ArtistBanner: FC<Props> = ({artist}) => (
+const ArtistBanner: FC<Props> = ({ artist }) => (
   <Banner>
     <Details>
       <Label>artist</Label>

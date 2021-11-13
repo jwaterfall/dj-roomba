@@ -1,22 +1,17 @@
-import {FC, useState} from 'react';
-import Track from '../Track';
-import useArtistTopTracks from '../../queries/useArtistTopTracks';
+import { FC, useState } from 'react';
 
-import {
-  Background,
-  BackgroundGradient,
-  Content,
-  SectionTitle,
-  SeeMore,
-} from './styles';
+import useArtistTopTracks from '../../queries/useArtistTopTracks';
+import { Title, TopBar } from '../Section';
+import Track from '../Track';
+import { Background, BackgroundGradient, Content, SeeMore } from './styles';
 
 interface Props {
   artistId: string;
 }
 
-const ArtistTopTrackList: FC<Props> = ({artistId}) => {
+const ArtistTopTrackList: FC<Props> = ({ artistId }) => {
   const [seeMore, setSeeMore] = useState(false);
-  const {data: tracks} = useArtistTopTracks(artistId);
+  const { data: tracks } = useArtistTopTracks(artistId);
 
   const handleSeeMore = () => {
     setSeeMore((oldValue) => !oldValue);
@@ -28,7 +23,9 @@ const ArtistTopTrackList: FC<Props> = ({artistId}) => {
     <Background>
       <BackgroundGradient />
       <Content>
-        <SectionTitle>Popular</SectionTitle>
+        <TopBar>
+          <Title>Popular</Title>
+        </TopBar>
         {(seeMore ? tracks : tracks.slice(0, 5)).map((track, index) => (
           <Track
             variant="artistTopTracks"

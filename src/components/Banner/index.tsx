@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import PlaylistBanner from './PlaylistBanner';
 import AlbumBanner from './AlbumBanner';
 import ArtistBanner from './ArtistBanner';

@@ -1,5 +1,5 @@
-import {FC, Fragment, useEffect} from 'react';
-import {useInView} from 'react-intersection-observer';
+import { FC, Fragment, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import ControlsSection from './ControlsSection';
 import Track from '../Track';
 import TrackSkeleton from '../Track/TrackSkeleton';
@@ -18,10 +18,13 @@ interface Props {
   playlistId: string;
 }
 
-const PlaylistTrackList: FC<Props> = ({playlistId}) => {
-  const {data, hasNextPage, fetchNextPage} = usePlaylistTracks(playlistId, 25);
-  const {isStuck, ref: isStuckRef} = useSticky();
-  const {ref: inViewRef, inView} = useInView();
+const PlaylistTrackList: FC<Props> = ({ playlistId }) => {
+  const { data, hasNextPage, fetchNextPage } = usePlaylistTracks(
+    playlistId,
+    25,
+  );
+  const { isStuck, ref: isStuckRef } = useSticky();
+  const { ref: inViewRef, inView } = useInView();
 
   useEffect(() => {
     if (inView) fetchNextPage();

@@ -1,26 +1,26 @@
-import {FC, Fragment, useEffect} from 'react';
-import {useInView} from 'react-intersection-observer';
-import Track from '../Track';
-import TrackSkeleton from '../Track/TrackSkeleton';
+import { FC, Fragment, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+
 import useSticky from '../../hooks/useSticky';
 import useLikedSongs from '../../queries/useLikedSongs';
-
+import Track from '../Track';
+import TrackSkeleton from '../Track/TrackSkeleton';
 import {
   Background,
   BackgroundGradient,
   Content,
-  PlaylistHeaderRow,
   Header,
+  PlaylistHeaderRow,
 } from './styles';
 
 const LikedSongsTrackList: FC = () => {
-  const {data, hasNextPage, fetchNextPage} = useLikedSongs(25);
-  const {isStuck, ref: isStuckRef} = useSticky();
-  const {ref: inViewRef, inView} = useInView();
+  const { data, hasNextPage, fetchNextPage } = useLikedSongs(25);
+  const { isStuck, ref: isStuckRef } = useSticky();
+  const { ref: inViewRef, inView } = useInView();
 
   useEffect(() => {
     if (inView) fetchNextPage();
-  }, [inView]);
+  }, [inView, fetchNextPage]);
 
   return (
     <Background>

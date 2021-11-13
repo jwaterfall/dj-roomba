@@ -1,13 +1,13 @@
-import {FC} from 'react';
-import {useParams} from 'react-router-dom';
+import { FC } from 'react';
+import { useParams } from 'react-router-dom';
 import Banner from '../components/Banner';
 import Cards from '../components/Cards';
 import TrackList from '../components/TrackList';
 import useArtist from '../queries/useArtist';
 
 const ArtistPage: FC = () => {
-  const {id} = useParams<{id: string}>();
-  const {data: artist} = useArtist(id);
+  const { id } = useParams<{ id: string }>();
+  const { data: artist } = useArtist(id);
 
   return artist ? (
     <>

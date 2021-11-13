@@ -1,13 +1,13 @@
-import {FC} from 'react';
-import {useAppSelector} from '../../redux/store';
-import {selectPlayback} from '../../redux/slices/playbackSlice';
+import { FC } from 'react';
+import { useAppSelector } from '../../redux/store';
+import { selectPlayback } from '../../redux/slices/playbackSlice';
 
-import {ReactComponent as Play} from '../../assets/icons/play.svg';
-import {ReactComponent as Pause} from '../../assets/icons/pause.svg';
-import {ReactComponent as PreviousTrack} from '../../assets/icons/previous-track.svg';
-import {ReactComponent as NextTrack} from '../../assets/icons/next-track.svg';
-import {ReactComponent as Shuffle} from '../../assets/icons/shuffle.svg';
-import {ReactComponent as Queue} from '../../assets/icons/queue.svg';
+import { ReactComponent as Play } from '../../assets/icons/play.svg';
+import { ReactComponent as Pause } from '../../assets/icons/pause.svg';
+import { ReactComponent as PreviousTrack } from '../../assets/icons/previous-track.svg';
+import { ReactComponent as NextTrack } from '../../assets/icons/next-track.svg';
+import { ReactComponent as Shuffle } from '../../assets/icons/shuffle.svg';
+import { ReactComponent as Queue } from '../../assets/icons/queue.svg';
 
 import {
   Container,
@@ -25,13 +25,13 @@ import {
   QueueLink,
 } from './styles';
 import usePlaybackControls from '../../hooks/usePlaybackControls';
-import {useSocket} from '../../contexts/socket';
-import {useHistory} from 'react-router-dom';
+import { useSocket } from '../../contexts/socket';
+import { useHistory } from 'react-router-dom';
 
 const ControlBar: FC = () => {
   const history = useHistory();
-  const {socket} = useSocket();
-  const {currentTrack, isPaused, isOnRepeat} = useAppSelector(selectPlayback);
+  const { socket } = useSocket();
+  const { currentTrack, isPaused, isOnRepeat } = useAppSelector(selectPlayback);
   const {
     connect,
     togglePause,
@@ -84,7 +84,8 @@ const ControlBar: FC = () => {
               history.goBack();
             }
           }}
-          to={'/queue'}>
+          to={'/queue'}
+        >
           <Queue />
         </QueueLink>
       </RightSection>

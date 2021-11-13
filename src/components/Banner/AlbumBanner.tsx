@@ -1,22 +1,22 @@
-import {FC} from 'react';
+import { FC } from 'react';
+
+import placeholder from '../../assets/images/placeholder.png';
 import {
   Banner,
-  Image,
-  Details,
-  Label,
-  Title,
   Description,
   DescriptionItem,
   DescriptionLink,
+  Details,
+  Image,
+  Label,
+  Title,
 } from './styles';
-
-import placeholder from '../../assets/images/placeholder.png';
 
 interface Props {
   album: SpotifyApi.SingleAlbumResponse;
 }
 
-const AlbumBanner: FC<Props> = ({album}) => {
+const AlbumBanner: FC<Props> = ({ album }) => {
   const imageUrl: string | undefined = album.images[0]?.url;
 
   return (

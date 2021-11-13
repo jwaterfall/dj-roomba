@@ -1,7 +1,8 @@
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+
 import theme from '../../theme';
-import {IconList, Index} from '../Track/ControlsSection/styles';
+import { IconList, Index } from '../Track/ControlsSection/styles';
 
 export const Detail = styled.h4`
   height: 1rem;
@@ -29,7 +30,7 @@ export const DetailLink = styled(NavLink)`
   }
 `;
 
-export const SimpleTrack = styled.div<{skeleton?: boolean}>`
+export const SimpleTrack = styled.div<{ skeleton?: boolean }>`
   display: grid;
   align-items: center;
   grid-gap: 1rem;
@@ -66,4 +67,8 @@ export const ArtistTopTrack = styled(SimpleTrack)`
 
 export const QueueTrack = styled(SimpleTrack)`
   grid-template-columns: 3rem 3fr 1fr;
+`;
+
+export const SearchTrack = styled(SimpleTrack)`
+  grid-template-columns: 3rem 4fr minmax(7.5rem, 1fr);
 `;

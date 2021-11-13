@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import type {RootState} from '../store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '../store';
 
 interface PlaybackState {
   currentTrack?: QueuedTrack;
@@ -36,7 +36,7 @@ export const playbackSlice = createSlice({
   },
 });
 
-export const {setCurrentTrack, setQueuedTracks, setIsPaused, setIsOnRepeat} =
+export const { setCurrentTrack, setQueuedTracks, setIsPaused, setIsOnRepeat } =
   playbackSlice.actions;
 
 export const selectPlayback = (state: RootState) => state.playback;

@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import Banner from '../components/Banner';
 import TrackList from '../components/TrackList';
 

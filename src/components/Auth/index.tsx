@@ -1,8 +1,8 @@
-import {FC, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import { FC, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
 import axios from 'axios';
-import {useAppDispatch, useAppSelector} from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 import {
   selectAuth,
   setSpotifyAccessToken,

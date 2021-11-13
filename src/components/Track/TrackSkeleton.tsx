@@ -1,7 +1,7 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import TitleSectionSkeleton from './TitleSection/TitleSectionSkeleton';
 import Skeleton from '../Skeleton';
-import {SimpleTrack, PlaylistTrack, ArtistTopTrack} from './styles';
+import { SimpleTrack, PlaylistTrack, ArtistTopTrack } from './styles';
 
 interface PlaylistProps {
   variant: 'playlist';

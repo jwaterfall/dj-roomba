@@ -1,5 +1,6 @@
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+
 import theme from '../../theme';
 
 export const Background = styled.section`
@@ -24,17 +25,7 @@ export const Content = styled.div`
   z-index: 3;
 `;
 
-export const SectionTitle = styled.h2`
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-bottom: 1rem;
-`;
-
-export const SimpleHeaderRow = styled.div<{isStuck: boolean}>`
+export const SimpleHeaderRow = styled.div<{ isStuck: boolean }>`
   display: grid;
   align-items: center;
   grid-gap: 1rem;

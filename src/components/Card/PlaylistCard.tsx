@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import dayjs from 'dayjs';
 import usePlaybackControls from '../../hooks/usePlaybackControls';
 
@@ -13,15 +13,15 @@ import {
 } from './styles';
 
 import placeholder from '../../assets/images/placeholder.png';
-import {ReactComponent as Play} from '../../assets/icons/play.svg';
+import { ReactComponent as Play } from '../../assets/icons/play.svg';
 
 interface Props {
   playlist: SpotifyApi.PlaylistObjectSimplified;
 }
 
-const PlaylistCard: FC<Props> = ({playlist}) => {
+const PlaylistCard: FC<Props> = ({ playlist }) => {
   const imageUrl: string | undefined = playlist.images[0]?.url;
-  const {playPlaylist} = usePlaybackControls();
+  const { playPlaylist } = usePlaybackControls();
 
   return (
     <Card to={`/playlist/${playlist.id}`}>
@@ -32,7 +32,8 @@ const PlaylistCard: FC<Props> = ({playlist}) => {
             e.stopPropagation();
             e.preventDefault();
             playPlaylist(playlist.id);
-          }}>
+          }}
+        >
           <Play />
         </PlayButton>
       </ImageContainer>

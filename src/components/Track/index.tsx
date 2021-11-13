@@ -1,17 +1,19 @@
-import {FC} from 'react';
 import dayjs from 'dayjs';
-import usePlaybackControls from '../../hooks/usePlaybackControls';
+import { FC } from 'react';
 
-import {
-  SimpleTrack,
-  PlaylistTrack,
-  ArtistTopTrack,
-  QueueTrack,
-  Detail,
-  DetailLink,
-} from './styles';
+import placeholder from '../../assets/images/placeholder.png';
+import usePlaybackControls from '../../hooks/usePlaybackControls';
 import ControlsSection from './ControlsSection';
 import TitleSection from './TitleSection';
+import {
+  ArtistTopTrack,
+  Detail,
+  DetailLink,
+  PlaylistTrack,
+  QueueTrack,
+  SearchTrack,
+  SimpleTrack,
+} from './styles';
 
 interface PlaylistProps {
   variant: 'playlist';
@@ -43,26 +45,37 @@ interface SavedTracksProps {
   savedTrack: SpotifyApi.SavedTrackObject;
 }
 
+interface SearchProps {
+  variant: 'search';
+  index: number;
+  track: SpotifyApi.TrackObjectFull;
+}
+
 type Props =
   | PlaylistProps
   | AlbumProps
   | ArtistTopTracksProps
   | QueueProps
-  | SavedTracksProps;
+  | SavedTracksProps
+  | SearchProps;
 
 const Track: FC<Props> = (props) => {
-  const {playTrack, skipTo} = usePlaybackControls();
+  const { playTrack, skipTo } = usePlaybackControls();
 
   if (props.variant === 'playlist') {
-    const {index} = props;
+    const { index } = props;
     const track = props.playlistTrack.track;
     const addedAt = props.playlistTrack.added_at;
-    const imageUrl: string | undefined = track.album.images[0].url;
+    const imageUrl: string | undefined = track.album.images[0]?.url;
 
     return (
       <PlaylistTrack onDoubleClick={() => playTrack(track.id)}>
         <ControlsSection variant="standard" index={index} track={track} />
-        <TitleSection variant="standard" track={track} imageUrl={imageUrl} />
+        <TitleSection
+          variant="standard"
+          track={track}
+          imageUrl={imageUrl || placeholder}
+        />
         <DetailLink to={`/album/${track.album.id}`}>
           {track.album.name}
         </DetailLink>
@@ -73,7 +86,7 @@ const Track: FC<Props> = (props) => {
   }
 
   if (props.variant === 'album') {
-    const {index, track} = props;
+    const { index, track } = props;
 
     return (
       <SimpleTrack onDoubleClick={() => playTrack(track.id)}>
@@ -85,7 +98,7 @@ const Track: FC<Props> = (props) => {
   }
 
   if (props.variant === 'artistTopTracks') {
-    const {index, track} = props;
+    const { index, track } = props;
     const imageUrl: string | undefined = track.album.images[0].url;
 
     return (
@@ -106,7 +119,7 @@ const Track: FC<Props> = (props) => {
   }
 
   if (props.variant === 'queue') {
-    const {index, track} = props;
+    const { index, track } = props;
 
     return (
       <QueueTrack onDoubleClick={() => skipTo(index)}>
@@ -118,7 +131,7 @@ const Track: FC<Props> = (props) => {
   }
 
   if (props.variant === 'savedTrack') {
-    const {index} = props;
+    const { index } = props;
     const track = props.savedTrack.track;
     const addedAt = props.savedTrack.added_at;
     const imageUrl: string | undefined = track.album.images[0].url;
@@ -133,6 +146,19 @@ const Track: FC<Props> = (props) => {
         <Detail>{dayjs(addedAt).format('MMM D, YYYY')}</Detail>
         <Detail>{dayjs.duration(track.duration_ms).format('m:ss')}</Detail>
       </PlaylistTrack>
+    );
+  }
+
+  if (props.variant === 'search') {
+    const { index, track } = props;
+    const imageUrl: string | undefined = track.album.images[0].url;
+
+    return (
+      <SearchTrack onDoubleClick={() => playTrack(track.id)}>
+        <ControlsSection variant="standard" index={index} track={track} />
+        <TitleSection variant="standard" track={track} imageUrl={imageUrl} />
+        <Detail>{dayjs.duration(track.duration_ms).format('m:ss')}</Detail>
+      </SearchTrack>
     );
   }
 

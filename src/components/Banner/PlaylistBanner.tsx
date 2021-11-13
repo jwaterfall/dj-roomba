@@ -1,24 +1,23 @@
-import {FC} from 'react';
 import numbro from 'numbro';
+import { FC } from 'react';
 
+import placeholder from '../../assets/images/placeholder.png';
 import {
   Banner,
-  Image,
-  Details,
-  Label,
-  Title,
   Description,
   DescriptionItem,
   DescriptionLink,
+  Details,
+  Image,
+  Label,
+  Title,
 } from './styles';
-
-import placeholder from '../../assets/images/placeholder.png';
 
 interface Props {
   playlist: SpotifyApi.SinglePlaylistResponse;
 }
 
-const PlaylistBanner: FC<Props> = ({playlist}) => {
+const PlaylistBanner: FC<Props> = ({ playlist }) => {
   const imageUrl: string | undefined = playlist.images[0]?.url;
   return (
     <Banner>

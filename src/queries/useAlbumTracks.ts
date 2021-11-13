@@ -1,4 +1,4 @@
-import {useQuery} from 'react-query';
+import { useQuery } from 'react-query';
 import SpotifyWebApi from 'spotify-web-api-node';
 import useSpotifyApi from '../hooks/useSpotifyApi';
 

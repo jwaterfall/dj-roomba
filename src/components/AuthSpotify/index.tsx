@@ -1,8 +1,8 @@
-import {FC, useEffect} from 'react';
-import {useLocation} from 'react-router';
+import { FC, useEffect } from 'react';
+import { useLocation } from 'react-router';
 import queryString from 'query-string';
-import {useAppDispatch} from '../../redux/store';
-import {setSpotifyAuthCode} from '../../redux/slices/authSlice';
+import { useAppDispatch } from '../../redux/store';
+import { setSpotifyAuthCode } from '../../redux/slices/authSlice';
 
 const AuthSpotify: FC = () => {
   const spotifyAuthCode = queryString.parse(useLocation().search).code;

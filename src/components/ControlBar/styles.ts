@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import theme from '../../theme';
 
-import {ReactComponent as RepeatIcon} from '../../assets/icons/repeat.svg';
+import { ReactComponent as RepeatIcon } from '../../assets/icons/repeat.svg';
 
 export const Container = styled.div`
   grid-area: control-bar;
@@ -111,7 +111,7 @@ export const PlayButton = styled.div`
   }
 `;
 
-export const Repeat = styled(RepeatIcon)<{isOnRepeat: boolean}>`
+export const Repeat = styled(RepeatIcon)<{ isOnRepeat: boolean }>`
   ${(props) => props.isOnRepeat && `fill: ${theme.primary} !important;`}
 `;
 

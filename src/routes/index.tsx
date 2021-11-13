@@ -1,23 +1,25 @@
-import {FC} from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
-import {Content, PageLayout} from '../components/PageLayout';
-import ControlBar from '../components/ControlBar';
-import Navbar from '../components/Navbar';
-import LibraryNavbar from '../components/LibraryNavbar';
-import ProtectedRoute from './ProtectedRoute';
-import AuthSpotify from '../components/AuthSpotify';
-import AuthDiscord from '../components/AuthDiscord';
+import { FC } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
-import DashboardPage from '../Pages/DashboardPage';
-import PlaylistPage from '../Pages/PlaylistPage';
 import AlbumPage from '../Pages/AlbumPage';
 import ArtistPage from '../Pages/ArtistPage';
+import DashboardPage from '../Pages/DashboardPage';
+import FollowedArtistsPage from '../Pages/FollowedArtistsPage';
+import LikedAlbumsPage from '../Pages/LikedAlbumsPage';
+import LikedPlaylistsPage from '../Pages/LikedPlaylistsPage';
 import LikedSongsPage from '../Pages/LikedSongsPage';
+import PlaylistPage from '../Pages/PlaylistPage';
 import QueuePage from '../Pages/QueuePage';
-import LibraryPlaylistsPage from '../Pages/LibraryPlaylistsPage';
-import LibraryAlbumsPage from '../Pages/LibraryAlbumsPage';
+import SearchPage from '../Pages/SearchPage';
+import AuthDiscord from '../components/AuthDiscord';
+import AuthSpotify from '../components/AuthSpotify';
+import ControlBar from '../components/ControlBar';
+import LibraryNavbar from '../components/LibraryNavbar';
+import Navbar from '../components/Navbar';
+import { Content, PageLayout } from '../components/PageLayout';
+import ProtectedRoute from './ProtectedRoute';
 
-const AUTH_URL_SPOTIFY = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_SPOTIFY_REDIRECT_URI}&response_type=code&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20playlist-read-private%20playlist-read-collaborative`;
+const AUTH_URL_SPOTIFY = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_SPOTIFY_REDIRECT_URI}&response_type=code&scope=streaming%20user-read-email%20user-follow-read%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20playlist-read-private%20playlist-read-collaborative`;
 const AUTH_URL_DISCORD = `https://discord.com/api/oauth2/authorize?client_id=${process.env.REACT_APP_DISCORD_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_DISCORD_REDIRECT_URI}&response_type=code&scope=identify`;
 
 const Routes: FC = () => {
@@ -69,14 +71,20 @@ const Routes: FC = () => {
               <Route path="/library">
                 <LibraryNavbar />
                 <Route path="/library/playlists">
-                  <LibraryPlaylistsPage />
+                  <LikedPlaylistsPage />
+                </Route>
+                <Route path="/library/artists">
+                  <FollowedArtistsPage />
                 </Route>
                 <Route path="/library/albums">
-                  <LibraryAlbumsPage />
+                  <LikedAlbumsPage />
                 </Route>
               </Route>
               <Route path="/liked-songs">
                 <LikedSongsPage />
+              </Route>
+              <Route path="/search">
+                <SearchPage />
               </Route>
             </Switch>
           </Content>

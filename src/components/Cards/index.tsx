@@ -1,8 +1,10 @@
-import {FC} from 'react';
+import { FC } from 'react';
+
+import AlbumCards from './AlbumCards';
 import ArtistAlbumCards from './ArtistAlbumCards';
+import ArtistCards from './ArtistCards';
 import ArtistSingleCards from './ArtistSingleCards';
 import PlaylistCards from './PlaylistCards';
-import AlbumCards from './AlbumCards';
 
 interface ArtistAlbumsProps {
   variant: 'artistAlbums';
@@ -14,21 +16,27 @@ interface ArtistSinglesProps {
   artistId: string;
 }
 
-interface PlaylistsProps {
-  variant: 'playlists';
-  playlists: SpotifyApi.PlaylistObjectSimplified[];
-}
-
 interface AlbumsProps {
   variant: 'albums';
   albums: SpotifyApi.AlbumObjectSimplified[];
 }
 
+interface ArtistsProps {
+  variant: 'artists';
+  artists: SpotifyApi.ArtistObjectFull[];
+}
+
+interface PlaylistsProps {
+  variant: 'playlists';
+  playlists: SpotifyApi.PlaylistObjectSimplified[];
+}
+
 type Props =
   | ArtistAlbumsProps
   | ArtistSinglesProps
-  | PlaylistsProps
-  | AlbumsProps;
+  | AlbumsProps
+  | ArtistsProps
+  | PlaylistsProps;
 
 const Cards: FC<Props> = (props) => {
   if (props.variant === 'artistAlbums')
@@ -37,10 +45,13 @@ const Cards: FC<Props> = (props) => {
   if (props.variant === 'artistSingles')
     return <ArtistSingleCards artistId={props.artistId} />;
 
+  if (props.variant === 'albums') return <AlbumCards albums={props.albums} />;
+
+  if (props.variant === 'artists')
+    return <ArtistCards artists={props.artists} />;
+
   if (props.variant === 'playlists')
     return <PlaylistCards playlists={props.playlists} />;
-
-  if (props.variant === 'albums') return <AlbumCards albums={props.albums} />;
 
   return <></>;
 };

@@ -1,10 +1,10 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import usePlaybackControls from '../../../hooks/usePlaybackControls';
 
-import {ReactComponent as Play} from '../../../assets/icons/play.svg';
-import {ReactComponent as QueueAdd} from '../../../assets/icons/queue-add.svg';
+import { ReactComponent as Play } from '../../../assets/icons/play.svg';
+import { ReactComponent as QueueAdd } from '../../../assets/icons/queue-add.svg';
 
-import {Container} from './styles';
+import { Container } from './styles';
 
 interface PlaylistProps {
   variant: 'playlist';
@@ -19,7 +19,7 @@ interface AlbumProps {
 type Props = PlaylistProps | AlbumProps;
 
 const ControlsSection: FC<Props> = (props) => {
-  const {playPlaylist, playAlbum} = usePlaybackControls();
+  const { playPlaylist, playAlbum } = usePlaybackControls();
 
   if (props.variant === 'playlist') {
     return (

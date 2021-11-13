@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import { FC, useState } from 'react';
 import useSticky from '../../hooks/useSticky';
 import Track from '../Track';
 import ControlsSection from './ControlsSection';
@@ -50,7 +50,7 @@ type Props =
   | SavedTracksProps;
 
 const TrackList: FC<Props> = (props) => {
-  const {isStuck, ref} = useSticky();
+  const { isStuck, ref } = useSticky();
   if (props.variant === 'playlist') {
     return <PlaylistTrackList playlistId={props.playlistId} />;
   }

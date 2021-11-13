@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import dayjs from 'dayjs';
 import usePlaybackControls from '../../hooks/usePlaybackControls';
 
@@ -14,16 +14,16 @@ import {
 } from './styles';
 
 import placeholder from '../../assets/images/placeholder.png';
-import {ReactComponent as Play} from '../../assets/icons/play.svg';
+import { ReactComponent as Play } from '../../assets/icons/play.svg';
 
 interface Props {
   album: SpotifyApi.AlbumObjectSimplified;
   artistPage?: boolean;
 }
 
-const AlbumCard: FC<Props> = ({album, artistPage = false}) => {
+const AlbumCard: FC<Props> = ({ album, artistPage = false }) => {
   const imageUrl: string | undefined = album.images[0]?.url;
-  const {playAlbum} = usePlaybackControls();
+  const { playAlbum } = usePlaybackControls();
 
   return (
     <Card to={`/album/${album.id}`}>
@@ -34,7 +34,8 @@ const AlbumCard: FC<Props> = ({album, artistPage = false}) => {
             e.stopPropagation();
             e.preventDefault();
             playAlbum(album.id);
-          }}>
+          }}
+        >
           <Play />
         </PlayButton>
       </ImageContainer>

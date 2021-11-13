@@ -1,24 +1,23 @@
-import {FC, useState} from 'react';
-import useUserPlaylists from '../../queries/useUserPlaylists';
+import { FC, useState } from 'react';
 
-import {ReactComponent as Home} from '../../assets/icons/home.svg';
-import {ReactComponent as Search} from '../../assets/icons/search.svg';
-import {ReactComponent as Library} from '../../assets/icons/library.svg';
-import {ReactComponent as LikedSongs} from '../../assets/icons/liked-songs.svg';
-
+import { ReactComponent as Home } from '../../assets/icons/home.svg';
+import { ReactComponent as Library } from '../../assets/icons/library.svg';
+import { ReactComponent as LikedSongs } from '../../assets/icons/liked-songs.svg';
+import { ReactComponent as Search } from '../../assets/icons/search.svg';
+import useLikedPlaylists from '../../queries/useLikedPlaylists';
 import {
-  NavbarContainer,
-  Links,
+  Divider,
   Link,
   LinkWithBackground,
-  Divider,
-  Playlists,
+  Links,
+  NavbarContainer,
   Playlist,
+  Playlists,
 } from './styles';
 
 const Navbar: FC = () => {
   useState<SpotifyApi.PlaylistObjectSimplified[]>();
-  const {data: playlists} = useUserPlaylists();
+  const { data: playlists } = useLikedPlaylists();
 
   return (
     <NavbarContainer>

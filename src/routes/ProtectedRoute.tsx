@@ -1,10 +1,10 @@
 import React from 'react';
-import {Redirect, Route} from 'react-router-dom';
-import {useAppSelector} from '../redux/store';
-import {selectAuth} from '../redux/slices/authSlice';
+import { Redirect, Route } from 'react-router-dom';
+import { useAppSelector } from '../redux/store';
+import { selectAuth } from '../redux/slices/authSlice';
 
 export const ProtectedRoute: React.FC = (props) => {
-  const {isAuthenticated} = useAppSelector(selectAuth);
+  const { isAuthenticated } = useAppSelector(selectAuth);
 
   if (!isAuthenticated) {
     return (

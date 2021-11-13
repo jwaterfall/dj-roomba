@@ -1,5 +1,6 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import {NavLink} from 'react-router-dom';
+
 import theme from '../../theme';
 
 export const PlayButton = styled.div`
@@ -56,6 +57,10 @@ export const Image = styled.img`
   aspect-ratio: 1/1;
   box-shadow: 0 0.25rem 3.5rem hsla(0, 0%, 0%, 0.5);
   width: 100%;
+`;
+
+export const ImageCircular = styled(Image)`
+  border-radius: 50%50%;
 `;
 
 export const Title = styled.h3`

@@ -1,16 +1,17 @@
-import {FC, useMemo} from 'react';
-import useViewport from '../../hooks/useViewport';
-import Card from '../Card';
-import useArtistAlbums from '../../queries/useArtistAlbums';
+import { FC, useMemo } from 'react';
 
-import {Container, TopBar, Title, Link, CardContainerRow} from './styles';
+import useViewport from '../../hooks/useViewport';
+import useArtistAlbums from '../../queries/useArtistAlbums';
+import Card from '../Card';
+import { Container, Link, Title, TopBar } from '../Section';
+import { CardContainerRow } from './styles';
 
 interface Props {
   artistId: string;
 }
 
-const ArtistAlbumCards: FC<Props> = ({artistId}) => {
-  const {width} = useViewport();
+const ArtistAlbumCards: FC<Props> = ({ artistId }) => {
+  const { width } = useViewport();
 
   const cardCount = useMemo(() => {
     if (width < 1000) return 2;
@@ -24,7 +25,7 @@ const ArtistAlbumCards: FC<Props> = ({artistId}) => {
     return 10;
   }, [width]);
 
-  const {data: albums} = useArtistAlbums(artistId, cardCount);
+  const { data: albums } = useArtistAlbums(artistId, cardCount);
 
   if (!albums?.length) return <></>;
 
@@ -32,9 +33,9 @@ const ArtistAlbumCards: FC<Props> = ({artistId}) => {
     <Container>
       <TopBar>
         <Title>Albums</Title>
-        {/* <Link to={`/artist/${artistId}/discography/albums`}>
+        <Link to={`/artist/${artistId}/discography/albums`}>
           see discography
-        </Link> */}
+        </Link>
       </TopBar>
       <CardContainerRow>
         {albums &&

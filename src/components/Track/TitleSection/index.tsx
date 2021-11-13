@@ -1,6 +1,6 @@
-import {FC} from 'react';
+import { FC } from 'react';
 
-import {Container, Image, Details, Title, Artists, Artist} from './styles';
+import { Container, Image, Details, Title, Artists, Artist } from './styles';
 
 interface StandardProps {
   variant: 'standard';

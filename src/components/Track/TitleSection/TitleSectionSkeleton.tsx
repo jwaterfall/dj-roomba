@@ -1,14 +1,14 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import Skeleton from '../../Skeleton';
 
-import {Container, Details} from './styles';
+import { Container, Details } from './styles';
 
 interface Props {
   hideImage?: boolean;
   hideArist?: boolean;
 }
 
-const TitleSectionSkeleton: FC<Props> = ({hideImage, hideArist}) => (
+const TitleSectionSkeleton: FC<Props> = ({ hideImage, hideArist }) => (
   <Container>
     {!hideImage && <Skeleton variant="rect" width="2.5rem" height="2.5rem" />}
     <Details>

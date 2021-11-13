@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import socketIOClient from 'socket.io-client';
-import {useSocket} from '../contexts/socket';
-import {useAppDispatch, useAppSelector} from '../redux/store';
-import {selectAuth} from '../redux/slices/authSlice';
+import { useSocket } from '../contexts/socket';
+import { useAppDispatch, useAppSelector } from '../redux/store';
+import { selectAuth } from '../redux/slices/authSlice';
 import {
   setCurrentTrack,
   setIsOnRepeat,
@@ -13,8 +13,8 @@ import {
 
 const usePlaybackControls = () => {
   const dispatch = useAppDispatch();
-  const {socket, setSocket} = useSocket();
-  const {discordAccessToken} = useAppSelector(selectAuth);
+  const { socket, setSocket } = useSocket();
+  const { discordAccessToken } = useAppSelector(selectAuth);
 
   const connect = async () => {
     if (!discordAccessToken || socket) return;
@@ -22,10 +22,10 @@ const usePlaybackControls = () => {
       discordAccessToken,
     });
 
-    const {guildId, username} = result.data;
+    const { guildId, username } = result.data;
 
     const newSocket = socketIOClient(process.env.REACT_APP_SERVER as string, {
-      query: {guildId, username},
+      query: { guildId, username },
     });
 
     newSocket.on('currentTrack', (track?: QueuedTrack) => {
