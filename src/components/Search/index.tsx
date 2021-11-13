@@ -2,26 +2,57 @@ import { FC, useState } from 'react';
 
 import { ReactComponent as Close } from '../../assets/icons/close.svg';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
+import useCardCount from '../../hooks/useCardCount';
 import useDebounce from '../../hooks/useDebounce';
+import useSearchAlbums from '../../queries/useSearchAlbums';
+import useSearchArtists from '../../queries/useSearchArtists';
+import useSearchPlaylists from '../../queries/useSearchPlaylists';
 import useSearchTracks from '../../queries/useSearchTracks';
-import SearchTrackList from '../TrackList/SearchTrackList';
-import { Container, Input, SearchBar } from './styles';
+import useSearchYoutube from '../../queries/useSearchYoutube';
+import Cards from '../Cards';
+import TrackList from '../TrackList';
+import { Input, SearchBar, TopBar } from './styles';
 
 const Search: FC = () => {
   const [input, setInput] = useState('');
-  const [search, setSearch] = useState('');
-  useDebounce(() => setSearch(input), 250, [input]);
-  const { data: tracks } = useSearchTracks(search, 4);
+  const [query, setQuery] = useState('');
+  useDebounce(() => setQuery(input), 250, [input]);
+  const cardCount = useCardCount();
+  const { data: tracks } = useSearchTracks(query, 5);
+  const { data: youtubeVideos } = useSearchYoutube(query);
+  const { data: artists } = useSearchArtists(query, cardCount);
+  const { data: albums } = useSearchAlbums(query, cardCount);
+  const { data: playlists } = useSearchPlaylists(query, cardCount);
 
   return (
-    <Container>
-      <SearchBar>
-        <SearchIcon />
-        <Input value={input} onChange={(e) => setInput(e.target.value)} />
-        <Close onClick={() => setSearch('')} />
-      </SearchBar>
-      {tracks && tracks.length > 0 && <SearchTrackList tracks={tracks} />}
-    </Container>
+    <>
+      <TopBar>
+        <SearchBar>
+          <SearchIcon />
+          <Input value={input} onChange={(e) => setInput(e.target.value)} />
+          <Close onClick={() => setQuery('')} />
+        </SearchBar>
+      </TopBar>
+      {tracks && tracks.length > 0 && (
+        <TrackList variant="search" tracks={tracks} query={query} />
+      )}
+      {youtubeVideos && youtubeVideos.length > 0 && (
+        <TrackList
+          variant="youtubeSearch"
+          videos={youtubeVideos.slice(10)}
+          query={query}
+        />
+      )}
+      {artists && artists.length > 0 && (
+        <Cards variant="artistSearch" artists={artists} query={query} />
+      )}
+      {albums && albums.length > 0 && (
+        <Cards variant="albumSearch" albums={albums} query={query} />
+      )}
+      {playlists && playlists.length > 0 && (
+        <Cards variant="playlistSearch" playlists={playlists} query={query} />
+      )}
+    </>
   );
 };
 

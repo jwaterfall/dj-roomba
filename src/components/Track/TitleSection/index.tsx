@@ -1,6 +1,7 @@
 import { FC } from 'react';
+import { VideoSearchResult } from 'yt-search';
 
-import { Container, Image, Details, Title, Artists, Artist } from './styles';
+import { Artist, Artists, Container, Details, Image, Title } from './styles';
 
 interface StandardProps {
   variant: 'standard';
@@ -9,12 +10,17 @@ interface StandardProps {
   hideArist?: boolean;
 }
 
+interface YoutubeProps {
+  variant: 'youtube';
+  video: VideoSearchResult;
+}
+
 interface QueueProps {
   variant: 'queue';
   track: QueuedTrack;
 }
 
-type Props = StandardProps | QueueProps;
+type Props = StandardProps | YoutubeProps | QueueProps;
 
 const TitleSection: FC<Props> = (props) => {
   if (props.variant === 'standard')
@@ -33,6 +39,16 @@ const TitleSection: FC<Props> = (props) => {
               ))}
             </Artists>
           )}
+        </Details>
+      </Container>
+    );
+
+  if (props.variant === 'youtube')
+    return (
+      <Container>
+        <Image src={props.video.thumbnail} />
+        <Details>
+          <Title>{props.video.title}</Title>
         </Details>
       </Container>
     );

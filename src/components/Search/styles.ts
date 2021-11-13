@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  padding: 1rem;
+export const TopBar = styled.div`
+  padding: 1rem 1rem 0 1rem;
 `;
 
 export const SearchBar = styled.div`

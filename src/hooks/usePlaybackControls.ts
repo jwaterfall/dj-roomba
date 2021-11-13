@@ -1,8 +1,8 @@
-import React from 'react';
 import axios from 'axios';
+import React from 'react';
 import socketIOClient from 'socket.io-client';
+
 import { useSocket } from '../contexts/socket';
-import { useAppDispatch, useAppSelector } from '../redux/store';
 import { selectAuth } from '../redux/slices/authSlice';
 import {
   setCurrentTrack,
@@ -10,6 +10,7 @@ import {
   setIsPaused,
   setQueuedTracks,
 } from '../redux/slices/playbackSlice';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 
 const usePlaybackControls = () => {
   const dispatch = useAppDispatch();
@@ -50,6 +51,11 @@ const usePlaybackControls = () => {
   const play = async (query: string, queue = false) => {
     if (!socket) return;
     socket.emit('play', query, queue);
+  };
+
+  const playYoutubeVideo = async (videoId: string, queue = false) => {
+    if (!socket) return;
+    play(`https://www.youtube.com/watch?v=${videoId}`, queue);
   };
 
   const playTrack = async (trackId: string, queue = false) => {
@@ -110,6 +116,7 @@ const usePlaybackControls = () => {
   return {
     connect,
     play,
+    playYoutubeVideo,
     playTrack,
     playAlbum,
     playPlaylist,

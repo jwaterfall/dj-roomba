@@ -1,20 +1,23 @@
 import { FC, useState } from 'react';
+import { VideoSearchResult } from 'yt-search';
+
 import useSticky from '../../hooks/useSticky';
 import Track from '../Track';
-import ControlsSection from './ControlsSection';
-import PlaylistTrackList from './PlaylistTrackList';
-import LikedSongsTrackList from './LikedSongsTrackList';
 import ArtistTopTrackList from './ArtistTopTrackList';
-
+import ControlsSection from './ControlsSection';
+import LikedSongsTrackList from './LikedSongsTrackList';
+import PlaylistTrackList from './PlaylistTrackList';
+import SearchTrackList from './SearchTrackList';
+import YoutubeSearchTrackList from './YoutubeSearchTrackList';
 import {
   Background,
   BackgroundGradient,
   Content,
-  SimpleHeaderRow,
-  QueueHeaderRow,
-  Header,
-  Copyrights,
   Copyright,
+  Copyrights,
+  Header,
+  QueueHeaderRow,
+  SimpleHeaderRow,
 } from './styles';
 
 interface PlaylistProps {
@@ -42,12 +45,26 @@ interface SavedTracksProps {
   variant: 'savedTracks';
 }
 
+interface SearchProps {
+  variant: 'search';
+  tracks: SpotifyApi.TrackObjectFull[];
+  query: string;
+}
+
+interface YoutubeSearchProps {
+  variant: 'youtubeSearch';
+  videos: VideoSearchResult[];
+  query: string;
+}
+
 type Props =
   | PlaylistProps
   | AlbumProps
   | ArtistTopTracksProps
   | QueueProps
-  | SavedTracksProps;
+  | SavedTracksProps
+  | SearchProps
+  | YoutubeSearchProps;
 
 const TrackList: FC<Props> = (props) => {
   const { isStuck, ref } = useSticky();
@@ -118,6 +135,14 @@ const TrackList: FC<Props> = (props) => {
 
   if (props.variant === 'savedTracks') {
     return <LikedSongsTrackList />;
+  }
+
+  if (props.variant === 'search') {
+    return <SearchTrackList tracks={props.tracks} query={props.query} />;
+  }
+
+  if (props.variant === 'youtubeSearch') {
+    return <YoutubeSearchTrackList videos={props.videos} query={props.query} />;
   }
 
   return <></>;

@@ -38,7 +38,8 @@
     "workbox-range-requests": "^5.1.4",
     "workbox-routing": "^5.1.4",
     "workbox-strategies": "^5.1.4",
-    "workbox-streams": "^5.1.4"
+    "workbox-streams": "^5.1.4",
+    "yt-search": "^2.10.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -76,7 +77,8 @@
     "@types/react-infinite-scroller": "^1.2.2",
     "@types/react-router-dom": "^5.3.0",
     "@types/spotify-web-api-node": "^5.0.3",
-    "@types/styled-components": "^5.1.14"
+    "@types/styled-components": "^5.1.14",
+    "@types/yt-search": "^2.3.2"
   },
   "engines": {
     "node": "16.10.0"

@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { FC } from 'react';
+import { VideoSearchResult } from 'yt-search';
 
 import placeholder from '../../assets/images/placeholder.png';
 import usePlaybackControls from '../../hooks/usePlaybackControls';
@@ -51,16 +52,29 @@ interface SearchProps {
   track: SpotifyApi.TrackObjectFull;
 }
 
+interface SearchProps {
+  variant: 'search';
+  index: number;
+  track: SpotifyApi.TrackObjectFull;
+}
+
+interface YoutubeSearchProps {
+  variant: 'youtubeSearch';
+  index: number;
+  video: VideoSearchResult;
+}
+
 type Props =
   | PlaylistProps
   | AlbumProps
   | ArtistTopTracksProps
   | QueueProps
   | SavedTracksProps
-  | SearchProps;
+  | SearchProps
+  | YoutubeSearchProps;
 
 const Track: FC<Props> = (props) => {
-  const { playTrack, skipTo } = usePlaybackControls();
+  const { playYoutubeVideo, playTrack, skipTo } = usePlaybackControls();
 
   if (props.variant === 'playlist') {
     const { index } = props;
@@ -158,6 +172,18 @@ const Track: FC<Props> = (props) => {
         <ControlsSection variant="standard" index={index} track={track} />
         <TitleSection variant="standard" track={track} imageUrl={imageUrl} />
         <Detail>{dayjs.duration(track.duration_ms).format('m:ss')}</Detail>
+      </SearchTrack>
+    );
+  }
+
+  if (props.variant === 'youtubeSearch') {
+    const { index, video } = props;
+
+    return (
+      <SearchTrack onDoubleClick={() => playYoutubeVideo(video.videoId)}>
+        <ControlsSection variant="youtube" index={index} video={video} />
+        <TitleSection variant="youtube" video={video} />
+        <Detail>{video.timestamp}</Detail>
       </SearchTrack>
     );
   }
