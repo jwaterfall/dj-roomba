@@ -4,7 +4,7 @@
   DJ Roomba
 </h1>
 <p align="center">
- A Spotify inspired interface for controlling a Discord music bot complete with playlist, album, artistm liked songs and library pages.
+ A Spotify inspired interface for controlling a Discord music bot complete with playlist, album, artist, liked songs and library pages.
 </p>
 
 ## Installation
