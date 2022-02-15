@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import Cards from '../components/Cards';
-import useLikedAlbums from '../queries/useLikedAlbums';
+import useLikedAlbums from '../hooks/queries/useLikedAlbums';
 
 const LikedAlbumsPage: FC = () => {
   const { data: albums } = useLikedAlbums();

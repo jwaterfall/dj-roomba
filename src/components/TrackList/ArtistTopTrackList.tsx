@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 
-import useArtistTopTracks from '../../queries/useArtistTopTracks';
+import useArtistTopTracks from '../../hooks/queries/useArtistTopTracks';
 import { Title, TopBar } from '../Section';
 import Track from '../Track';
 import { Background, BackgroundGradient, Content, SeeMore } from './styles';

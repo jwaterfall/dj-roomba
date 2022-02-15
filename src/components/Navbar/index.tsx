@@ -4,7 +4,7 @@ import { ReactComponent as Home } from '../../assets/icons/home.svg';
 import { ReactComponent as Library } from '../../assets/icons/library.svg';
 import { ReactComponent as LikedSongs } from '../../assets/icons/liked-songs.svg';
 import { ReactComponent as Search } from '../../assets/icons/search.svg';
-import useLikedPlaylists from '../../queries/useLikedPlaylists';
+import useLikedPlaylists from '../../hooks/queries/useLikedPlaylists';
 import {
   Divider,
   Link,

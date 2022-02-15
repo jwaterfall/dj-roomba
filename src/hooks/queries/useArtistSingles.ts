@@ -1,28 +1,28 @@
 import { useQuery } from 'react-query';
 import SpotifyWebApi from 'spotify-web-api-node';
-import useSpotifyApi from '../hooks/useSpotifyApi';
+import useSpotifyApi from '../useSpotifyApi';
 
-const getArtistAlbums = async (
+const getArtistSingles = async (
   spotifyApi: SpotifyWebApi,
   artistId: string,
   limit = 10,
 ) => {
   const response = await spotifyApi.getArtistAlbums(artistId, {
-    include_groups: 'album',
+    include_groups: 'single',
     country: 'GB',
     limit,
   });
-  const albums = response.body.items;
+  const singles = response.body.items;
 
-  return albums;
+  return singles;
 };
 
-const useArtistAlbums = (artistId: string, limit = 10) => {
+const useArtistSingles = (artistId: string, limit = 10) => {
   const spotifyApi = useSpotifyApi();
   return useQuery<SpotifyApi.AlbumObjectSimplified[]>(
-    ['ARTIST_ALBUMS', artistId, limit],
-    () => getArtistAlbums(spotifyApi, artistId, limit),
+    ['ARTIST_SINGLES', artistId, limit],
+    () => getArtistSingles(spotifyApi, artistId, limit),
   );
 };
 
-export default useArtistAlbums;
+export default useArtistSingles;

@@ -2,7 +2,7 @@ import { FC, Fragment, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import useSticky from '../../hooks/useSticky';
-import useLikedSongs from '../../queries/useLikedSongs';
+import useLikedSongs from '../../hooks/queries/useLikedSongs';
 import Track from '../Track';
 import TrackSkeleton from '../Track/TrackSkeleton';
 import {

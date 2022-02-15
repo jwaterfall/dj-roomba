@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import SpotifyWebApi from 'spotify-web-api-node';
-import useSpotifyApi from '../hooks/useSpotifyApi';
+import useSpotifyApi from '../useSpotifyApi';
 
 const getArtistTopTracks = async (
   spotifyApi: SpotifyWebApi,

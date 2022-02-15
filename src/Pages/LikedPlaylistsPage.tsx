@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import Cards from '../components/Cards';
-import useLikedPlaylists from '../queries/useLikedPlaylists';
+import useLikedPlaylists from '../hooks/queries/useLikedPlaylists';
 
 const LikedPlaylistsPage: FC = () => {
   const { data: playlists } = useLikedPlaylists();

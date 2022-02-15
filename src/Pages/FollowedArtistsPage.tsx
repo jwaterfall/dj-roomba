@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import Cards from '../components/Cards';
-import useFollowedArtists from '../queries/useFollowedArtists';
+import useFollowedArtists from '../hooks/queries/useFollowedArtists';
 
 const FollowedArtistsPage: FC = () => {
   const { data: artists } = useFollowedArtists();

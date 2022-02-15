@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import useCardCount from '../../hooks/useCardCount';
-import useArtistSingles from '../../queries/useArtistSingles';
+import useArtistSingles from '../../hooks/queries/useArtistSingles';
 import Card from '../Card';
 import { Container, Link, Title, TopBar } from '../Section';
 import { CardContainerRow } from './styles';

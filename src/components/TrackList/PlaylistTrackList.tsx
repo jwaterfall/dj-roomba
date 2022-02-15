@@ -4,7 +4,7 @@ import ControlsSection from './ControlsSection';
 import Track from '../Track';
 import TrackSkeleton from '../Track/TrackSkeleton';
 import useSticky from '../../hooks/useSticky';
-import usePlaylistTracks from '../../queries/usePlaylistTracks';
+import usePlaylistTracks from '../../hooks/queries/usePlaylistTracks';
 
 import {
   Background,

@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import Banner from '../components/Banner';
 import TrackList from '../components/TrackList';
-import useAlbum from '../queries/useAlbum';
-import useAlbumTracks from '../queries/useAlbumTracks';
+import useAlbum from '../hooks/queries/useAlbum';
+import useAlbumTracks from '../hooks/queries/useAlbumTracks';
 
 const AlbumPage: FC = () => {
   const { id } = useParams<{ id: string }>();

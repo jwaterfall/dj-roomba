@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import Banner from '../components/Banner';
 import TrackList from '../components/TrackList';
-import usePlaylist from '../queries/usePlaylist';
+import usePlaylist from '../hooks/queries/usePlaylist';
 
 const PlaylistPage: FC = () => {
   const { id } = useParams<{ id: string }>();

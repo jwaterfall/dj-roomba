@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import SpotifyWebApi from 'spotify-web-api-node';
-import useSpotifyApi from '../hooks/useSpotifyApi';
+import useSpotifyApi from '../useSpotifyApi';
 
 const getPlaylist = async (spotifyApi: SpotifyWebApi, playlistId: string) => {
   const result = await spotifyApi.getPlaylist(playlistId);

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Banner from '../components/Banner';
 import Cards from '../components/Cards';
 import TrackList from '../components/TrackList';
-import useArtist from '../queries/useArtist';
+import useArtist from '../hooks/queries/useArtist';
 
 const ArtistPage: FC = () => {
   const { id } = useParams<{ id: string }>();
