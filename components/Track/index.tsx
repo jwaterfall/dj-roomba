@@ -3,7 +3,6 @@ import { FC } from 'react';
 import { VideoSearchResult } from 'yt-search';
 
 import usePlaybackControls from '../../hooks/usePlaybackControls';
-import placeholder from '../../images/placeholder.png';
 import NavLink from '../NavLink';
 import ControlsSection from './ControlsSection';
 import TitleSection from './TitleSection';
@@ -81,7 +80,9 @@ const Track: FC<Props> = (props) => {
     const { index } = props;
     const track = props.playlistTrack.track;
     const addedAt = props.playlistTrack.added_at;
-    const imageUrl: string | undefined = track.album.images[0]?.url;
+    const url = track.album.images[0].url ?? '/images/placeholder.png';
+    const width = track.album.images[0]?.width ?? 50;
+    const height = track.album.images[0]?.height ?? 50;
 
     return (
       <PlaylistTrack onDoubleClick={() => playTrack(track.id)}>
@@ -89,7 +90,7 @@ const Track: FC<Props> = (props) => {
         <TitleSection
           variant="standard"
           track={track}
-          imageUrl={imageUrl || placeholder}
+          image={{ url, width, height }}
         />
         <NavLink href={`/albums/${track.album.id}`} passHref>
           <DetailLink>{track.album.name}</DetailLink>
@@ -114,7 +115,9 @@ const Track: FC<Props> = (props) => {
 
   if (props.variant === 'artistTopTracks') {
     const { index, track } = props;
-    const imageUrl: string | undefined = track.album.images[0].url;
+    const url = track.album.images[0].url ?? '/images/placeholder.png';
+    const width = track.album.images[0]?.width ?? 50;
+    const height = track.album.images[0]?.height ?? 50;
 
     return (
       <ArtistTopTrack onDoubleClick={() => playTrack(track.id)}>
@@ -122,7 +125,7 @@ const Track: FC<Props> = (props) => {
         <TitleSection
           variant="standard"
           track={track}
-          imageUrl={imageUrl}
+          image={{ url, width, height }}
           hideArist={true}
         />
         <NavLink href={`/albums/${track.album.id}`} passHref>
@@ -149,12 +152,18 @@ const Track: FC<Props> = (props) => {
     const { index } = props;
     const track = props.savedTrack.track;
     const addedAt = props.savedTrack.added_at;
-    const imageUrl: string | undefined = track.album.images[0].url;
+    const url = track.album.images[0].url ?? '/images/placeholder.png';
+    const width = track.album.images[0]?.width ?? 50;
+    const height = track.album.images[0]?.height ?? 50;
 
     return (
       <PlaylistTrack onDoubleClick={() => playTrack(track.id)}>
         <ControlsSection variant="standard" index={index} track={track} />
-        <TitleSection variant="standard" track={track} imageUrl={imageUrl} />
+        <TitleSection
+          variant="standard"
+          track={track}
+          image={{ url, width, height }}
+        />
         <NavLink href={`/albums/${track.album.id}`} passHref>
           <DetailLink>{track.album.name}</DetailLink>
         </NavLink>
@@ -166,12 +175,18 @@ const Track: FC<Props> = (props) => {
 
   if (props.variant === 'search') {
     const { index, track } = props;
-    const imageUrl: string | undefined = track.album.images[0].url;
+    const url = track.album.images[0].url ?? '/images/placeholder.png';
+    const width = track.album.images[0]?.width ?? 50;
+    const height = track.album.images[0]?.height ?? 50;
 
     return (
       <SearchTrack onDoubleClick={() => playTrack(track.id)}>
         <ControlsSection variant="standard" index={index} track={track} />
-        <TitleSection variant="standard" track={track} imageUrl={imageUrl} />
+        <TitleSection
+          variant="standard"
+          track={track}
+          image={{ url, width, height }}
+        />
         <Detail>{dayjs.duration(track.duration_ms).format('m:ss')}</Detail>
       </SearchTrack>
     );

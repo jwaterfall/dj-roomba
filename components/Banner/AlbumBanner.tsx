@@ -1,6 +1,6 @@
+import Image from 'next/image';
 import { FC } from 'react';
 
-import placeholder from '../../images/placeholder.png';
 import NavLink from '../NavLink';
 import {
   Banner,
@@ -8,7 +8,7 @@ import {
   DescriptionItem,
   DescriptionLink,
   Details,
-  Image,
+  ImageContainer,
   Label,
   Title,
 } from './styles';
@@ -18,11 +18,22 @@ interface Props {
 }
 
 const AlbumBanner: FC<Props> = ({ album }) => {
-  const imageUrl: string | undefined = album.images[0]?.url;
+  const url = album.images[0]?.url ?? '/images/placeholder.png';
+  const width = album.images[0]?.width ?? 50;
+  const height = album.images[0]?.height ?? 50;
 
   return (
     <Banner>
-      <Image src={imageUrl || placeholder} />
+      <ImageContainer>
+        <Image
+          src={url}
+          width={width}
+          height={height}
+          layout="responsive"
+          priority={true}
+          alt="album"
+        />
+      </ImageContainer>
       <Details>
         <Label>{album.album_type}</Label>
         <Title>{album.name}</Title>

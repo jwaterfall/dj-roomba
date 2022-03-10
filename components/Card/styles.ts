@@ -49,17 +49,14 @@ export const Card = styled.a`
 
 export const ImageContainer = styled.div`
   position: relative;
-`;
-
-export const Image = styled.img`
   display: block;
   aspect-ratio: 1/1;
   box-shadow: 0 0.25rem 3.5rem hsla(0, 0%, 0%, 0.5);
   width: 100%;
 `;
 
-export const ImageCircular = styled(Image)`
-  border-radius: 50%50%;
+export const ImageContainerCircular = styled(ImageContainer)`
+  border-radius: 50%;
 `;
 
 export const Title = styled.h3`

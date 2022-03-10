@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import {
@@ -20,7 +21,7 @@ import {
   CurrentTrackSection,
   Description,
   Details,
-  Image,
+  ImageContainer,
   JoinButton,
   JoinSection,
   PlayButton,
@@ -43,7 +44,7 @@ const ControlBar: FC = () => {
     shuffle,
   } = usePlaybackControls();
 
-  const imageUrl = currentTrack?.thumbnail;
+  const url = currentTrack?.thumbnail ?? '/images/placeholder.png';
   const name = currentTrack?.title;
 
   if (!socket) {
@@ -60,7 +61,16 @@ const ControlBar: FC = () => {
     <Container>
       {currentTrack && (
         <CurrentTrackSection>
-          {imageUrl && <Image src={imageUrl} />}
+          <ImageContainer>
+            <Image
+              src={url}
+              width={50}
+              height={50}
+              layout="responsive"
+              priority={true}
+              alt="album"
+            />
+          </ImageContainer>
           <Details>
             <TitleLink href={currentTrack.uri}>{name}</TitleLink>
             <Description>Playing from youtube</Description>

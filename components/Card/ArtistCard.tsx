@@ -1,28 +1,31 @@
+import Image from 'next/image';
 import { FC } from 'react';
 
-import placeholder from '../../images/placeholder.png';
 import NavLink from '../NavLink';
-import {
-  Card,
-  Description,
-  ImageCircular,
-  ImageContainer,
-  Title,
-} from './styles';
+import { Card, Description, ImageContainerCircular, Title } from './styles';
 
 interface Props {
   artist: SpotifyApi.ArtistObjectFull;
 }
 
 const ArtistCard: FC<Props> = ({ artist }) => {
-  const imageUrl: string | undefined = artist.images[0]?.url;
+  const url = artist.images[0]?.url ?? '/images/placeholder.png';
+  const width = artist.images[0]?.width ?? 50;
+  const height = artist.images[0]?.height ?? 50;
 
   return (
     <NavLink href={`/artists/${artist.id}`} passHref>
       <Card>
-        <ImageContainer>
-          <ImageCircular src={imageUrl || placeholder} />
-        </ImageContainer>
+        <ImageContainerCircular>
+          <Image
+            src={url}
+            width={width}
+            height={height}
+            layout="responsive"
+            priority={true}
+            alt="artist"
+          />
+        </ImageContainerCircular>
         <Title>{artist.name}</Title>
         <Description>Artist</Description>
       </Card>

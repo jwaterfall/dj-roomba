@@ -1,33 +1,33 @@
-import dayjs from 'dayjs';
+import Image from 'next/image';
 import { FC } from 'react';
 import { MdPlayArrow } from 'react-icons/md';
 
 import usePlaybackControls from '../../hooks/usePlaybackControls';
-import placeholder from '../../images/placeholder.png';
 import NavLink from '../NavLink';
-import {
-  Card,
-  Description,
-  DescriptionItem,
-  Image,
-  ImageContainer,
-  PlayButton,
-  Title,
-} from './styles';
+import { Card, Description, ImageContainer, PlayButton, Title } from './styles';
 
 interface Props {
   playlist: SpotifyApi.PlaylistObjectSimplified;
 }
 
 const PlaylistCard: FC<Props> = ({ playlist }) => {
-  const imageUrl: string | undefined = playlist.images[0]?.url;
   const { playPlaylist } = usePlaybackControls();
+  const url = playlist.images[0]?.url ?? '/images/placeholder.png';
+  const width = playlist.images[0]?.width ?? 50;
+  const height = playlist.images[0]?.height ?? 50;
 
   return (
     <NavLink href={`/playlists/${playlist.id}`} passHref>
       <Card>
         <ImageContainer>
-          <Image src={imageUrl || placeholder} />
+          <Image
+            src={url}
+            width={width}
+            height={height}
+            layout="responsive"
+            priority={true}
+            alt="playlist"
+          />
           <PlayButton
             onClick={(e) => {
               e.stopPropagation();

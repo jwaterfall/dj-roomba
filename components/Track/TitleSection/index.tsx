@@ -1,13 +1,21 @@
+import Image from 'next/image';
 import { FC } from 'react';
 import { VideoSearchResult } from 'yt-search';
 
 import NavLink from '../../NavLink';
-import { Artist, Artists, Container, Details, Image, Title } from './styles';
+import {
+  Artist,
+  Artists,
+  Container,
+  Details,
+  ImageContainer,
+  Title,
+} from './styles';
 
 interface StandardProps {
   variant: 'standard';
   track: SpotifyApi.TrackObjectSimplified;
-  imageUrl?: string;
+  image?: { url: string; width: number; height: number };
   hideArist?: boolean;
 }
 
@@ -27,7 +35,18 @@ const TitleSection: FC<Props> = (props) => {
   if (props.variant === 'standard')
     return (
       <Container>
-        {props.imageUrl && <Image src={props.imageUrl} />}
+        {props.image && (
+          <ImageContainer>
+            <Image
+              src={props.image.url}
+              width={props.image.width}
+              height={props.image.height}
+              layout="responsive"
+              priority={true}
+              alt="track"
+            />
+          </ImageContainer>
+        )}
         <Details>
           <Title>{props.track.name}</Title>
           {!props.hideArist && (
@@ -49,7 +68,15 @@ const TitleSection: FC<Props> = (props) => {
   if (props.variant === 'youtube')
     return (
       <Container>
-        <Image src={props.video.thumbnail} />
+        <ImageContainer>
+          <Image
+            src={props.video.thumbnail}
+            width={50}
+            height={50}
+            layout="responsive"
+            alt="track"
+          />
+        </ImageContainer>
         <Details>
           <Title>{props.video.title}</Title>
         </Details>

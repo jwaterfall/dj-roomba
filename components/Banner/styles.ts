@@ -11,7 +11,8 @@ export const Banner = styled.section`
   background-image: linear-gradient(transparent 0, rgba(0, 0, 0, 0.5) 100%);
 `;
 
-export const Image = styled.img`
+export const ImageContainer = styled.div`
+  flex-shrink: 0;
   width: 14.5rem;
   height: 14.5rem;
   box-shadow: 0 0.25rem 3.5rem hsla(0, 0%, 0%, 0.5);

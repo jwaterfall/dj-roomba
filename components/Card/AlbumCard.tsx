@@ -1,16 +1,15 @@
 import dayjs from 'dayjs';
+import Image from 'next/image';
 import { FC } from 'react';
 import { MdPlayArrow } from 'react-icons/md';
 
 import usePlaybackControls from '../../hooks/usePlaybackControls';
-import placeholder from '../../images/placeholder.png';
 import NavLink from '../NavLink';
 import {
   Card,
   Description,
   DescriptionItem,
   DescriptionLink,
-  Image,
   ImageContainer,
   PlayButton,
   Title,
@@ -22,14 +21,23 @@ interface Props {
 }
 
 const AlbumCard: FC<Props> = ({ album, artistPage = false }) => {
-  const imageUrl: string | undefined = album.images[0]?.url;
   const { playAlbum } = usePlaybackControls();
+  const url = album.images[0]?.url ?? '/images/placeholder.png';
+  const width = album.images[0]?.width ?? 50;
+  const height = album.images[0]?.height ?? 50;
 
   return (
     <NavLink href={`/albums/${album.id}`} passHref>
       <Card>
         <ImageContainer>
-          <Image src={imageUrl || placeholder} />
+          <Image
+            src={url}
+            width={width}
+            height={height}
+            layout="responsive"
+            priority={true}
+            alt="album"
+          />
           <PlayButton
             onClick={(e) => {
               e.stopPropagation();

@@ -24,7 +24,7 @@ export const CurrentTrackSection = styled.div`
   gap: 1rem;
 `;
 
-export const Image = styled.img`
+export const ImageContainer = styled.div`
   width: 2.5rem;
   height: 2.5rem;
 `;

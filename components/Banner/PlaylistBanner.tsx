@@ -1,7 +1,7 @@
+import Image from 'next/image';
 import numbro from 'numbro';
 import { FC } from 'react';
 
-import placeholder from '../../images/placeholder.png';
 import NavLink from '../NavLink';
 import {
   Banner,
@@ -9,7 +9,7 @@ import {
   DescriptionItem,
   DescriptionLink,
   Details,
-  Image,
+  ImageContainer,
   Label,
   Title,
 } from './styles';
@@ -19,10 +19,22 @@ interface Props {
 }
 
 const PlaylistBanner: FC<Props> = ({ playlist }) => {
-  const imageUrl: string | undefined = playlist.images[0]?.url;
+  const url = playlist.images[0]?.url ?? '/images/placeholder.png';
+  const width = playlist.images[0]?.width ?? 50;
+  const height = playlist.images[0]?.height ?? 50;
+
   return (
     <Banner>
-      <Image src={imageUrl || placeholder} />
+      <ImageContainer>
+        <Image
+          src={url}
+          width={width}
+          height={height}
+          layout="responsive"
+          priority={true}
+          alt="album"
+        />
+      </ImageContainer>
       <Details>
         <Label>playlist</Label>
         <Title>{playlist.name}</Title>
