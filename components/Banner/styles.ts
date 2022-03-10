@@ -7,7 +7,7 @@ export const Banner = styled.section`
   display: flex;
   gap: 1.5rem;
   align-items: flex-end;
-  background-color: ${theme.primary};
+  background-color: ${theme.gradient};
   background-image: linear-gradient(transparent 0, rgba(0, 0, 0, 0.5) 100%);
 `;
 

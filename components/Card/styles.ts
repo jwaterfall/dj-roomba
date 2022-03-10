@@ -33,6 +33,7 @@ export const PlayButton = styled.div`
 
 export const Card = styled.a`
   background: ${theme.card};
+  border: 1px solid ${theme.accent};
   border-radius: 0.25rem;
   padding: 1rem;
   transition: background 150ms;
@@ -57,6 +58,7 @@ export const ImageContainer = styled.div`
 
 export const ImageContainerCircular = styled(ImageContainer)`
   border-radius: 50%;
+  overflow: hidden;
 `;
 
 export const Title = styled.h3`

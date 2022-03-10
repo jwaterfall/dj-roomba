@@ -6,7 +6,6 @@ import NavLink from '../NavLink';
 import {
   Divider,
   Link,
-  LinkWithBackground,
   Links,
   NavbarContainer,
   Playlist,
@@ -21,22 +20,22 @@ const Navbar: FC = () => {
     <NavbarContainer>
       <Links>
         <NavLink href="/" passHref>
-          <LinkWithBackground>
+          <Link>
             <MdHome />
             Home
-          </LinkWithBackground>
+          </Link>
         </NavLink>
         <NavLink href="/search" passHref>
-          <LinkWithBackground>
+          <Link>
             <MdSearch />
             Search
-          </LinkWithBackground>
+          </Link>
         </NavLink>
         <NavLink href="/library" passHref exact={false}>
-          <LinkWithBackground>
+          <Link>
             <MdLibraryMusic />
             Your Library
-          </LinkWithBackground>
+          </Link>
         </NavLink>
       </Links>
       <Links>

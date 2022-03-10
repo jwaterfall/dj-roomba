@@ -12,7 +12,6 @@ import GlobalStyle from '../GlobalStyle';
 import Auth from '../components/Auth';
 import socketContext from '../contexts/socket';
 import { persistor, store } from '../redux/store';
-import '../styles/globals.css';
 
 dayjs.extend(duration);
 

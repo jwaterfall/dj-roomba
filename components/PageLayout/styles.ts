@@ -19,15 +19,15 @@ export const Content = styled.div`
   overflow-y: auto;
   transition: all 150ms;
   scrollbar-width: thin;
-  scrollbar-color: hsla(0, 0%, 100%, 0.3) ${theme.navbar};
+  scrollbar-color: hsla(0, 0%, 100%, 0.3) transparent;
   &:hover {
-    scrollbar-color: hsla(0, 0%, 100%, 0.5) ${theme.navbar};
+    scrollbar-color: hsla(0, 0%, 100%, 0.5) transparent;
   }
   &::-webkit-scrollbar {
-    background: ${theme.navbar};
-    width: 0.75rem;
+    width: 0.4rem;
   }
   &::-webkit-scrollbar-thumb {
+    border-radius: 0.2rem;
     background: hsla(0, 0%, 100%, 0.3);
     &:hover {
       background: hsla(0, 0%, 100%, 0.5);
