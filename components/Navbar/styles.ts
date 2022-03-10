@@ -7,8 +7,9 @@ export const NavbarContainer = styled.nav`
   width: 16rem;
   max-height: 100%;
   display: flex;
+  background: ${theme.background};
+  border-right: 1px solid ${theme.accent};
   flex-direction: column;
-  background: ${theme.navbar};
   overflow-y: auto;
   overflow-x: hidden;
 `;
@@ -30,27 +31,18 @@ export const Link = styled.a`
   text-overflow: ellipsis;
   color: ${theme.textSecondary};
   transition: all 150ms;
+  border-radius: 0.25rem;
   & > svg {
-    color: ${theme.textSecondary};
     display: block;
     width: 1.5rem;
     height: 1.5rem;
   }
   &.active {
     color: ${theme.text};
-    & > svg {
-      color: ${theme.text};
-    }
+    background-color: ${theme.active};
   }
   &:hover {
     color: ${theme.text};
-  }
-`;
-
-export const LinkWithBackground = styled(Link)`
-  &.active {
-    background-color: #282828;
-    border-radius: 0.25rem;
   }
 `;
 
@@ -68,15 +60,15 @@ export const Playlists = styled.div`
   padding: 0.5rem 0;
   transition: all 150ms;
   scrollbar-width: thin;
-  scrollbar-color: hsla(0, 0%, 100%, 0.3) hsl(0, 0%, 0%);
+  scrollbar-color: hsla(0, 0%, 100%, 0.3) transparent;
   &:hover {
-    scrollbar-color: hsla(0, 0%, 100%, 0.5) hsl(0, 0%, 0%);
+    scrollbar-color: hsla(0, 0%, 100%, 0.5) transparent;
   }
   &::-webkit-scrollbar {
-    background: hsl(0, 0%, 0%);
-    width: 0.75rem;
+    width: 0.4rem;
   }
   &::-webkit-scrollbar-thumb {
+    border-radius: 0.2rem;
     background: hsla(0, 0%, 100%, 0.3);
     &:hover {
       background: hsla(0, 0%, 100%, 0.5);

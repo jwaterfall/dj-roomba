@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import theme from '../../theme';
@@ -8,7 +7,7 @@ export const Background = styled.section`
 `;
 
 export const BackgroundGradient = styled.div`
-  background-color: ${theme.primary};
+  background-color: ${theme.gradient};
   background-image: linear-gradient(
     rgba(0, 0, 0, 0.6) 0,
     ${theme.background} 100%

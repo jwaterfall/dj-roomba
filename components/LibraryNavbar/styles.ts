@@ -12,12 +12,13 @@ export const Container = styled.div`
 export const Link = styled.a`
   border-radius: 0.25rem;
   padding: 0.75rem 1rem;
-  color: ${theme.text};
+  color: ${theme.textSecondary};
   font-size: 0.875rem;
   font-weight: 700;
   text-transform: capitalize;
   text-decoration: none;
   &.active {
-    background-color: ${theme.accent};
+    color: ${theme.text};
+    background-color: ${theme.active};
   }
 `;
