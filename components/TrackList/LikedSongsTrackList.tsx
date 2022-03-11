@@ -1,8 +1,8 @@
 import { FC, Fragment, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import useSticky from '../../hooks/useSticky';
 import useLikedSongs from '../../hooks/queries/useLikedSongs';
+import useSticky from '../../hooks/useSticky';
 import Track from '../Track';
 import TrackSkeleton from '../Track/TrackSkeleton';
 import {
@@ -39,7 +39,7 @@ const LikedSongsTrackList: FC = () => {
               <Track
                 variant="savedTrack"
                 index={pageIndex * 25 + index + 1}
-                key={index}
+                key={savedTrack.id}
                 savedTrack={savedTrack}
               />
             ))}

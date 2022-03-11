@@ -1,17 +1,17 @@
 import { FC, Fragment, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import ControlsSection from './ControlsSection';
+
+import usePlaylistTracks from '../../hooks/queries/usePlaylistTracks';
+import useSticky from '../../hooks/useSticky';
 import Track from '../Track';
 import TrackSkeleton from '../Track/TrackSkeleton';
-import useSticky from '../../hooks/useSticky';
-import usePlaylistTracks from '../../hooks/queries/usePlaylistTracks';
-
+import ControlsSection from './ControlsSection';
 import {
   Background,
   BackgroundGradient,
   Content,
-  PlaylistHeaderRow,
   Header,
+  PlaylistHeaderRow,
 } from './styles';
 
 interface Props {
@@ -28,7 +28,7 @@ const PlaylistTrackList: FC<Props> = ({ playlistId }) => {
 
   useEffect(() => {
     if (inView) fetchNextPage();
-  }, [inView]);
+  }, [inView, fetchNextPage]);
 
   return (
     <Background>
@@ -48,7 +48,7 @@ const PlaylistTrackList: FC<Props> = ({ playlistId }) => {
               <Track
                 variant="playlist"
                 index={pageIndex * 25 + index + 1}
-                key={index}
+                key={playlistTrack.id}
                 playlistTrack={playlistTrack}
               />
             ))}

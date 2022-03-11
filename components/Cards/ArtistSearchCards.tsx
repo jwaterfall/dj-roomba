@@ -20,7 +20,7 @@ const ArtistSearchCards: FC<Props> = ({ artists, query }) => (
     </TopBar>
     <CardContainerRow>
       {artists.map((artist) => (
-        <Card variant="artist" artist={artist} />
+        <Card key={artist.id} variant="artist" artist={artist} />
       ))}
     </CardContainerRow>
   </Container>

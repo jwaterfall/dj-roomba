@@ -29,7 +29,12 @@ const ArtistSingleCards: FC<Props> = ({ artistId }) => {
       <CardContainerRow>
         {singles &&
           singles.map((single) => (
-            <Card variant="album" album={single} artistPage={true} />
+            <Card
+              key={single.id}
+              variant="album"
+              album={single}
+              artistPage={true}
+            />
           ))}
       </CardContainerRow>
     </Container>

@@ -30,7 +30,7 @@ const ArtistTopTrackList: FC<Props> = ({ artistId }) => {
           <Track
             variant="artistTopTracks"
             index={index + 1}
-            key={index}
+            key={track.id}
             track={track}
           />
         ))}

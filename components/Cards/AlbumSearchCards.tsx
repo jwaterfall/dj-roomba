@@ -20,7 +20,7 @@ const AlbumSearchCards: FC<Props> = ({ albums, query }) => (
     </TopBar>
     <CardContainerRow>
       {albums.map((album) => (
-        <Card variant="album" album={album} />
+        <Card key={album.id} variant="album" album={album} />
       ))}
     </CardContainerRow>
   </Container>

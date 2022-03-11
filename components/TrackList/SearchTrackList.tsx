@@ -18,7 +18,7 @@ const SearchTrackList: FC<Props> = ({ tracks, query }) => (
       </NavLink>
     </TopBar>
     {tracks.map((track, index) => (
-      <Track variant="search" index={index + 1} track={track} />
+      <Track key={track.id} variant="search" index={index + 1} track={track} />
     ))}
   </Container>
 );

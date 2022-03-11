@@ -52,7 +52,7 @@ const TitleSection: FC<Props> = (props) => {
           {!props.hideArist && (
             <Artists>
               {props.track.artists.map((artist, index) => (
-                <span key={index}>
+                <span key={artist.id}>
                   {index > 0 && ', '}
                   <NavLink href={`/artists/${artist.id}`} passHref>
                     <Artist>{artist.name}</Artist>

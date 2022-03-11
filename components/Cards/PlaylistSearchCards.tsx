@@ -20,7 +20,7 @@ const PlaylistSearchCards: FC<Props> = ({ playlists, query }) => (
     </TopBar>
     <CardContainerRow>
       {playlists.map((playlist) => (
-        <Card variant="playlist" playlist={playlist} />
+        <Card key={playlist.id} variant="playlist" playlist={playlist} />
       ))}
     </CardContainerRow>
   </Container>

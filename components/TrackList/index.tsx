@@ -88,13 +88,13 @@ const TrackList: FC<Props> = (props) => {
             <Track
               variant="album"
               index={index + 1}
-              key={index}
+              key={track.id}
               track={track}
             />
           ))}
           <Copyrights>
-            {props.album.copyrights.map((copyright) => (
-              <Copyright>
+            {props.album.copyrights.map((copyright, index) => (
+              <Copyright key={index}>
                 {copyright.type === 'C' && '© '}
                 {copyright.type === 'P' && '℗ '}
                 {copyright.text.replaceAll('©', '').replaceAll('℗', '')}
@@ -124,7 +124,7 @@ const TrackList: FC<Props> = (props) => {
             <Track
               variant="queue"
               index={index + 1}
-              key={index}
+              key={track.uri}
               track={track}
             />
           ))}

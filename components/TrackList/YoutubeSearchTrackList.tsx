@@ -19,7 +19,12 @@ const YoutubeSearchTrackList: FC<Props> = ({ videos, query }) => (
       </NavLink>
     </TopBar>
     {videos.map((video, index) => (
-      <Track variant="youtubeSearch" index={index + 1} video={video} />
+      <Track
+        key={video.videoId}
+        variant="youtubeSearch"
+        index={index + 1}
+        video={video}
+      />
     ))}
   </Container>
 );

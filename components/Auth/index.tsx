@@ -47,7 +47,7 @@ const Auth: FC = () => {
       .catch(() => {
         push('/');
       });
-  }, [spotifyAuthCode]);
+  }, [spotifyAuthCode, dispatch, push, spotifyAccessToken]);
 
   useEffect(() => {
     if (!spotifyRefreshToken || !spotifyExpiresIn) return;
@@ -67,7 +67,7 @@ const Auth: FC = () => {
     }, (spotifyExpiresIn - 60) * 1000);
 
     return () => clearInterval(interval);
-  }, [spotifyRefreshToken]);
+  }, [spotifyRefreshToken, dispatch, push, spotifyExpiresIn]);
 
   useEffect(() => {
     if (discordAccessToken || !discordAuthCode) return;
@@ -85,7 +85,7 @@ const Auth: FC = () => {
       .catch(() => {
         push('/');
       });
-  }, [discordAuthCode]);
+  }, [discordAuthCode, dispatch, push, discordAccessToken]);
 
   useEffect(() => {
     if (!discordRefreshToken || !discordExpiresIn) return;
@@ -105,7 +105,7 @@ const Auth: FC = () => {
     }, (discordExpiresIn - 60) * 1000);
 
     return () => clearInterval(interval);
-  }, [discordRefreshToken]);
+  }, [discordRefreshToken, dispatch, push, discordExpiresIn]);
 
   return <></>;
 };

@@ -5,7 +5,7 @@ import useSpotifyApi from '../useSpotifyApi';
 
 const getFollowedArtists = async (spotifyApi: SpotifyWebApi) => {
   let artists = [];
-  let after: number | undefined = undefined;
+  let after: string | undefined = undefined;
   while (true) {
     const response = await spotifyApi.getFollowedArtists({ limit: 50, after });
     artists.push(...response.body.artists.items);
@@ -13,7 +13,7 @@ const getFollowedArtists = async (spotifyApi: SpotifyWebApi) => {
     const newAfter = response.body.artists.cursors.after;
 
     if (newAfter) {
-      after = newAfter as unknown as number;
+      after = newAfter as unknown as string;
     } else {
       break;
     }

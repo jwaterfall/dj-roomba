@@ -10,7 +10,7 @@ interface Props {
 const ArtistCards: FC<Props> = ({ artists }) => (
   <CardContainer>
     {artists.map((artist) => (
-      <Card variant="artist" artist={artist} />
+      <Card key={artist.id} variant="artist" artist={artist} />
     ))}
   </CardContainer>
 );
