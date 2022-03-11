@@ -39,7 +39,7 @@ const LikedSongsTrackList: FC = () => {
               <Track
                 variant="savedTrack"
                 index={pageIndex * 25 + index + 1}
-                key={savedTrack.id}
+                key={savedTrack.track.id}
                 savedTrack={savedTrack}
               />
             ))}
