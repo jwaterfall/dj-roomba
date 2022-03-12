@@ -1,23 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useSticky = () => {
   const [isStuck, setIsStuck] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [ref, setRef] = useState<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!ref.current) return;
-    const cachedRef = ref.current;
+    if (!ref) return;
+    console.log('observer');
     const observer = new IntersectionObserver(
       ([e]) => {
         setIsStuck(e.intersectionRatio < 1);
       },
       { threshold: [1] },
     );
-    observer.observe(cachedRef);
-    return () => observer.unobserve(cachedRef);
+    observer.observe(ref);
+    return () => observer.unobserve(ref);
   }, [ref]);
 
-  return { isStuck, ref };
+  return { isStuck, ref: setRef };
 };
 
 export default useSticky;
