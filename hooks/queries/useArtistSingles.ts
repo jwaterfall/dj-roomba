@@ -5,7 +5,7 @@ import useSpotifyApi from '../useSpotifyApi';
 const getArtistSingles = async (
   spotifyApi: SpotifyWebApi,
   artistId: string,
-  limit = 10,
+  limit: number,
 ) => {
   const response = await spotifyApi.getArtistAlbums(artistId, {
     include_groups: 'single',

@@ -8,7 +8,7 @@ import TrackList from '../components/TrackList';
 const LibraryTracksPage: NextPage = () => (
   <PageLayout>
     <Banner variant="likedSongs" />
-    <TrackList variant="savedTracks" />
+    <TrackList variant="saved" />
   </PageLayout>
 );
 

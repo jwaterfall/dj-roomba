@@ -4,7 +4,7 @@ const theme = {
   accent: 'hsla(0, 0%, 100%, 0.1)',
   active: 'hsla(0, 0%, 100%, 0.075)',
   primary: 'hsl(345, 100%, 40%)',
-  gradient: 'hsl(345, 100%, 20%)',
+  gradient: 'hsl(345, 100%, 15%)',
   navbar: 'hsl(0, 0%, 0%)',
   background: 'hsl(345, 100%, 1%)',
   card: 'linear-gradient(125deg, hsl(345, 100%, 5%), hsl(345, 100%, 8%))',

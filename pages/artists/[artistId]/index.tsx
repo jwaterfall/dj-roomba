@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
-import Banner from '../../components/Banner';
-import Cards from '../../components/Cards';
-import withAuth from '../../components/HOCS/withAuth';
-import PageLayout from '../../components/PageLayout';
-import TrackList from '../../components/TrackList';
-import useArtist from '../../hooks/queries/useArtist';
+import Banner from '../../../components/Banner';
+import Cards from '../../../components/Cards';
+import withAuth from '../../../components/HOCS/withAuth';
+import PageLayout from '../../../components/PageLayout';
+import TrackList from '../../../components/TrackList';
+import useArtist from '../../../hooks/queries/useArtist';
 
 const ArtistPage: NextPage = () => {
   const router = useRouter();
