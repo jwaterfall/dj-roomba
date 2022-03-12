@@ -11,6 +11,12 @@ export const Banner = styled.section`
   background-image: linear-gradient(transparent 0, rgba(0, 0, 0, 0.5) 100%);
 `;
 
+export const DiscographyBanner = styled(Banner)`
+  padding: 0;
+  margin-bottom: 1.5rem;
+  background: none;
+`;
+
 export const ImageContainer = styled.div`
   flex-shrink: 0;
   width: 14.5rem;
@@ -18,13 +24,20 @@ export const ImageContainer = styled.div`
   box-shadow: 0 0.25rem 3.5rem hsla(0, 0%, 0%, 0.5);
 `;
 
+export const DiscographyImageContainer = styled(ImageContainer)`
+  width: 7.5rem;
+  height: 7.5rem;
+`;
+
 export const Details = styled.div`
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 `;
 
 export const Label = styled.h4`
   margin: 0;
-  margin-bottom: 0.5rem;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -32,7 +45,6 @@ export const Label = styled.h4`
 
 export const Title = styled.h1`
   margin: 0;
-  margin-bottom: 0.75rem;
   font-size: 4.5rem;
   font-weight: 900;
   text-transform: capitalize;
@@ -41,9 +53,13 @@ export const Title = styled.h1`
   text-overflow: ellipsis;
 `;
 
+export const DiscographyTitle = styled(Title)`
+  font-size: 2rem;
+  font-weight: 700;
+`;
+
 export const Description = styled.p`
   margin: 0;
-  margin-top: 0.75rem;
   font-size: 0.875rem;
   font-weight: 400;
   color: hsla(0, 0%, 100%, 0.7);

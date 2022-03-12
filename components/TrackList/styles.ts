@@ -4,6 +4,9 @@ import theme from '../../theme';
 
 export const Background = styled.section`
   position: relative;
+  &:not(:last-child) {
+    border-bottom: 1px solid ${theme.accent};
+  }
 `;
 
 export const BackgroundGradient = styled.div`
@@ -12,7 +15,8 @@ export const BackgroundGradient = styled.div`
     rgba(0, 0, 0, 0.6) 0,
     ${theme.background} 100%
   );
-  height: 14.5rem;
+  height: 100%;
+  max-height: 14.5rem;
   width: 100%;
   position: absolute;
   z-index: 2;

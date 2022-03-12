@@ -26,8 +26,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         <PersistGate loading={null} persistor={persistor}>
           <socketContext.Provider value={{ socket, setSocket }}>
             <GlobalStyle />
+            <Auth />
             <ReactQueryDevtools />
-            <Auth /> <Component {...pageProps} />
+            <Component {...pageProps} />
           </socketContext.Provider>
         </PersistGate>
       </Provider>

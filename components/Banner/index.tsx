@@ -1,17 +1,19 @@
 import { FC } from 'react';
-import PlaylistBanner from './PlaylistBanner';
+
 import AlbumBanner from './AlbumBanner';
 import ArtistBanner from './ArtistBanner';
+import DiscographyAlbumBanner from './DiscographyAlbumBanner';
 import LikedSongsBanner from './LikedSongsBanner';
+import PlaylistBanner from './PlaylistBanner';
 
 interface PlaylistProps {
   variant: 'playlist';
-  playlist: SpotifyApi.SinglePlaylistResponse;
+  playlist: SpotifyApi.PlaylistObjectFull;
 }
 
 interface AlbumProps {
   variant: 'album';
-  album: SpotifyApi.SingleAlbumResponse;
+  album: SpotifyApi.AlbumObjectSimplified;
 }
 
 interface ArtistProps {
@@ -23,7 +25,17 @@ interface LikedSongsProps {
   variant: 'likedSongs';
 }
 
-type Props = PlaylistProps | AlbumProps | ArtistProps | LikedSongsProps;
+interface DiscographyAlbumProps {
+  variant: 'discographyAlbum';
+  album: SpotifyApi.AlbumObjectSimplified;
+}
+
+type Props =
+  | PlaylistProps
+  | AlbumProps
+  | ArtistProps
+  | LikedSongsProps
+  | DiscographyAlbumProps;
 
 const Banner: FC<Props> = (props) => (
   <>
@@ -33,6 +45,9 @@ const Banner: FC<Props> = (props) => (
     {props.variant === 'album' && <AlbumBanner album={props.album} />}
     {props.variant === 'artist' && <ArtistBanner artist={props.artist} />}
     {props.variant === 'likedSongs' && <LikedSongsBanner />}
+    {props.variant === 'discographyAlbum' && (
+      <DiscographyAlbumBanner album={props.album} />
+    )}
   </>
 );
 

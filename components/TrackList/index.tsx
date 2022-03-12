@@ -5,6 +5,7 @@ import useSticky from '../../hooks/useSticky';
 import Track from '../Track';
 import ArtistTopTrackList from './ArtistTopTrackList';
 import ControlsSection from './ControlsSection';
+import DiscographyAlbumTrackList from './DiscographyAlbumTrackList';
 import LikedSongsTrackList from './LikedSongsTrackList';
 import PlaylistTrackList from './PlaylistTrackList';
 import SearchTrackList from './SearchTrackList';
@@ -36,13 +37,18 @@ interface ArtistTopTracksProps {
   artistId: string;
 }
 
+interface DiscographyAlbumTracksProps {
+  variant: 'discographyAlbum';
+  album: SpotifyApi.AlbumObjectSimplified;
+}
+
 interface QueueProps {
   variant: 'queue';
   tracks: QueuedTrack[];
 }
 
 interface SavedTracksProps {
-  variant: 'savedTracks';
+  variant: 'saved';
 }
 
 interface SearchProps {
@@ -61,6 +67,7 @@ type Props =
   | PlaylistProps
   | AlbumProps
   | ArtistTopTracksProps
+  | DiscographyAlbumTracksProps
   | QueueProps
   | SavedTracksProps
   | SearchProps
@@ -110,6 +117,10 @@ const TrackList: FC<Props> = (props) => {
     return <ArtistTopTrackList artistId={props.artistId} />;
   }
 
+  if (props.variant === 'discographyAlbum') {
+    return <DiscographyAlbumTrackList album={props.album} />;
+  }
+
   if (props.variant === 'queue') {
     return (
       <Background>
@@ -133,7 +144,7 @@ const TrackList: FC<Props> = (props) => {
     );
   }
 
-  if (props.variant === 'savedTracks') {
+  if (props.variant === 'saved') {
     return <LikedSongsTrackList />;
   }
 
