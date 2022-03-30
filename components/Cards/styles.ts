@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const CardContainer = styled.div`
-  padding: 2rem;
-  padding-top: 0;
   display: grid;
   grid-template-rows: 1fr;
   overflow-y: hidden;
@@ -11,7 +9,6 @@ export const CardContainer = styled.div`
 `;
 
 export const CardContainerRow = styled(CardContainer)`
-  padding: 0;
   grid-auto-rows: 0;
   grid-auto-flow: column;
 `;

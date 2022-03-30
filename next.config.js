@@ -19,6 +19,7 @@ const nextConfig = {
       'mixed-media-images.spotifycdn.com',
       'charts-images.scdn.co',
       'misc.scdn.co',
+      't.scdn.co',
     ],
   },
 };

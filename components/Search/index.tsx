@@ -29,28 +29,21 @@ const Search: FC = () => {
         <SearchBar>
           <MdSearch />
           <Input value={input} onChange={(e) => setInput(e.target.value)} />
-          <MdClose onClick={() => setQuery('')} />
+          <MdClose onClick={() => setInput('')} />
         </SearchBar>
       </TopBar>
-      {tracks && tracks.length > 0 && (
-        <TrackList variant="search" tracks={tracks} query={query} />
-      )}
+      {tracks && tracks.length > 0 && <TrackList variant="search" tracks={tracks} query={query} />}
       {artists && artists.length > 0 && (
         <Cards variant="artistSearch" artists={artists} query={query} />
       )}
-      {albums && albums.length > 0 && (
-        <Cards variant="albumSearch" albums={albums} query={query} />
-      )}
+      {albums && albums.length > 0 && <Cards variant="albumSearch" albums={albums} query={query} />}
       {playlists && playlists.length > 0 && (
         <Cards variant="playlistSearch" playlists={playlists} query={query} />
       )}
       {youtubeVideos && youtubeVideos.length > 0 && (
-        <TrackList
-          variant="youtubeSearch"
-          videos={youtubeVideos.slice(10)}
-          query={query}
-        />
+        <TrackList variant="youtubeSearch" videos={youtubeVideos.slice(10)} query={query} />
       )}
+      {!query && <Cards variant="categories" />}
     </>
   );
 };
