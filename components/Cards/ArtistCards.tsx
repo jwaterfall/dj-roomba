@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import Card from '../Card';
+import { Container } from '../Section';
 import { CardContainer } from './styles';
 
 interface Props {
@@ -8,11 +9,13 @@ interface Props {
 }
 
 const ArtistCards: FC<Props> = ({ artists }) => (
-  <CardContainer>
-    {artists.map((artist) => (
-      <Card key={artist.id} variant="artist" artist={artist} />
-    ))}
-  </CardContainer>
+  <Container>
+    <CardContainer>
+      {artists.map((artist) => (
+        <Card key={artist.id} variant="artist" artist={artist} />
+      ))}
+    </CardContainer>
+  </Container>
 );
 
 export default ArtistCards;

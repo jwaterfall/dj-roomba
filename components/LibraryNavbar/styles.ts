@@ -6,7 +6,8 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 1rem 2rem;
+  margin-bottom: -2rem;
 `;
 
 export const Link = styled.a`
