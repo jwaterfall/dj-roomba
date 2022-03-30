@@ -1,25 +1,20 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { VideoSearchResult } from 'yt-search';
 
-import useSticky from '../../hooks/useSticky';
-import Track from '../Track';
+import Albums from '../../pages/library/albums';
+import AlbumTrackList from './AlbumTrackList';
 import ArtistTopTrackList from './ArtistTopTrackList';
-import ControlsSection from './ControlsSection';
 import DiscographyAlbumTrackList from './DiscographyAlbumTrackList';
 import LikedSongsTrackList from './LikedSongsTrackList';
 import PlaylistTrackList from './PlaylistTrackList';
+import QueueTrackList from './QueueTrackList';
 import SearchTrackList from './SearchTrackList';
+import TopTrackList from './TopTrackList';
 import YoutubeSearchTrackList from './YoutubeSearchTrackList';
-import {
-  Background,
-  BackgroundGradient,
-  Content,
-  Copyright,
-  Copyrights,
-  Header,
-  QueueHeaderRow,
-  SimpleHeaderRow,
-} from './styles';
+
+interface TopTracksProps {
+  variant: 'topTracks';
+}
 
 interface PlaylistProps {
   variant: 'playlist';
@@ -64,6 +59,7 @@ interface YoutubeSearchProps {
 }
 
 type Props =
+  | TopTracksProps
   | PlaylistProps
   | AlbumProps
   | ArtistTopTracksProps
@@ -74,89 +70,37 @@ type Props =
   | YoutubeSearchProps;
 
 const TrackList: FC<Props> = (props) => {
-  const { isStuck, ref } = useSticky();
-  if (props.variant === 'playlist') {
-    return <PlaylistTrackList playlistId={props.playlistId} />;
+  switch (props.variant) {
+    case 'topTracks':
+      return <TopTrackList />;
+
+    case 'playlist':
+      return <PlaylistTrackList playlistId={props.playlistId} />;
+
+    case 'album':
+      return <AlbumTrackList album={props.album} tracks={props.tracks} />;
+
+    case 'artistTopTracks':
+      return <ArtistTopTrackList artistId={props.artistId} />;
+
+    case 'discographyAlbum':
+      return <DiscographyAlbumTrackList album={props.album} />;
+
+    case 'queue':
+      return <QueueTrackList tracks={props.tracks} />;
+
+    case 'saved':
+      return <LikedSongsTrackList />;
+
+    case 'search':
+      return <SearchTrackList tracks={props.tracks} query={props.query} />;
+
+    case 'youtubeSearch':
+      return <YoutubeSearchTrackList videos={props.videos} query={props.query} />;
+
+    default:
+      return <></>;
   }
-
-  if (props.variant === 'album') {
-    return (
-      <Background>
-        <BackgroundGradient />
-        <Content>
-          <ControlsSection variant="album" albumId={props.album.id} />
-          <SimpleHeaderRow ref={ref} isStuck={isStuck}>
-            <Header>#</Header>
-            <Header>title</Header>
-            <Header>length</Header>
-          </SimpleHeaderRow>
-
-          {props.tracks.map((track, index) => (
-            <Track
-              variant="album"
-              index={index + 1}
-              key={track.id}
-              track={track}
-            />
-          ))}
-          <Copyrights>
-            {props.album.copyrights.map((copyright, index) => (
-              <Copyright key={index}>
-                {copyright.type === 'C' && '© '}
-                {copyright.type === 'P' && '℗ '}
-                {copyright.text.replaceAll('©', '').replaceAll('℗', '')}
-              </Copyright>
-            ))}
-          </Copyrights>
-        </Content>
-      </Background>
-    );
-  }
-
-  if (props.variant === 'artistTopTracks') {
-    return <ArtistTopTrackList artistId={props.artistId} />;
-  }
-
-  if (props.variant === 'discographyAlbum') {
-    return <DiscographyAlbumTrackList album={props.album} />;
-  }
-
-  if (props.variant === 'queue') {
-    return (
-      <Background>
-        <BackgroundGradient />
-        <Content>
-          <QueueHeaderRow ref={ref} isStuck={isStuck}>
-            <Header>#</Header>
-            <Header>title</Header>
-            <Header>added by</Header>
-          </QueueHeaderRow>
-          {props.tracks.map((track, index) => (
-            <Track
-              variant="queue"
-              index={index + 1}
-              key={track.uri}
-              track={track}
-            />
-          ))}
-        </Content>
-      </Background>
-    );
-  }
-
-  if (props.variant === 'saved') {
-    return <LikedSongsTrackList />;
-  }
-
-  if (props.variant === 'search') {
-    return <SearchTrackList tracks={props.tracks} query={props.query} />;
-  }
-
-  if (props.variant === 'youtubeSearch') {
-    return <YoutubeSearchTrackList videos={props.videos} query={props.query} />;
-  }
-
-  return <></>;
 };
 
 export default TrackList;

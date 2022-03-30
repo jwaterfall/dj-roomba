@@ -1,7 +1,12 @@
 import { FC } from 'react';
-import TitleSectionSkeleton from './TitleSection/TitleSectionSkeleton';
+
 import Skeleton from '../Skeleton';
-import { SimpleTrack, PlaylistTrack, ArtistTopTrack } from './styles';
+import TitleSectionSkeleton from './TitleSection/TitleSectionSkeleton';
+import {
+  AlbumTrackContainer,
+  ArtistTopTrackContainer,
+  PlaylistOrSavedTrackContainer,
+} from './styles';
 
 interface PlaylistProps {
   variant: 'playlist';
@@ -19,55 +24,51 @@ interface SavedTracksProps {
   variant: 'savedTrack';
 }
 
-type Props =
-  | PlaylistProps
-  | AlbumProps
-  | ArtistTopTracksProps
-  | SavedTracksProps;
+type Props = PlaylistProps | AlbumProps | ArtistTopTracksProps | SavedTracksProps;
 
 const TrackSkeleton: FC<Props> = (props) => {
   if (props.variant === 'playlist') {
     return (
-      <PlaylistTrack skeleton={true}>
+      <PlaylistOrSavedTrackContainer skeleton={true}>
         <Skeleton variant="rect" width="1.5rem" height="1rem" />
         <TitleSectionSkeleton />
         <Skeleton variant="rect" width="8rem" height="1rem" />
         <Skeleton variant="rect" width="6rem" height="1rem" />
         <Skeleton variant="rect" width="2rem" height="1rem" />
-      </PlaylistTrack>
+      </PlaylistOrSavedTrackContainer>
     );
   }
 
   if (props.variant === 'album') {
     return (
-      <SimpleTrack skeleton={true}>
+      <AlbumTrackContainer skeleton={true}>
         <Skeleton variant="rect" width="1.5rem" height="1rem" />
         <TitleSectionSkeleton hideImage={true} />
         <Skeleton variant="rect" width="2rem" height="1rem" />
-      </SimpleTrack>
+      </AlbumTrackContainer>
     );
   }
 
   if (props.variant === 'artistTopTracks') {
     return (
-      <ArtistTopTrack skeleton={true}>
+      <ArtistTopTrackContainer skeleton={true}>
         <Skeleton variant="rect" width="1.5rem" height="1rem" />
         <TitleSectionSkeleton hideArist={true} />
         <Skeleton variant="rect" width="8rem" height="1rem" />
         <Skeleton variant="rect" width="2rem" height="1rem" />
-      </ArtistTopTrack>
+      </ArtistTopTrackContainer>
     );
   }
 
   if (props.variant === 'savedTrack') {
     return (
-      <PlaylistTrack skeleton={true}>
+      <PlaylistOrSavedTrackContainer skeleton={true}>
         <Skeleton variant="rect" width="1.5rem" height="1rem" />
         <TitleSectionSkeleton />
         <Skeleton variant="rect" width="8rem" height="1rem" />
         <Skeleton variant="rect" width="6rem" height="1rem" />
         <Skeleton variant="rect" width="2rem" height="1rem" />
-      </PlaylistTrack>
+      </PlaylistOrSavedTrackContainer>
     );
   }
 

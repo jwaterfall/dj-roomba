@@ -29,7 +29,7 @@ export const DetailLink = styled.a`
   }
 `;
 
-export const SimpleTrack = styled.div<{ skeleton?: boolean }>`
+export const AlbumTrackContainer = styled.div<{ skeleton?: boolean }>`
   display: grid;
   align-items: center;
   grid-gap: 1rem;
@@ -56,18 +56,22 @@ export const SimpleTrack = styled.div<{ skeleton?: boolean }>`
   }`}
 `;
 
-export const PlaylistTrack = styled(SimpleTrack)`
+export const PlaylistOrSavedTrackContainer = styled(AlbumTrackContainer)`
   grid-template-columns: 3rem 6fr 4fr 3fr minmax(7.5rem, 1fr);
 `;
 
-export const ArtistTopTrack = styled(SimpleTrack)`
+export const TopTrackContainer = styled(AlbumTrackContainer)`
+  grid-template-columns: 3rem 6fr 4fr 3fr;
+`;
+
+export const ArtistTopTrackContainer = styled(AlbumTrackContainer)`
   grid-template-columns: 3rem 4fr 3fr minmax(7.5rem, 1fr);
 `;
 
-export const QueueTrack = styled(SimpleTrack)`
+export const QueueTrackContainer = styled(AlbumTrackContainer)`
   grid-template-columns: 3rem 3fr 1fr;
 `;
 
-export const SearchTrack = styled(SimpleTrack)`
+export const SearchTrackContainer = styled(AlbumTrackContainer)`
   grid-template-columns: 3rem 4fr minmax(7.5rem, 1fr);
 `;
