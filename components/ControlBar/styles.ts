@@ -1,4 +1,3 @@
-import { MdRepeat } from 'react-icons/md';
 import styled from 'styled-components';
 
 import theme from '../../theme';
@@ -67,7 +66,7 @@ export const ControlsSection = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  & > svg {
+  & svg {
     cursor: pointer;
     display: block;
     width: 1.5rem;
@@ -102,8 +101,10 @@ export const PlayButton = styled.div`
   }
 `;
 
-export const Repeat = styled(MdRepeat)<{ isOnRepeat: boolean }>`
-  ${(props) => props.isOnRepeat && `color: ${theme.primary} !important;`}
+export const Repeat = styled.div<{ isOnRepeat: boolean }>`
+  & svg {
+    ${(props) => props.isOnRepeat && `color: ${theme.primary} !important;`}
+  }
 `;
 
 export const JoinSection = styled.div`

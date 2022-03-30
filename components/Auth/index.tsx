@@ -44,14 +44,15 @@ const Auth: FC = () => {
         dispatch(setSpotifyExpiresIn(res.data.expiresIn));
         push('/sign-in-discord');
       })
-      .catch(() => {
-        push('/');
+      .catch((error) => {
+        console.log(error);
       });
   }, [spotifyAuthCode, dispatch, push, spotifyAccessToken]);
 
   useEffect(() => {
     if (!spotifyRefreshToken || !spotifyExpiresIn) return;
     const interval = setInterval(() => {
+      dateLog('Attempting to refresh spotify access token');
       axios
         .post(`${process.env.NEXT_PUBLIC_SERVER}/auth/spotify/refresh`, {
           refreshToken: spotifyRefreshToken,
@@ -61,13 +62,13 @@ const Auth: FC = () => {
           dispatch(setSpotifyAccessToken(res.data.accessToken));
           dispatch(setSpotifyExpiresIn(res.data.expiresIn));
         })
-        .catch(() => {
-          push('/');
+        .catch((error) => {
+          console.log(error);
         });
     }, (spotifyExpiresIn - 60) * 1000);
 
     return () => clearInterval(interval);
-  }, [spotifyRefreshToken, dispatch, push, spotifyExpiresIn]);
+  }, [spotifyRefreshToken, spotifyExpiresIn, dispatch]);
 
   useEffect(() => {
     if (discordAccessToken || !discordAuthCode) return;
@@ -82,14 +83,15 @@ const Auth: FC = () => {
         dispatch(setDiscordExpiresIn(res.data.expiresIn));
         push('/');
       })
-      .catch(() => {
-        push('/');
+      .catch((error) => {
+        console.log(error);
       });
   }, [discordAuthCode, dispatch, push, discordAccessToken]);
 
   useEffect(() => {
     if (!discordRefreshToken || !discordExpiresIn) return;
     const interval = setInterval(() => {
+      dateLog('Attempting to refresh discord access token');
       axios
         .post(`${process.env.NEXT_PUBLIC_SERVER}/auth/discord/refresh`, {
           refreshToken: discordRefreshToken,
@@ -97,15 +99,18 @@ const Auth: FC = () => {
         .then((res) => {
           dateLog('Successfully refreshed discord access token');
           dispatch(setDiscordAccessToken(res.data.accessToken));
+          dispatch(setDiscordRefreshToken(res.data.refreshToken));
           dispatch(setDiscordExpiresIn(res.data.expiresIn));
         })
-        .catch(() => {
-          push('/');
+        .catch((error) => {
+          console.log(error);
         });
     }, (discordExpiresIn - 60) * 1000);
 
-    return () => clearInterval(interval);
-  }, [discordRefreshToken, dispatch, push, discordExpiresIn]);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [discordRefreshToken, discordExpiresIn, dispatch]);
 
   return <></>;
 };

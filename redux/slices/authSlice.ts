@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Socket } from 'socket.io-client';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import type { RootState } from '../store';
 
 interface AuthState {

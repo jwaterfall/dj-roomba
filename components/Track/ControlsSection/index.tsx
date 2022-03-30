@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { MdPlayArrow, MdPlaylistAdd } from 'react-icons/md';
+import { MdPlayArrow, MdPlaylistAdd, MdRemove } from 'react-icons/md';
 import { VideoSearchResult } from 'yt-search';
 
 import usePlaybackControls from '../../../hooks/usePlaybackControls';
@@ -58,7 +58,7 @@ const ControlsSection: FC<Props> = (props) => {
       <div>
         <IconList>
           <MdPlayArrow onClick={() => skipTo(props.index)} />
-          <MdPlaylistAdd onClick={() => remove(props.index)} />
+          <MdRemove onClick={() => remove(props.index)} />
         </IconList>
         <Index>{props.index}</Index>
       </div>

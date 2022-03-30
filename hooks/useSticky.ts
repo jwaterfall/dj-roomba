@@ -6,7 +6,6 @@ const useSticky = () => {
 
   useEffect(() => {
     if (!ref) return;
-    console.log('observer');
     const observer = new IntersectionObserver(
       ([e]) => {
         setIsStuck(e.intersectionRatio < 1);

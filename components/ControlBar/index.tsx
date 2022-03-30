@@ -5,6 +5,7 @@ import {
   MdPause,
   MdPlayArrow,
   MdQueueMusic,
+  MdRepeat,
   MdShuffle,
   MdSkipNext,
   MdSkipPrevious,
@@ -85,7 +86,9 @@ const ControlBar: FC = () => {
           {isPaused ? <MdPlayArrow /> : <MdPause />}
         </PlayButton>
         <MdSkipNext onClick={nextTrack} />
-        <Repeat onClick={toggleRepeat} isOnRepeat={isOnRepeat} />
+        <Repeat onClick={toggleRepeat} isOnRepeat={isOnRepeat}>
+          <MdRepeat />
+        </Repeat>
       </ControlsSection>
       <RightSection>
         <NavLink href={'/queue'} passHref>

@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  pwa: {
+    disable: process.env.NODE_ENV === 'development',
+  },
   images: {
     domains: [
       'img.youtube.com',
@@ -13,6 +16,9 @@ const nextConfig = {
       'seed-mix-image.spotifycdn.com',
       'thisis-images.scdn.co',
       'seeded-session-images.scdn.co',
+      'mixed-media-images.spotifycdn.com',
+      'charts-images.scdn.co',
+      'misc.scdn.co',
     ],
   },
 };
