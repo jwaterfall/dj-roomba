@@ -8,6 +8,7 @@ import ArtistSearchCards from './ArtistSearchCards';
 import ArtistSingleCards from './ArtistSingleCards';
 import PlaylistCards from './PlaylistCards';
 import PlaylistSearchCards from './PlaylistSearchCards';
+import TopArtistsCards from './TopArtistsCards';
 
 interface ArtistAlbumsProps {
   variant: 'artistAlbums';
@@ -17,6 +18,10 @@ interface ArtistAlbumsProps {
 interface ArtistSinglesProps {
   variant: 'artistSingles';
   artistId: string;
+}
+
+interface TopArtistsProps {
+  variant: 'topArtists';
 }
 
 interface AlbumsProps {
@@ -55,6 +60,7 @@ interface PlaylistSearchProps {
 type Props =
   | ArtistAlbumsProps
   | ArtistSinglesProps
+  | TopArtistsProps
   | AlbumsProps
   | ArtistsProps
   | PlaylistsProps
@@ -63,32 +69,28 @@ type Props =
   | PlaylistSearchProps;
 
 const Cards: FC<Props> = (props) => {
-  if (props.variant === 'artistAlbums')
-    return <ArtistAlbumCards artistId={props.artistId} />;
-
-  if (props.variant === 'artistSingles')
-    return <ArtistSingleCards artistId={props.artistId} />;
-
-  if (props.variant === 'albums') return <AlbumCards albums={props.albums} />;
-
-  if (props.variant === 'artists')
-    return <ArtistCards artists={props.artists} />;
-
-  if (props.variant === 'playlists')
-    return <PlaylistCards playlists={props.playlists} />;
-
-  if (props.variant === 'artistSearch')
-    return <ArtistSearchCards artists={props.artists} query={props.query} />;
-
-  if (props.variant === 'albumSearch')
-    return <AlbumSearchCards albums={props.albums} query={props.query} />;
-
-  if (props.variant === 'playlistSearch')
-    return (
-      <PlaylistSearchCards playlists={props.playlists} query={props.query} />
-    );
-
-  return <></>;
+  switch (props.variant) {
+    case 'artistAlbums':
+      return <ArtistAlbumCards artistId={props.artistId} />;
+    case 'artistSingles':
+      return <ArtistSingleCards artistId={props.artistId} />;
+    case 'topArtists':
+      return <TopArtistsCards />;
+    case 'albums':
+      return <AlbumCards albums={props.albums} />;
+    case 'artists':
+      return <ArtistCards artists={props.artists} />;
+    case 'playlists':
+      return <PlaylistCards playlists={props.playlists} />;
+    case 'albumSearch':
+      return <AlbumSearchCards albums={props.albums} query={props.query} />;
+    case 'artistSearch':
+      return <ArtistSearchCards artists={props.artists} query={props.query} />;
+    case 'playlistSearch':
+      return <PlaylistSearchCards playlists={props.playlists} query={props.query} />;
+    default:
+      return <></>;
+  }
 };
 
 export default Cards;

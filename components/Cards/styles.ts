@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const CardContainer = styled.div`
-  padding: 1rem;
+  padding: 2rem;
+  padding-top: 0;
   display: grid;
   grid-template-rows: 1fr;
   overflow-y: hidden;
