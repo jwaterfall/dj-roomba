@@ -12,7 +12,7 @@ const getTopArtists = async (spotifyApi: SpotifyWebApi, limit: number) => {
 
 const useTopArtists = (limit = 10) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.ArtistObjectFull[]>(['TOP_ARTISTS', limit], () =>
+  return useQuery(['TOP_ARTISTS', limit], () =>
     getTopArtists(spotifyApi, limit),
   );
 };

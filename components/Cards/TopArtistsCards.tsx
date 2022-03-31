@@ -17,7 +17,7 @@ const TopArtistsCards: FC = () => {
   return (
     <Container>
       <TopBar>
-        <Title>Top artists</Title>
+        <Title>Your Top Artists</Title>
         <NavLink href="/library/artists" passHref>
           <Link>see all</Link>
         </NavLink>

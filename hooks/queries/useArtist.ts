@@ -11,7 +11,7 @@ const getArtist = async (spotifyApi: SpotifyWebApi, artistId: string) => {
 
 const useArtist = (artistId: string) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.SingleArtistResponse>(['ARTIST', artistId], () =>
+  return useQuery(['ARTIST', artistId], () =>
     getArtist(spotifyApi, artistId),
   );
 };

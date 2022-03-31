@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import SpotifyWebApi from 'spotify-web-api-node';
+
 import useSpotifyApi from '../useSpotifyApi';
 
 const getTrack = async (spotifyApi: SpotifyWebApi, trackId?: string) => {
@@ -12,10 +13,7 @@ const getTrack = async (spotifyApi: SpotifyWebApi, trackId?: string) => {
 
 const useTrack = (trackId?: string) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.SingleTrackResponse | undefined>(
-    ['TRACK', trackId],
-    () => getTrack(spotifyApi, trackId),
-  );
+  return useQuery(['TRACK', trackId], () => getTrack(spotifyApi, trackId));
 };
 
 export default useTrack;

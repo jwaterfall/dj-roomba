@@ -16,7 +16,7 @@ const searchPlaylists = async (
 
 const useSearchPlaylists = (query: string, limit: number) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.PlaylistObjectSimplified[] | undefined>(
+  return useQuery(
     ['SEARCH_PLAYLISTS', query, limit],
     () => searchPlaylists(spotifyApi, query, limit),
   );

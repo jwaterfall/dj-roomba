@@ -16,7 +16,7 @@ const searchArtists = async (
 
 const useSearchArtists = (query: string, limit: number) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.ArtistObjectFull[] | undefined>(
+  return useQuery(
     ['SEARCH_ARTISTS', query, limit],
     () => searchArtists(spotifyApi, query, limit),
   );

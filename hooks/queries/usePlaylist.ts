@@ -11,7 +11,7 @@ const getPlaylist = async (spotifyApi: SpotifyWebApi, playlistId: string) => {
 
 const usePlaylist = (playlistId: string) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.SinglePlaylistResponse>(
+  return useQuery(
     ['PLAYLIST', playlistId],
     () => getPlaylist(spotifyApi, playlistId),
   );

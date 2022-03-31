@@ -8,7 +8,6 @@ const searchYoutube = async (query: string) => {
   );
 
   const videos = result.data;
-
   return videos;
 };
 
