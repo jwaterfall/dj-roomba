@@ -11,7 +11,7 @@ const getAlbum = async (spotifyApi: SpotifyWebApi, albumId: string) => {
 
 const useAlbum = (albumId: string) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.SingleAlbumResponse>(['ALBUM', albumId], () =>
+  return useQuery(['ALBUM', albumId], () =>
     getAlbum(spotifyApi, albumId),
   );
 };

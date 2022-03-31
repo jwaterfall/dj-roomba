@@ -16,7 +16,7 @@ const searchTracks = async (
 
 const useSearchTracks = (query: string, limit: number) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.TrackObjectFull[] | undefined>(
+  return useQuery(
     ['SEARCH_TRACKS', query, limit],
     () => searchTracks(spotifyApi, query, limit),
   );

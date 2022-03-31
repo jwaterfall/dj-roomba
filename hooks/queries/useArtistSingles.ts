@@ -19,7 +19,7 @@ const getArtistSingles = async (
 
 const useArtistSingles = (artistId: string, limit = 10) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.AlbumObjectSimplified[]>(
+  return useQuery(
     ['ARTIST_SINGLES', artistId, limit],
     () => getArtistSingles(spotifyApi, artistId, limit),
   );

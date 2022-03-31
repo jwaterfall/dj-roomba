@@ -14,7 +14,7 @@ const getArtistTopTracks = async (
 
 const useArtistTopTracks = (artistId: string) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.TrackObjectFull[]>(
+  return useQuery(
     ['ARTIST_TOP_TRACKS', artistId],
     () => getArtistTopTracks(spotifyApi, artistId),
   );

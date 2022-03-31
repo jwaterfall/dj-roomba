@@ -13,7 +13,7 @@ const TopTrackList: FC = () => {
   return (
     <Container>
       <TopBar>
-        <Title>Top Tracks</Title>
+        <Title>Your Top Tracks</Title>
         <NavLink href="/liked-songs" passHref>
           <Link>see all</Link>
         </NavLink>

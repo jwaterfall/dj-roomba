@@ -12,9 +12,7 @@ const getTopTracks = async (spotifyApi: SpotifyWebApi, limit: number) => {
 
 const useTopTracks = (limit = 10) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.TrackObjectFull[]>(['TOP_TRACKS', limit], () =>
-    getTopTracks(spotifyApi, limit),
-  );
+  return useQuery(['TOP_TRACKS', limit], () => getTopTracks(spotifyApi, limit));
 };
 
 export default useTopTracks;

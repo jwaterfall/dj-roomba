@@ -7,6 +7,7 @@ import ArtistCards from './ArtistCards';
 import ArtistSearchCards from './ArtistSearchCards';
 import ArtistSingleCards from './ArtistSingleCards';
 import CategoryCards from './CategoryCards';
+import NewReleasesCards from './NewReleasesCards';
 import PlaylistCards from './PlaylistCards';
 import PlaylistSearchCards from './PlaylistSearchCards';
 import TopArtistsCards from './TopArtistsCards';
@@ -66,6 +67,10 @@ interface CategoriesProps {
   variant: 'categories';
 }
 
+interface NewReleasesProps {
+  variant: 'newReleases';
+}
+
 type Props =
   | ArtistAlbumsProps
   | ArtistSinglesProps
@@ -76,7 +81,8 @@ type Props =
   | ArtistSearchProps
   | AlbumSearchProps
   | PlaylistSearchProps
-  | CategoriesProps;
+  | CategoriesProps
+  | NewReleasesProps;
 
 const Cards: FC<Props> = (props) => {
   switch (props.variant) {
@@ -100,6 +106,8 @@ const Cards: FC<Props> = (props) => {
       return <PlaylistSearchCards playlists={props.playlists} query={props.query} />;
     case 'categories':
       return <CategoryCards />;
+    case 'newReleases':
+      return <NewReleasesCards />;
     default:
       return <></>;
   }

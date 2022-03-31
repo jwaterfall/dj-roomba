@@ -18,7 +18,7 @@ const getAlbumTracks = async (spotifyApi: SpotifyWebApi, albumId: string) => {
 
 const useAlbumTracks = (albumId: string) => {
   const spotifyApi = useSpotifyApi();
-  return useQuery<SpotifyApi.TrackObjectSimplified[]>(
+  return useQuery(
     ['ALBUM_TRACKS', albumId],
     () => getAlbumTracks(spotifyApi, albumId),
   );
