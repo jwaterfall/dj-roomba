@@ -23,11 +23,11 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "docker-build:client": "docker build -t dj-roomba/client -f ./client/Dockerfile .",
-    "docker-build:backend": "docker build -t dj-roomba/backend -f ./backend/Dockerfile ."
+    "docker-build:server": "docker build -t dj-roomba/server -f ./server/Dockerfile ."
   },
   "workspaces": [
     "client",
-    "backend"
+    "server"
   ],
   "devDependencies": {
     "eslint": "^8.2.0",

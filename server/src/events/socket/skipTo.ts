@@ -1,7 +1,7 @@
-import { SocketEvent } from "../../Event";
+import { SocketEvent } from '../../Event';
 
 export const event: SocketEvent = {
-  name: "skipTo",
+  name: 'skipTo',
   once: false,
   execute: async (client, player, requester, index: number) => {
     if (index < 1 || index > player.queue.length) return;
@@ -11,6 +11,6 @@ export const event: SocketEvent = {
     }
 
     player.stop();
-    client.io.in(player.guild).emit("setQueuedTracks", player.queue);
+    client.io.in(player.guild).emit('setQueuedTracks', player.queue);
   },
 };

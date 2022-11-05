@@ -1,7 +1,7 @@
 import Client from "./Client";
 import Logger, { LogLevel } from "./Logger";
-import { Intents } from "discord.js";
-import dotenv from "dotenv";
+import { GatewayIntentBits } from "discord.js";
+import dotenv from "dotenv-flow";
 import { Manager } from "erela.js";
 import Spotify from "erela.js-spotify";
 import express from "express";
@@ -10,12 +10,18 @@ import { Server } from "socket.io";
 
 dotenv.config();
 
+console.log({
+  host: process.env.LAVA_LINK_HOST as string,
+  password: process.env.LAVA_LINK_PASSWORD as string,
+  port: parseInt(process.env.LAVA_LINK_PORT as string),
+});
+
 const logger = new Logger(LogLevel.DEBUG);
 const app = express();
 const server = http.createServer(app);
 const client = new Client(
   {
-    intents: [Intents.FLAGS.GUILDS, "GUILD_VOICE_STATES"],
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
   },
   new Manager({
     nodes: [
@@ -45,8 +51,8 @@ const client = new Client(
   logger
 );
 
+client.login(process.env.DISCORD_TOKEN);
+
 server.listen(parseInt(process.env.PORT as string), () => {
   logger.info(`Socket server listening on port ${process.env.PORT}`);
 });
-
-client.login(process.env.DISCORD_TOKEN);

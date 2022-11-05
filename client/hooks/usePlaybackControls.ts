@@ -1,15 +1,10 @@
-import axios from 'axios';
-import socketIOClient from 'socket.io-client';
+import axios from "axios";
+import socketIOClient from "socket.io-client";
 
-import { useSocket } from '../contexts/socket';
-import { selectAuth } from '../redux/slices/authSlice';
-import {
-  setCurrentTrack,
-  setIsOnRepeat,
-  setIsPaused,
-  setQueuedTracks,
-} from '../redux/slices/playbackSlice';
-import { useAppDispatch, useAppSelector } from '../redux/store';
+import { useSocket } from "../contexts/socket";
+import { selectAuth } from "../redux/slices/authSlice";
+import { setCurrentTrack, setIsOnRepeat, setIsPaused, setQueuedTracks } from "../redux/slices/playbackSlice";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 
 const usePlaybackControls = () => {
   const dispatch = useAppDispatch();
@@ -18,24 +13,28 @@ const usePlaybackControls = () => {
 
   const connect = () => {
     if (!discordAccessToken || socket) return;
-    const newSocket = socketIOClient(process.env.NEXT_PUBLIC_SERVER as string, {
+    const newSocket = socketIOClient(process.env.NEXT_PUBLIC_SERVER_URL as string, {
       auth: { discordAccessToken },
     });
 
-    newSocket.on('setCurrentTrack', (track?: QueuedTrack) => {
+    newSocket.on("setCurrentTrack", (track?: QueuedTrack) => {
       dispatch(setCurrentTrack(track));
     });
 
-    newSocket.on('setQueuedTracks', (tracks: QueuedTrack[]) => {
+    newSocket.on("setQueuedTracks", (tracks: QueuedTrack[]) => {
       dispatch(setQueuedTracks(tracks));
     });
 
-    newSocket.on('setIsPaused', (isPaused: boolean) => {
+    newSocket.on("setIsPaused", (isPaused: boolean) => {
       dispatch(setIsPaused(isPaused));
     });
 
-    newSocket.on('setIsOnRepeat', (isOnRepeat: boolean) => {
+    newSocket.on("setIsOnRepeat", (isOnRepeat: boolean) => {
       dispatch(setIsOnRepeat(isOnRepeat));
+    });
+
+    newSocket.on("disconnect", () => {
+      setSocket(undefined);
     });
 
     setSocket(newSocket);
@@ -43,7 +42,7 @@ const usePlaybackControls = () => {
 
   const play = async (query: string, queue = false) => {
     if (!socket) return;
-    socket.emit('play', query, queue);
+    socket.emit("play", query, queue);
   };
 
   const playYoutubeVideo = async (videoId: string, queue = false) => {
@@ -68,42 +67,42 @@ const usePlaybackControls = () => {
 
   const togglePause = () => {
     if (!socket) return;
-    socket.emit('togglePause');
+    socket.emit("toggleIsPaused");
   };
 
   const nextTrack = () => {
     if (!socket) return;
-    socket.emit('nextTrack');
+    socket.emit("nextTrack");
   };
 
   const previousTrack = () => {
     if (!socket) return;
-    socket.emit('previousTrack');
+    socket.emit("previousTrack");
   };
 
   const skipTo = (index: number) => {
     if (!socket) return;
-    socket.emit('skipTo', index);
+    socket.emit("skipTo", index);
   };
 
   const clearQueue = () => {
     if (!socket) return;
-    socket.emit('clearQueue');
+    socket.emit("clearQueue");
   };
 
   const remove = (index: number) => {
     if (!socket) return;
-    socket.emit('remove', index);
+    socket.emit("remove", index);
   };
 
   const toggleRepeat = () => {
     if (!socket) return;
-    socket.emit('toggleRepeat');
+    socket.emit("toggleIsOnRepeat");
   };
 
   const shuffle = () => {
     if (!socket) return;
-    socket.emit('shuffle');
+    socket.emit("shuffle");
   };
 
   return {

@@ -7,15 +7,15 @@ services:
       - ./lavalink/application.yml:/opt/Lavalink/application.yml
     ports:
       - 2333:2333
-  backend:
-    image: dj-roomba/backend
-    environment:
-      - TOKEN=your-token-here
+  server:
+    image: dj-roomba/server
+    ports:
+      - 3001:3001
     depends_on:
       - lavalink
   client:
     image: dj-roomba/client
-    environment:
-      - TOKEN=your-token-here
+    ports:
+      - 3000:3000
     depends_on:
-      - backend
+      - server

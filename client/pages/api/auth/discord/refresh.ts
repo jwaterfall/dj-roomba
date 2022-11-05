@@ -5,7 +5,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case 'POST':
       try {
-        const refreshToken: string | undefined = req.body.refreshToken;
+        const { refreshToken } = req.body;
         if (!refreshToken) {
           res.status(401).send('No refresh token code provided!');
           return;

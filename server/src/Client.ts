@@ -1,11 +1,11 @@
-import { Event, Requester } from "./Event";
 import Logger from "Logger";
 import axios from "axios";
-import { Client as DiscordClient, ClientOptions, Collection } from "discord.js";
+import { ChannelType, Client as DiscordClient, ClientOptions, Collection, EmbedBuilder } from "discord.js";
 import { Manager } from "erela.js";
 import { readdirSync } from "fs";
 import { join as joinPath } from "path";
 import { Server } from "socket.io";
+import { Event, Requester } from "./Event";
 
 class Client extends DiscordClient {
   private socketEvents = new Collection<string, Event>();
@@ -23,7 +23,7 @@ class Client extends DiscordClient {
 
     for (const file of files) {
       const contents = await import(joinPath(path, file));
-      const event: Event = contents.event;
+      const { event } = contents;
       this[event.once ? "once" : "on"](event.name, (...args) => event.execute(this, ...args));
     }
   }
@@ -34,7 +34,7 @@ class Client extends DiscordClient {
 
     for (const file of files) {
       const contents = await import(joinPath(path, file));
-      const event: Event = contents.event;
+      const { event } = contents;
       this.manager[event.once ? "once" : "on"](event.name as any, (...args) => event.execute(this, ...args));
     }
   }
@@ -45,12 +45,12 @@ class Client extends DiscordClient {
 
     for (const file of files) {
       const contents = await import(joinPath(path, file));
-      const event: Event = contents.event;
+      const { event } = contents;
       this.socketEvents.set(event.name, event);
     }
 
     this.io.on("connection", async (socket) => {
-      const discordAccessToken: string = socket.handshake.auth.discordAccessToken;
+      const { discordAccessToken } = socket.handshake.auth;
       if (!discordAccessToken) return;
 
       const response = await axios.get("https://discord.com/api/users/@me", {
@@ -64,15 +64,9 @@ class Client extends DiscordClient {
       const voiceChannel = "276370462143938560";
       const textChannel = "893789722172878909";
 
+      const player = this.manager.players.get(guild) ?? this.createPlayer(guild, voiceChannel, textChannel);
+
       socket.join(guild);
-
-      const player = this.manager.create({
-        guild,
-        voiceChannel,
-        textChannel,
-      });
-
-      player.connect();
 
       socket.emit("setCurrentTrack", player.queue.current);
       socket.emit("setQueuedTracks", player.queue);
@@ -82,7 +76,55 @@ class Client extends DiscordClient {
       for (const event of this.socketEvents.values()) {
         socket[event.once ? "once" : "on"](event.name, (...args) => event.execute(this, player, requester, ...args));
       }
+
+      this.logger.debug(`User ${requester.username} connected to guild ${guild}`);
     });
+  }
+
+  public getTextChannel(guildId: string) {
+    const player = this.manager.players.get(guildId);
+    if (!player?.textChannel) return undefined;
+
+    const channel = this.channels.cache.get(player.textChannel);
+    if (!channel || channel.type !== ChannelType.GuildText) return undefined;
+
+    return channel;
+  }
+
+  public sendEmbed(guildId: string, title: string, description: string, url?: string) {
+    const channel = this.getTextChannel(guildId);
+    if (!channel) return;
+
+    const embed = new EmbedBuilder()
+      .setColor("#F42728")
+      .setDescription(description)
+      .setTitle(title)
+      .setURL(url ?? null);
+
+    channel.send({ embeds: [embed] });
+  }
+
+  private createPlayer(guildId: string, voiceChannelId: string, textChannelId: string) {
+    const player = this.manager.create({
+      guild: guildId,
+      voiceChannel: voiceChannelId,
+      textChannel: textChannelId,
+    });
+
+    player.connect();
+    this.logger.info(`Created player for guild ${guildId}`);
+
+    return player;
+  }
+
+  public destroyPlayer(guildId: string) {
+    const player = this.manager.players.get(guildId);
+    if (!player) return false;
+
+    player.destroy();
+    this.logger.info(`Destroyed player for guild ${guildId}`);
+
+    this.io.in(guildId).disconnectSockets();
   }
 }
 

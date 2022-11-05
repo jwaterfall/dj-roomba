@@ -1,9 +1,9 @@
-import { createContext, useContext } from 'react';
-import { Socket } from 'socket.io-client';
+import { createContext, useContext } from "react";
+import { Socket } from "socket.io-client";
 
 interface SocketContext {
   socket?: Socket;
-  setSocket: (socket: Socket) => void;
+  setSocket: (socket: Socket | undefined) => void;
 }
 
 const socketContext = createContext<SocketContext>({} as SocketContext);

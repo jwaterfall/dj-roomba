@@ -1,5 +1,5 @@
-import Client from "./Client";
-import { Player } from "erela.js";
+import { Player } from 'erela.js';
+import Client from './Client';
 
 export interface Event {
   name: string;

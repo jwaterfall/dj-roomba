@@ -5,7 +5,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case 'POST':
       try {
-        const authCode: string | undefined = req.body.authCode;
+        const { authCode } = req.body;
 
         if (!authCode) {
           res.status(401).send('No authorization code provided!');

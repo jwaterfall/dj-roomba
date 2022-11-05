@@ -48,7 +48,7 @@ const PlaylistTrackList: FC<Props> = ({ playlistId }) => {
               <Track
                 variant="playlist"
                 index={pageIndex * 25 + index + 1}
-                key={playlistTrack.track.id}
+                key={playlistTrack.track!.id}
                 playlistTrack={playlistTrack}
               />
             ))}

@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import chalk from 'chalk';
 
 export enum LogLevel {
   ERROR = 0,
@@ -12,22 +12,22 @@ class Logger {
 
   public error(...messages: any[]) {
     if (this.logLevel < LogLevel.ERROR) return;
-    this.log("ERROR", ...messages);
+    this.log('ERROR', ...messages);
   }
 
   public warn(...messages: any[]) {
     if (this.logLevel < LogLevel.WARN) return;
-    this.log("WARN", ...messages);
+    this.log('WARN', ...messages);
   }
 
   public info(...messages: any[]) {
     if (this.logLevel < LogLevel.INFO) return;
-    this.log("INFO", ...messages);
+    this.log('INFO', ...messages);
   }
-  
+
   public debug(...messages: any[]) {
     if (this.logLevel < LogLevel.DEBUG) return;
-    this.log("DEBUG", ...messages);
+    this.log('DEBUG', ...messages);
   }
 
   private log(level: string, ...messages: any[]) {

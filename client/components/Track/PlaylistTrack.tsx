@@ -1,11 +1,11 @@
-import dayjs from 'dayjs';
-import { FC } from 'react';
+import dayjs from "dayjs";
+import { FC } from "react";
 
-import usePlaybackControls from '../../hooks/usePlaybackControls';
-import NavLink from '../NavLink';
-import ControlsSection from './ControlsSection';
-import TitleSection from './TitleSection';
-import { Detail, DetailLink, PlaylistOrSavedTrackContainer } from './styles';
+import usePlaybackControls from "../../hooks/usePlaybackControls";
+import NavLink from "../NavLink";
+import ControlsSection from "./ControlsSection";
+import TitleSection from "./TitleSection";
+import { Detail, DetailLink, PlaylistOrSavedTrackContainer } from "./styles";
 
 interface Props {
   index: number;
@@ -16,8 +16,10 @@ const PlaylistTrack: FC<Props> = ({ index, playlistTrack }) => {
   const { playTrack } = usePlaybackControls();
 
   const { track } = playlistTrack;
+  if (!track) return null;
+
   const addedAt = playlistTrack.added_at;
-  const url = track.album.images[0].url ?? '/images/placeholder.png';
+  const url = track.album.images[0].url ?? "/images/placeholder.png";
   const width = track.album.images[0]?.width ?? 50;
   const height = track.album.images[0]?.height ?? 50;
 
@@ -28,8 +30,8 @@ const PlaylistTrack: FC<Props> = ({ index, playlistTrack }) => {
       <NavLink href={`/albums/${track.album.id}`} passHref>
         <DetailLink>{track.album.name}</DetailLink>
       </NavLink>
-      <Detail>{dayjs(addedAt).format('MMM D, YYYY')}</Detail>
-      <Detail>{dayjs.duration(track.duration_ms).format('m:ss')}</Detail>
+      <Detail>{dayjs(addedAt).format("MMM D, YYYY")}</Detail>
+      <Detail>{dayjs.duration(track.duration_ms).format("m:ss")}</Detail>
     </PlaylistOrSavedTrackContainer>
   );
 };
