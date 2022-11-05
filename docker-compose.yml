@@ -1,0 +1,21 @@
+version: "3.1"
+
+services:
+  lavalink:
+    image: fredboat/lavalink
+    volumes:
+      - ./lavalink/application.yml:/opt/Lavalink/application.yml
+    ports:
+      - 2333:2333
+  server:
+    image: dj-roomba/server
+    ports:
+      - 3001:3001
+    depends_on:
+      - lavalink
+  client:
+    image: dj-roomba/client
+    ports:
+      - 3000:3000
+    depends_on:
+      - server
