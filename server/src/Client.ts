@@ -1,7 +1,7 @@
 import Logger from "Logger";
 import axios from "axios";
 import { ChannelType, Client as DiscordClient, ClientOptions, Collection, EmbedBuilder } from "discord.js";
-import { Manager } from "erela.js";
+import { Manager, PlayerOptions } from "erela.js";
 import { readdirSync } from "fs";
 import { join as joinPath } from "path";
 import { Server } from "socket.io";
@@ -51,7 +51,10 @@ class Client extends DiscordClient {
 
     this.io.on("connection", async (socket) => {
       const { discordAccessToken } = socket.handshake.auth;
-      if (!discordAccessToken) return;
+      if (!discordAccessToken) {
+        socket.disconnect();
+        return;
+      }
 
       const response = await axios.get("https://discord.com/api/users/@me", {
         headers: {
@@ -60,14 +63,17 @@ class Client extends DiscordClient {
       });
 
       const requester: Requester = response.data;
-      const guild = "210120672087769089";
-      const voiceChannel = "276370462143938560";
-      const textChannel = "893789722172878909";
 
-      const player = this.manager.players.get(guild) ?? this.createPlayer(guild, voiceChannel, textChannel);
+      const playerOptions = this.getPlayerOptions(requester);
+      if (!playerOptions) {
+        socket.disconnect();
+        return;
+      }
 
-      socket.join(guild);
+      const player = this.manager.create(playerOptions);
+      player.connect();
 
+      socket.join(player.guild);
       socket.emit("setCurrentTrack", player.queue.current);
       socket.emit("setQueuedTracks", player.queue);
       socket.emit("setIsPaused", player.paused);
@@ -77,8 +83,35 @@ class Client extends DiscordClient {
         socket[event.once ? "once" : "on"](event.name, (...args) => event.execute(this, player, requester, ...args));
       }
 
-      this.logger.debug(`User ${requester.username} connected to guild ${guild}`);
+      this.logger.debug(`User ${requester.username} connected to guild ${player.guild}`);
     });
+  }
+
+  private getPlayerOptions(requester: Requester): PlayerOptions | undefined {
+    for (const guild of this.guilds.cache.values()) {
+      const member = guild.members.cache.get(requester.id);
+      if (!member) continue;
+
+      const voiceChannel = member.voice.channel;
+      if (!voiceChannel) continue;
+
+      const textChannel = guild.channels.cache.find((channel) => channel.name === "dj-roomba");
+      if (!textChannel) continue;
+
+      return {
+        guild: guild.id,
+        voiceChannel: voiceChannel.id,
+        textChannel: textChannel.id,
+      };
+    }
+  }
+
+  public destroyPlayer(guildId: string) {
+    const player = this.manager.players.get(guildId);
+    if (!player) return false;
+
+    player.destroy();
+    this.io.in(guildId).disconnectSockets();
   }
 
   public getTextChannel(guildId: string) {
@@ -102,29 +135,6 @@ class Client extends DiscordClient {
       .setURL(url ?? null);
 
     channel.send({ embeds: [embed] });
-  }
-
-  private createPlayer(guildId: string, voiceChannelId: string, textChannelId: string) {
-    const player = this.manager.create({
-      guild: guildId,
-      voiceChannel: voiceChannelId,
-      textChannel: textChannelId,
-    });
-
-    player.connect();
-    this.logger.info(`Created player for guild ${guildId}`);
-
-    return player;
-  }
-
-  public destroyPlayer(guildId: string) {
-    const player = this.manager.players.get(guildId);
-    if (!player) return false;
-
-    player.destroy();
-    this.logger.info(`Destroyed player for guild ${guildId}`);
-
-    this.io.in(guildId).disconnectSockets();
   }
 }
 

@@ -10,12 +10,6 @@ import { Server } from "socket.io";
 
 dotenv.config();
 
-console.log({
-  host: process.env.LAVA_LINK_HOST as string,
-  password: process.env.LAVA_LINK_PASSWORD as string,
-  port: parseInt(process.env.LAVA_LINK_PORT as string),
-});
-
 const logger = new Logger(LogLevel.DEBUG);
 const app = express();
 const server = http.createServer(app);
