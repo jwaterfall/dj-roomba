@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  pwa: {
-    disable: process.env.NODE_ENV === 'development',
-  },
+  productionBrowserSourceMaps: true,
+  experimental: { appDir: true },
   images: {
     domains: [
       'img.youtube.com',

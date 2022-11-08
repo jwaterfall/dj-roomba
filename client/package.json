@@ -9,23 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.0",
-    "axios": "^0.26.1",
+    "@next/font": "^13.0.2",
+    "@reduxjs/toolkit": "^1.9.0",
+    "axios": "^1.1.3",
     "dayjs": "^1.10.8",
-    "next": "12.1.0",
+    "eslint-config-next": "^13.0.2",
+    "next": "^13.0.2",
     "numbro": "^2.3.6",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
-    "react-intersection-observer": "^8.33.1",
+    "react-intersection-observer": "^9.4.0",
     "react-query": "^3.34.16",
-    "react-redux": "^7.2.6",
+    "react-redux": "^8.0.5",
     "redux-persist": "^6.0.0",
-    "sharp": "^0.30.2",
+    "sharp": "^0.31.2",
     "socket.io-client": "^4.4.1",
     "spotify-web-api-node": "^5.0.2",
     "styled-components": "^5.3.3",
     "styled-normalize": "^8.0.7",
+    "usehooks-ts": "^2.9.1",
     "yt-search": "^2.10.3"
   },
   "devDependencies": {
@@ -34,6 +37,10 @@
     "@types/sharp": "^0.29.5",
     "@types/spotify-web-api-node": "^5.0.7",
     "@types/styled-components": "^5.1.24",
-    "@types/yt-search": "^2.3.2"
+    "@types/yt-search": "^2.3.2",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.18",
+    "tailwind-scrollbar": "^2.0.1",
+    "tailwindcss": "^3.2.2"
   }
 }

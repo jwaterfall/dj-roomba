@@ -1,26 +1,25 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import SpotifyWebApi from 'spotify-web-api-node';
+import { NextApiRequest, NextApiResponse } from "next";
+import SpotifyWebApi from "spotify-web-api-node";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
-    case 'POST':
+    case "POST":
       try {
         const { refreshToken } = req.body;
 
         if (!refreshToken) {
-          res.status(401).send('No refresh token provided!');
+          res.status(401).send("No refresh token provided!");
           return;
         }
 
         const spotifyApi = new SpotifyWebApi({
-          redirectUri: process.env.SPOTIFY_REDIRECT_URI,
-          clientId: process.env.SPOTIFY_CLIENT_ID,
+          redirectUri: process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI,
+          clientId: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID,
           clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
           refreshToken,
         });
 
         const data = await spotifyApi.refreshAccessToken();
-
         res.json({
           accessToken: data.body.access_token,
           expiresIn: data.body.expires_in,
@@ -31,8 +30,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       break;
     default:
-      res.setHeader('Allow', ['POST']);
-      res.status(405).json({ message: 'Method not allowed' });
+      res.setHeader("Allow", ["POST"]);
+      res.status(405).json({ message: "Method not allowed" });
       break;
   }
 };
