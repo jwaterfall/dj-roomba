@@ -1,17 +1,18 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { createContext, useState, useEffect, FC, useContext } from "react";
-import { useSessionStorage } from "usehooks-ts";
-import axios from "axios";
+import { useRouter } from 'next/navigation';
+import {
+  createContext, useState, useEffect, FC, useContext,
+} from 'react';
+import { useSessionStorage } from 'usehooks-ts';
+import axios from 'axios';
 
 const AUTH_URL_DISCORD = `https://discord.com/api/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_DISCORD_REDIRECT_URI}&response_type=code&scope=identify`;
-const AUTH_URL_SPOTIFY = `https://accounts.spotify.com/authorize?client_id=${process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI}&response_type=code&scope=streaming%20user-read-email%20user-follow-read%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20playlist-read-private%20playlist-read-collaborative%20user-top-read
-`;
+const AUTH_URL_SPOTIFY = `https://accounts.spotify.com/authorize?client_id=${process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI}&response_type=code&scope=streaming%20user-read-email%20user-follow-read%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20playlist-read-private%20playlist-read-collaborative%20user-top-read`;
 
 interface Auth {
-  discordAccessToken: string | null;
-  spotifyAccessToken: string | null;
+  discordAccessToken?: string;
+  spotifyAccessToken?: string;
   isDiscordAuthenticated: boolean;
   isSpotifyAuthenticated: boolean;
   isAuthenticated: boolean;
@@ -32,19 +33,21 @@ interface RefreshTokenResponse extends AccessTokenResponse {
 
 export const AuthProvider: FC = ({ children }) => {
   const router = useRouter();
-  const [discordAccessToken, setDiscordAccessToken] = useSessionStorage<string | null>("discordAccessToken", null);
-  const [discordRefreshToken, setDiscordRefreshToken] = useSessionStorage<string | null>("discordRefreshToken", null);
-  const [discordTokenExpiresAt, setDiscordTokenExpiresAt] = useSessionStorage<string | null>("discordTokenExpiresAt", null);
-  const [discordAuthCode, setDiscordAuthCode] = useState<string | null>(null);
-  const [isDiscordAuthenticating, setIsDiscordAuthenticating] = useSessionStorage("isDiscordAuthenticating", false);
-  const [spotifyAccessToken, setSpotifyAccessToken] = useSessionStorage<string | null>("spotifyAccessToken", null);
-  const [spotifyRefreshToken, setSpotifyRefreshToken] = useSessionStorage<string | null>("spotifyRefreshToken", null);
-  const [spotifyTokenExpiresAt, setSpotifyTokenExpiresAt] = useSessionStorage<string | null>("spotifyTokenExpiresAt", null);
-  const [spotifyAuthCode, setSpotifyAuthCode] = useState<string | null>(null);
-  const [isSpotifyAuthenticating, setIsSpotifyAuthenticating] = useSessionStorage("isSpotifyAuthenticating", false);
 
-  const isDiscordAuthenticated = discordAccessToken !== null;
-  const isSpotifyAuthenticated = spotifyAccessToken !== null;
+  const [discordAccessToken, setDiscordAccessToken] = useSessionStorage<string | undefined>('discordAccessToken', undefined);
+  const [discordRefreshToken, setDiscordRefreshToken] = useSessionStorage<string | undefined>('discordRefreshToken', undefined);
+  const [discordTokenExpiresAt, setDiscordTokenExpiresAt] = useSessionStorage<string | undefined>('discordTokenExpiresAt', undefined);
+  const [discordAuthCode, setDiscordAuthCode] = useState<string | undefined>(undefined);
+  const [isDiscordAuthenticating, setIsDiscordAuthenticating] = useSessionStorage('isDiscordAuthenticating', false);
+
+  const [spotifyAccessToken, setSpotifyAccessToken] = useSessionStorage<string | undefined>('spotifyAccessToken', undefined);
+  const [spotifyRefreshToken, setSpotifyRefreshToken] = useSessionStorage<string | undefined>('spotifyRefreshToken', undefined);
+  const [spotifyTokenExpiresAt, setSpotifyTokenExpiresAt] = useSessionStorage<string | undefined>('spotifyTokenExpiresAt', undefined);
+  const [spotifyAuthCode, setSpotifyAuthCode] = useState<string | undefined>(undefined);
+  const [isSpotifyAuthenticating, setIsSpotifyAuthenticating] = useSessionStorage('isSpotifyAuthenticating', false);
+
+  const isDiscordAuthenticated = discordAccessToken !== undefined;
+  const isSpotifyAuthenticated = spotifyAccessToken !== undefined;
   const isAuthenticated = isDiscordAuthenticated && isSpotifyAuthenticated;
 
   useEffect(() => {
@@ -60,15 +63,14 @@ export const AuthProvider: FC = ({ children }) => {
   }, [isAuthenticated, isDiscordAuthenticated, isSpotifyAuthenticated, isSpotifyAuthenticating]);
 
   useEffect(() => {
-    if (!isAuthenticated) return;
-    router.push("/");
+    if (isAuthenticated) router.push('/');
   }, [isAuthenticated]);
 
   const getExpiresAt = (expiresIn: number) => new Date(Date.now() + expiresIn * 1000).toISOString();
   const getTimeout = (expiresAt: string) => new Date(expiresAt).getTime() - Date.now() - 60000;
 
   const getDiscordAccessToken = async () => {
-    const response = await axios.post<RefreshTokenResponse>(`${window.location.origin}/api/auth/discord/login`, {
+    const response = await axios.post<RefreshTokenResponse>(`${window.location.origin}/api/auth/login/discord`, {
       authCode: discordAuthCode,
     });
 
@@ -80,7 +82,7 @@ export const AuthProvider: FC = ({ children }) => {
   };
 
   const getSpotifyAccessToken = async () => {
-    const response = await axios.post<RefreshTokenResponse>(`${window.location.origin}/api/auth/spotify/login`, {
+    const response = await axios.post<RefreshTokenResponse>(`${window.location.origin}/api/auth/login/spotify`, {
       authCode: spotifyAuthCode,
     });
 
@@ -92,7 +94,7 @@ export const AuthProvider: FC = ({ children }) => {
   };
 
   const refreshDiscordAccessToken = async () => {
-    const response = await axios.post<RefreshTokenResponse>(`${window.location.origin}/api/auth/discord/refresh`, {
+    const response = await axios.post<RefreshTokenResponse>(`${window.location.origin}/api/auth/refresh/discord`, {
       refreshToken: discordRefreshToken,
     });
 
@@ -103,7 +105,7 @@ export const AuthProvider: FC = ({ children }) => {
   };
 
   const refreshSpotifyAccessToken = async () => {
-    const response = await axios.post<AccessTokenResponse>(`${window.location.origin}/api/auth/spotify/refresh`, {
+    const response = await axios.post<AccessTokenResponse>(`${window.location.origin}/api/auth/refresh/spotify`, {
       refreshToken: spotifyRefreshToken,
     });
 

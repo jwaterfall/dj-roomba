@@ -1,12 +1,12 @@
-import Client from "./Client";
-import Logger, { LogLevel } from "./Logger";
-import { GatewayIntentBits } from "discord.js";
-import dotenv from "dotenv-flow";
-import { Manager } from "erela.js";
-import Spotify from "erela.js-spotify";
-import express from "express";
-import http from "http";
-import { Server } from "socket.io";
+import { GatewayIntentBits } from 'discord.js';
+import dotenv from 'dotenv-flow';
+import { Manager } from 'erela.js';
+import Spotify from 'erela.js-spotify';
+import express from 'express';
+import http from 'http';
+import { Server } from 'socket.io';
+import Logger, { LogLevel } from './Logger';
+import Client from './Client';
 
 dotenv.config();
 
@@ -39,10 +39,10 @@ const client = new Client(
   new Server(server, {
     cors: {
       origin: process.env.CLIENT_URL,
-      methods: ["GET", "POST"],
+      methods: ['GET', 'POST'],
     },
   }),
-  logger
+  logger,
 );
 
 client.login(process.env.DISCORD_TOKEN);

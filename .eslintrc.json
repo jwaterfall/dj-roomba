@@ -1,3 +1,6 @@
 {
-  "extends": ["airbnb", "airbnb/hooks", "next/core-web-vitals"]
+    "extends": ["airbnb", "airbnb/hooks", "next/core-web-vitals"],
+    "rules": {
+        "linebreak-style": ["error", "windows"]
+    }
 }
