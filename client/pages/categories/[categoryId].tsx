@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
 import Cards from '../../components/Cards';
-import withAuth from '../../components/HOCS/withAuth';
 import PageLayout from '../../components/PageLayout';
 import useCategoryPlaylists from '../../hooks/queries/useCategoryPlaylists';
 
@@ -16,4 +15,4 @@ const PlaylistPage: NextPage = () => {
   );
 };
 
-export default withAuth(PlaylistPage);
+export default PlaylistPage;

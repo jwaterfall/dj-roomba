@@ -6,15 +6,21 @@ interface AuthState {
   spotifyAuthCode?: string;
   spotifyAccessToken?: string;
   spotifyRefreshToken?: string;
-  spotifyExpiresIn?: number;
+  spotifyTokenExpiresAt?: string;
+  isSpotifyAuthenticating: boolean;
   discordAuthCode?: string;
   discordAccessToken?: string;
   discordRefreshToken?: string;
-  discordExpiresIn?: number;
-  isAuthenticated?: boolean;
+  discordTokenExpiresAt?: string;
+  isDiscordAuthenticating: boolean;
+  isAuthenticated: boolean;
 }
 
-const initialState: AuthState = { isAuthenticated: false };
+const initialState: AuthState = {
+  isSpotifyAuthenticating: false,
+  isDiscordAuthenticating: false,
+  isAuthenticated: false,
+};
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -29,21 +35,26 @@ export const authSlice = createSlice({
     setSpotifyRefreshToken: (state, action: PayloadAction<string>) => {
       state.spotifyRefreshToken = action.payload;
     },
-    setSpotifyExpiresIn: (state, action: PayloadAction<number>) => {
-      state.spotifyExpiresIn = action.payload;
+    setSpotifyTokenExpiresAt: (state, action: PayloadAction<string>) => {
+      state.spotifyTokenExpiresAt = action.payload;
+    },
+    setIsSpotifyAuthenticating: (state, action: PayloadAction<boolean>) => {
+      state.isSpotifyAuthenticating = action.payload;
     },
     setDiscordAuthCode: (state, action: PayloadAction<string>) => {
       state.discordAuthCode = action.payload;
     },
     setDiscordAccessToken: (state, action: PayloadAction<string>) => {
       state.discordAccessToken = action.payload;
-      state.isAuthenticated = true;
     },
     setDiscordRefreshToken: (state, action: PayloadAction<string>) => {
       state.discordRefreshToken = action.payload;
     },
-    setDiscordExpiresIn: (state, action: PayloadAction<number>) => {
-      state.discordExpiresIn = action.payload;
+    setDiscordTokenExpiresAt: (state, action: PayloadAction<string>) => {
+      state.discordTokenExpiresAt = action.payload;
+    },
+    setIsDiscordAuthenticating: (state, action: PayloadAction<boolean>) => {
+      state.isDiscordAuthenticating = action.payload;
     },
     setIsAuthenticated: (state, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;
@@ -55,11 +66,14 @@ export const {
   setSpotifyAuthCode,
   setSpotifyAccessToken,
   setSpotifyRefreshToken,
-  setSpotifyExpiresIn,
+  setSpotifyTokenExpiresAt,
+  setIsSpotifyAuthenticating,
   setDiscordAuthCode,
   setDiscordAccessToken,
   setDiscordRefreshToken,
-  setDiscordExpiresIn,
+  setDiscordTokenExpiresAt,
+  setIsDiscordAuthenticating,
+  setIsAuthenticated,
 } = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth;

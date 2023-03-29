@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
 import Banner from '../../components/Banner';
-import withAuth from '../../components/HOCS/withAuth';
 import PageLayout from '../../components/PageLayout';
 import TrackList from '../../components/TrackList';
 import useAlbum from '../../hooks/queries/useAlbum';
@@ -24,4 +23,4 @@ const AlbumPage: NextPage = () => {
   );
 };
 
-export default withAuth(AlbumPage);
+export default AlbumPage;

@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 
 import Cards from '../../components/Cards';
-import withAuth from '../../components/HOCS/withAuth';
 import LibraryNavbar from '../../components/LibraryNavbar';
 import PageLayout from '../../components/PageLayout';
 import useFollowedArtists from '../../hooks/queries/useFollowedArtists';
@@ -17,4 +16,4 @@ const LibraryArtistsPage: NextPage = () => {
   );
 };
 
-export default withAuth(LibraryArtistsPage);
+export default LibraryArtistsPage;

@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 
 import Banner from '../../../components/Banner';
 import Cards from '../../../components/Cards';
-import withAuth from '../../../components/HOCS/withAuth';
 import PageLayout from '../../../components/PageLayout';
 import TrackList from '../../../components/TrackList';
 import useArtist from '../../../hooks/queries/useArtist';
@@ -23,4 +22,4 @@ const ArtistPage: NextPage = () => {
   );
 };
 
-export default withAuth(ArtistPage);
+export default ArtistPage;

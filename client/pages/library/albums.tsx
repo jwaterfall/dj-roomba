@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 
 import Cards from '../../components/Cards';
-import withAuth from '../../components/HOCS/withAuth';
 import LibraryNavbar from '../../components/LibraryNavbar';
 import PageLayout from '../../components/PageLayout';
 import useLikedAlbums from '../../hooks/queries/useLikedAlbums';
@@ -22,4 +21,4 @@ const LibraryAlbumsPage: NextPage = () => {
   );
 };
 
-export default withAuth(LibraryAlbumsPage);
+export default LibraryAlbumsPage;

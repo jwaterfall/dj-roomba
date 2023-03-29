@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
-import withAuth from '../../../../components/HOCS/withAuth';
 import PageLayout from '../../../../components/PageLayout';
 import DiscographyAlbumTrackList from '../../../../components/TrackList/DiscographyAlbumTrackList';
 import useArtistAlbums from '../../../../hooks/queries/useArtistAlbums';
@@ -20,4 +19,4 @@ const ArtistPage: NextPage = () => {
   );
 };
 
-export default withAuth(ArtistPage);
+export default ArtistPage;

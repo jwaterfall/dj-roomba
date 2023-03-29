@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 
-import withAuth from '../components/HOCS/withAuth';
 import PageLayout from '../components/PageLayout';
 import TrackList from '../components/TrackList';
 import { selectPlayback } from '../redux/slices/playbackSlice';
@@ -16,4 +15,4 @@ const QueuePage: NextPage = () => {
   );
 };
 
-export default withAuth(QueuePage);
+export default QueuePage;
