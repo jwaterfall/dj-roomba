@@ -30,15 +30,15 @@
     "server"
   ],
   "devDependencies": {
-    "eslint": "^8.2.0",
+    "eslint": "^8.37.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "nodemon": "^2.0.16",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.7.4"
+    "nodemon": "^2.0.22",
+    "rimraf": "^4.4.1",
+    "typescript": "^5.0.2"
   },
   "engines": {
     "node": ">=16.15.1",

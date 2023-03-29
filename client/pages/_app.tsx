@@ -13,6 +13,8 @@ import Auth from '../components/Auth';
 import socketContext from '../contexts/socket';
 import { persistor, store } from '../redux/store';
 
+import '../globals.css';
+
 dayjs.extend(duration);
 
 const queryClient = new QueryClient();
